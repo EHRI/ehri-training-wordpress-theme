@@ -1,0 +1,397 @@
+
+
+// Textured background to any component
+.paper {
+  background-image: url(./images/doc-paper-bgd-yellow.jpg);
+}
+
+// A generic button
+.button {
+  border-radius: var(--input-border-radius);
+  border: 2px solid transparent;
+  padding: .75rem 1.25rem;
+  display: inline-block;
+  font-family: var(--font-family-headings);
+  font-weight: var(--font-weight-bold);
+  transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+}
+
+// An action button
+.button-primary {
+  @extend .button;
+  color: var(--wine-red);
+  border: 2px solid var(--wine-red);
+  white-space: nowrap;
+  background-color: transparent;
+  font-size: $font-size-md;
+  line-height: 1.35rem;
+  background-image: none;
+
+  &:hover {
+    border-color: var(--beige);
+    background-color: var(--beige);
+  }
+}
+
+.breadcrumb {
+  @include content-nav-link();
+
+  // Use same padding as header/footer
+  padding: 0 var(--margin-page-h);
+
+  > ol {
+    margin: 0;
+    padding: 0;
+  }
+  > ol > li {
+    display: inline-block;
+    margin-right: $space-sm;
+    &:after {
+      content: "/";
+      margin-left: $space-sm;
+    }
+    &:last-child {
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
+
+// A figure with the caption on the side
+.fig-side {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  img {
+    flex: 2;
+  }
+  figcaption {
+    flex: 1;
+  }
+}
+
+.fig-float {
+  float: left;
+  margin: 0 1rem 1rem 0;
+  width: calc(50% - .5rem);
+}
+
+.fig-right {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+@media (max-width: $breakpoint-phone) {
+  .fig-float,
+  .fig-right
+  {
+    float: none;
+    margin: 0 0 1rem 0;
+    width: 100%;
+  }
+}
+
+// Traditional clearfix, to clear floats
+.clearfix:before,
+.clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+// Date line on posts/news items
+.news-date {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bolder);
+  margin-bottom: $space-md;
+}
+
+// Page summary lists
+.page-summaries {
+  padding: $space-lg 0;
+}
+
+// A page summary in a single list
+.page-summary {
+  margin-bottom: $space-xl;
+  border-bottom: 1px dashed var(--grey-mid);
+  display: flow-root; // box expands around floating images
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .page-summary-content {
+    display: flow-root; // box expands around floating images
+    clear: both;
+  }
+
+  header {
+    font-family: var(--font-family-headings);
+    font-size: $font-size-xl;
+    line-height: 2rem;
+    font-weight: var(--font-weight-bolder);
+    margin-bottom: $space-lg;
+  }
+
+  .read-more {
+    @include content-nav-link();
+    float: right;
+  }
+
+  .featured-image img {
+    display: block;
+    max-width: 100%;
+    width: 16rem;
+    height: auto;
+    // the following pulls the news image to the right
+    // outside of its containing box and allows text
+    // to flow around it
+    //margin: 0 1rem 1rem calc(calc(-1 * var(--padding-page-content-h) + var(--margin-page-h)));
+    margin: 0 $space-md $space-md 0;
+    float: left;
+
+    @media (max-width: $breakpoint-phone) {
+      margin: 0 0 $space-md 0;
+      width: 100%;
+    }
+  }
+}
+// Grid of resources...
+.resource-cards {
+  @include auto-grid(24rem, 4rem, $max-cols: 3);
+
+  margin: 3rem 0;
+  padding: 0;
+}
+
+// A single resource 'card'
+.resource-card {
+  @include card();
+  display: grid;
+  grid-template-rows: 12rem 1.25fr;
+  height: 100%;
+
+  .resource-img {
+    overflow: hidden;
+    img {
+      border-top-left-radius: var(--card-border-radius);
+      border-top-right-radius: var(--card-border-radius);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .resource-info {
+    padding: 2 * $space-lg;
+    display: grid;
+    align-items: start;
+    grid-template-columns: auto min-content;
+    header {
+      font-size: $font-size-xl;
+      line-height: 2rem; // larger than spec
+      font-family: var(--font-family-headings);
+      font-weight: var(--font-weight-bolder);
+      grid-area: 1 / 1 / 2 / 2;
+    }
+    .resource-icon {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: $font-size-title;
+      line-height: 2rem;
+      justify-self: end;
+    }
+    p {
+      grid-area: 2 / 1 / 2 / 3;
+      // FIXME: line height?
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* number of lines to show */
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .links {
+      grid-area: 3 / 1 / 3 / 3;
+      margin-top: auto;
+      align-self: start;
+      justify-self: start;
+
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: $space-md;
+      row-gap: $space-md;
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    .resource-info {
+      padding: $space-lg;
+    }
+  }
+}
+
+// On narrow widths, turn resource cards into
+// a single-line list
+@media (max-width: $breakpoint-phone) {
+  .resource-cards {
+    margin: 0;
+    //grid-gap: 2px;
+
+    .resource-card {
+      height: min-content;
+      //grid-template-rows: unset;
+      border-radius: 0;
+      //.resource-img {
+      //  display: none;
+      //}
+      .resource-info {
+        //width: max-content;
+        //p {
+        //  display: none;
+        //}
+        .button-primary {
+          display: none;
+        }
+      }
+    }
+    .resource-card:first-child {
+      border-top-right-radius: var(--card-border-radius);
+      border-top-left-radius: var(--card-border-radius);
+    }
+    .resource-card:last-child {
+      border-bottom-left-radius: var(--card-border-radius);
+      border-bottom-right-radius: var(--card-border-radius);
+    }
+  }
+}
+
+// A grid of partner cards
+.partner-cards {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: $space-lg;
+  margin: 3rem 0;
+}
+
+
+.partner-card {
+  @include card();
+  padding: $space-xl;
+  grid-template-columns: 1fr min-content;
+  .logo {
+    max-width: 16rem;
+    height: auto;
+    margin: 0 0 $space-md $space-md;
+    float: right;
+  }
+  header {
+    h3 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+  }
+  .button-primary {
+    // Allow button text to wrap if necessary
+    white-space: unset;
+  }
+  .info {
+    grid-area: info;
+  }
+  @media (max-width: $breakpoint-phone) {
+    .logo {
+      float: unset;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 0 $space-md 0;
+    }
+  }
+}
+
+// A grid of latest news cards cards
+.latest-cards {
+  display: grid;
+  @include auto-grid(21rem, 3rem, 3);
+  margin: 0;
+  // FIXME: arbitrary hack to give more top padding
+  padding: 1rem 0 0;
+
+  li {
+    list-style: none;
+  }
+  li.twitter {
+    row-span: 2;
+    max-height: 300px;
+  }
+}
+
+// A single latest news card
+.latest-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  header {
+    font-family: var(--font-family-headings);
+    font-size: $font-size-xl;
+    line-height: 2rem;
+    font-weight: var(--font-weight-bolder);
+    margin-bottom: .5rem;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: $space-md;
+    row-gap: $space-md;
+  }
+
+  .read-more {
+    @include content-nav-link();
+    color: var(--wine-red);
+  }
+}
+
+// Contact card
+.contact-card {
+  font-family: var(--font-family-headings);
+  font-weight: var(--font-weight-bold);
+  padding-top: $space-lg;
+
+  header,
+  header a
+  {
+    font-size: $font-size-lg;
+    font-weight: var(--font-weight-bolder);
+  }
+  a {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: var(--font-weight-reg);
+  }
+}
+
+// Small row of social media buttons
+.follow-buttons {
+  display: flex;
+  column-gap: $space-md;
+  width: min-content;
+}
+
+// Footnote body
+.footnotes {
+  font-family: var(--font-family-headings);
+  ol {
+    margin-top: 3rem;
+    padding-left: 1rem;
+  }
+  a,
+  a:hover
+  {
+    background-image: none;
+  }
+}

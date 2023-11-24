@@ -1,0 +1,31 @@
+
+//.news.page-content {
+.page-content {
+
+  //picture.featured-image img {
+  //  display: block;
+  //  width: Max(400px, 25vw);
+  //  height: auto;
+  //  // the following pulls the news image to the right
+  //  // outside of its containing box and allows text
+  //  // to flow around it. FIXME: I don't know why it doesn't work
+  //  // on tablet size, but it doesn't.
+  //  margin: 0 calc((-1 * var(--padding-page-content-h)) + var(--margin-page-h)) $space-md $space-md;
+  //  float: right;
+  //
+  //  @media (max-width: $breakpoint-tablet) {
+  //    margin: 0 0 $space-md $space-md;
+  //    float: right;
+  //  }
+  //
+  //  @media (max-width: $breakpoint-phone) {
+  //    margin: 0 0 $space-md 0;
+  //    width: 100%;
+  //  }
+  //}
+
+  a.permalink {
+    color: inherit;
+    text-decoration: none;
+  }
+}

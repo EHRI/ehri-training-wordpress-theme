@@ -1,0 +1,37 @@
+@mixin card() {
+  border-radius: var(--card-border-radius);
+  background: var(--beige-light-bg);
+  box-sizing: border-box;
+}
+
+// Grid where each cell as a minimum size, below which the grid will
+// wrap to fewer columns
+@mixin auto-grid($min-size, $gap, $max-cols: "") {
+  @if ($max-cols != "") {
+    $auto-grid-min-size: "max(#{$min-size}, calc(100%/#{$max-cols}) - #{$gap})";
+    --auto-grid-min-size: #{$auto-grid-min-size};
+  } @else {
+    --auto-grid-min-size: #{$min-size};
+  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--auto-grid-min-size), 1fr));
+  grid-gap: $gap;
+  width: 100%;
+
+  @media (max-width: $breakpoint-phone) {
+    --auto-grid-min-size: unset;
+  }
+}
+
+@mixin content-nav-link() {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  margin-top: $space-sm;
+  font-family: var(--font-family-headings);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--wine-red);
+    text-decoration: underline;
+  }
+}

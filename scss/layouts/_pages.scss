@@ -1,0 +1,118 @@
+// Text and links within the main page content
+main {
+
+  h1 {
+    font-size: 3rem;
+    line-height: 3.25rem;
+  }
+
+  p {
+    > a {
+      color: var(--grey-darker);
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: var(--beige);
+      text-decoration-thickness: 0.25rem;
+      background-image: linear-gradient(to bottom, transparent calc(100%), var(--beige) calc(100%));
+      background-position: bottom;
+      background-repeat: no-repeat;
+      background-size: 100% 0;
+      transition-duration: 0.2s;
+      transition-property: background-color background-size color;
+
+      &:hover {
+        color: var(--wine-red);
+        background-image: linear-gradient(to bottom, var(--beige) calc(100% - .5rem), var(--beige) calc(100% - .5rem));
+        background-size: 100% 100%;
+      }
+    }
+  }
+
+  // Intro text is larger than normal
+  div.intro,
+  div.intro > p
+  {
+    font-size: $font-size-lg;
+    line-height: 2.25rem;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-headings);
+  }
+
+  .intro.intro-large {
+    font-size: $font-size-xl;
+  }
+
+  // Standard text lists have a non-standard bullet
+  ul > li {
+    list-style-type: '—  ';
+  }
+
+  // Tables
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 4rem 0;
+    font-size: 0.9rem;
+    font-family: var(--font-family-headings);
+  }
+
+  table,
+  td,
+  th
+  {
+    border: 1px solid #8f8f8f;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  tbody tr:hover {
+    background: var(--beige-light-bg);
+  }
+
+  thead {
+    background-color: var(--beige);
+  }
+
+  th,
+  td
+  {
+    padding: 0.8vw 1vw;
+  }
+
+  // Footnote links
+  sup a {
+    display: inline;
+    font-size: 0.8rem;
+    font-family: var(--font-family-headings);
+    font-weight: bold;
+    color: var(--wine-red);
+    text-decoration: none;
+    background-image: none;
+  }
+
+  // Figures with a caption
+  figure {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 0 2rem;
+    background-color: var(--beige);
+
+    figcaption {
+      padding: 0.4vw 1.2vw
+    }
+
+    img {
+      width: 100%;
+    }
+
+    h4,
+    h5 {
+      margin: 1rem 0;
+      font-size: 1.2625rem;
+    }
+    p {
+      font-size: $font-size-sm;
+    }
+  }
+}

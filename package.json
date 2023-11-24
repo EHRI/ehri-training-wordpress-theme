@@ -1,0 +1,17 @@
+{
+  "name": "ehriproject-wp-theme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass",  
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "EUPL-1.2",
+  "dependencies": {
+    "compass": "^0.1.1",
+    "compass-mixins": "^0.12.12",
+    "sass": "^1.69.5"
+  }
+}

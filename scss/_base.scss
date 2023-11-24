@@ -1,0 +1,229 @@
+/**
+ * Minimal reset from Andy Bell@
+ * https://andy-bell.co.uk/a-modern-css-reset/
+ */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+// Global custom properties
+:root {
+  --purple: #{$purple};
+  --wine-red: #{$wine-red};
+  --grey-mid: rgba(0,0,0,0.15);
+  --grey-dark: #{$grey-dark};
+  --grey-darker: #{$grey-darker};
+  --beige: #{$beige};
+  --beige-light-bg: #{$beige-light};
+  --white: #{$white};
+  --black: #{$black};
+
+  --input-border-radius: 5px;
+  --card-border-radius: 10px;
+  --font-size-base: #{$font-size-base};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-family-headings: #{$headings-font-family};
+  --font-family-text: #{$font-family-base};
+  --font-weight-reg: #{$font-weight-reg};
+  --font-weight-bold: #{$font-weight-bold};
+  --font-weight-bolder: #{$font-weight-bolder};
+
+  --max-width: #{$max-width};
+
+  --margin-page-v: max(1rem, min(3.1875rem, 5vw));
+  --margin-page-h: max(1rem, calc((100vw - var(--max-width)) / 2));
+  //--margin-page-h: clamp(max(1rem, 5vw), 5vw, min(1rem, 15vw));
+
+  // Adjust margins for larger screens
+  @media (min-width: $breakpoint-laptop) {
+    //--margin-page-h: max(1rem, 10vw);
+  }
+
+  --margin-section-v: max(2rem, min(5rem, 7vw));
+  --margin-section-h: var(--margin-page-h);
+
+  --padding-page-content-v: max(2rem, min(8rem, 10vw));
+  --padding-page-content-h: 18vw;
+}
+
+html {
+  // Dynamic font-size test...
+  //font-size: calc(15px + 0.190625vw);
+  font-size: Min(Max(1rem, 4vw), 16px);
+  height: 100vh;
+  background-color: var(--white);
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family-text);
+  color: var(--black);
+  //font-size: $font-size-base;
+  line-height: 1.8rem;
+
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  //max-width: 1742px;
+  min-height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  border-top: $font-size-xs solid $wine-red;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  font-family: var(--font-family-headings);
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.25rem;
+}
+
+h2 {
+  font-size: 2.25rem;
+  line-height: 2.375rem;
+}
+
+h3 {
+  font-size: $font-size-title;
+  line-height: 2.125rem;
+}
+
+h4 {
+  font-size: 1.375rem;
+  line-height: 1.5rem;
+}
+
+h5 {
+  font-size: $font-size-md;
+}
+
+h6 {
+  font-size: $font-size-base;
+}
+
+// Default links
+a {
+  color: var(--wine-red);
+  text-decoration: none;
+}
+
+p  {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: $breakpoint-tablet) {
+  h1 {
+    font-size: 3.375rem;
+    line-height: 3.625rem;
+  }
+
+  body {
+    //font-size: $font-size-sm;
+    line-height: 1.25rem;
+  }
+}
+
+@media (max-width: $breakpoint-phone) {
+  h1 {
+    font-size: 2rem;
+    line-height: 2.125rem;
+  }
+
+  h2 {
+    font-size: 1.625rem;
+    line-height: 1.75rem;
+    align-self: start;
+  }
+}
+
+input,
+textarea {
+  border: 1px solid var(--beige);
+  border-radius: var(--input-border-radius);
+  display: block;
+  padding: $space-md;
+  margin-bottom: $space-sm;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: var(--font-family-headings);
+  font-weight: var(--font-weight-bold);
+  font-size: $font-size-md;
+}
+
+.form-group ~ button[type='submit'] {
+  margin-top: $space-sm;
+}
+
+blockquote {
+  margin-left: 0;
+  p {
+    display: block;
+    line-height: 1.6rem;
+    padding: 2vw;
+    margin-bottom: 2vw;
+    color: var(--wine-red);
+    border-left: .25rem solid var(--beige);
+  }
+}
+
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  //font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+

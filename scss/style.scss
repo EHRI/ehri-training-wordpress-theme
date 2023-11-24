@@ -1,0 +1,38 @@
+// Wordpress theme metadata
+/*!
+Theme Name: EHRI-ERIC
+Theme URI: http://www.ehri-project.eu
+Author: EHRI
+Author URI: http://www.ehri-project.eu
+Description: EHRI-ERIC site styling.
+Version: 0.1
+License: EUPL-1.2
+License URI: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+Tags: custom-header, custom-background, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready
+Text Domain: ehriproject
+ */
+$fa-font-path: "./fonts";
+
+@import "variables";
+@import "mixins";
+@import "base";
+@import "fonts";
+@import "components";
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/pages";
+@import "layouts/home";
+@import "layouts/about";
+@import "layouts/contact";
+@import "layouts/services";
+@import "layouts/news";
+
+@import "temp.scss";
+
+
+// Font Awesome 6 icons
+@import "fa/fontawesome";
+@import "fa/solid";
+@import "fa/brands";
+@import "fa/regular";
+@import "fa/shims";

@@ -1,0 +1,33 @@
+.services.page-content {
+  .resource-cards {
+    margin-bottom: var(--margin-section-v);
+  }
+
+  @media (min-width: $breakpoint-phone) {
+    .resource-cards {
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr;
+
+      .resource-card {
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: 1fr;
+        img {
+          border-bottom-left-radius: var(--card-border-radius);
+          border-top-right-radius: 0;
+        }
+      }
+    }
+    .resource-info {
+      padding: $space-xl;
+
+      p {
+        // Undo the properties which limited this element
+        // to a fixed height on the main page
+        display: block;
+        -webkit-line-clamp: unset;
+        -webkit-box-orient: unset;
+        line-clamp: unset;
+      }
+    }
+  }
+}

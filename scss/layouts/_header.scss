@@ -1,0 +1,427 @@
+
+/**
+ * Main page header navigation. This is a fairly complex
+ * responsive component that is designed to work on mobile
+ * and desktop views without JavaScript.
+ */
+.header.main {
+  color: var(--wine-red);
+  font-family: var(--font-family-headings);
+
+  padding: var(--margin-page-v) var(--margin-page-h);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  a {
+    font-size: $font-size-base;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: auto;
+  }
+
+  .logo {
+    height: auto;
+    // Negative margin to push down centre line of logo
+    // so the 'H' aligns with nav bar.
+    margin-bottom: -$space-xl;
+  }
+
+  .title {
+    font-size: $font-size-lg;
+    margin-left: 44px;
+    margin-right: 1rem;
+  }
+
+  .main-navbar {
+    // Hide hamburger toggle
+    label[for='hb-toggle'],
+    input#hb-toggle,
+    span.hb {
+      display: none;
+    }
+  }
+
+  .navbar {
+    display: flex;
+    font-size: var(--font-size-md);
+    padding: $space-md;
+    position: relative;
+
+    #main-menu-items {
+      .menu-item {
+        list-style-type: none;
+      }
+
+      .menu-item > a {
+        @extend .button;
+        text-align: start;
+        width: 100%;
+        color: var(--wine-red);
+
+        white-space: break-spaces;
+      }
+
+      .sub-menu > .menu-item {
+        width: 100%;
+      }
+    }
+    .search-controls #search-form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      input,
+      button {
+        margin-bottom: 0;
+        padding: $space-md $space-md;
+        font-size: var(--font-size-md);
+        border: 1px solid var(--grey-mid);
+        outline: none;
+      }
+      #search-submit {
+        width: max-content;
+        border-radius: 0 var(--input-border-radius) var(--input-border-radius) 0;
+        background-color: var(--white);
+        border-left: none;
+      }
+      #search-input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+        * {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+
+    .navbar {
+      align-items: center;
+
+      #main-menu-items {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        > .menu-item {
+          text-align: center;
+        }
+        > .menu-item:last-child {
+          margin-right: 0;
+        }
+
+        > .menu-item:hover {
+          border-color: var(--beige);
+          background-color: var(--beige);
+          border-radius: var(--input-border-radius);
+        }
+
+        > .menu-item > .sub-menu {
+          display: none;
+          position: absolute;
+          background: var(--beige-light-bg);
+          box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.1);
+
+          padding: 0;
+          flex-direction: column;
+          align-items: flex-start;
+          width: max-content;
+
+          .menu-item {
+            a {
+              &:hover {
+                background-color: var(--beige);
+              }
+
+              display: block;
+              padding: $space-md $space-lg;
+            }
+          }
+        }
+
+        // Make submenu visible when main menu is hovered
+        > .menu-item:hover > .sub-menu {
+          display: flex;
+        }
+      }
+
+      #search-toggle {
+        display: block;
+        width: $font-size-lg;
+        height: $font-size-lg;
+        position: absolute;
+        float: left;
+        cursor: pointer;
+        opacity: 0; /* hide this */
+        z-index: 1002; /* and place it over the hamburger */
+
+        -webkit-touch-callout: none;
+      }
+
+      .search-controls {
+        visibility: hidden;
+        position: absolute;
+        width: calc(100% - 3rem);
+        height: 100%;
+        top: 50%;
+        right: 3rem;
+        transform: translateY(-50%); // centres item vertically
+        border: 2px solid transparent; // matches the buttons behind
+      }
+
+      #search-toggle:checked ~ .search-controls {
+        visibility: visible;
+        z-index: 50;
+        form {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+        }
+      }
+
+      #search-icon {
+        //position: absolute;
+        //right: 0;
+        //transition: opacity 0s ease;
+      }
+
+      span.st-x {
+        opacity: 0;
+        right: $space-md; // same as padding
+        top: 50%;
+        width: $font-size-lg;
+        height: .2rem;
+        //margin-bottom: 5px;
+        position: absolute;
+        //top: $space-sm;
+        float: right;
+
+        background: var(--wine-red);
+        border-radius: 3px;
+
+        z-index: 1001;
+
+        transform-origin: center;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        opacity 0s ease;
+      }
+
+      input#search-toggle:checked ~ i#search-icon {
+        opacity: 0;
+      }
+
+      input#search-toggle:checked ~ span.st-x {
+        opacity: 1;
+        transform: rotate(45deg);
+      }
+
+      input#search-toggle:checked ~ span.st-x:nth-last-child(2) {
+        opacity: 1;
+        transform: rotate(-45deg);
+      }
+
+      > .social {
+        display: none;
+      }
+
+      #main-menu-items > #menu-item-search {
+        padding: $space-sm $space-md;
+        &:hover {
+          background-color: inherit;
+          border-color: inherit;
+        }
+      }
+    }
+
+  }
+
+  // When the language switcher is given fixed placement,
+  // make the navbar align to the right
+  @media (min-width: $breakpoint-phone) {
+    .main-navbar {
+      margin-left: auto;
+    }
+  }
+
+  // Turn menu into a hamburger pop-out at widths below.
+  // NB: largely borrowed from: https://codepen.io/erikterwan/pen/EVzeRP
+  @media (max-width: $breakpoint-tablet) {
+    .logo,
+    .logo img {
+      width: 117px;
+    }
+    .title {
+      margin-left: 33px;
+    }
+
+    .main-navbar {
+      min-width: unset;
+
+      // Hamburger toggle
+      input#hb-toggle {
+        display: block;
+        width: 40px;
+        height: $font-size-lg;
+        position: relative;
+        float: right;
+        right: 7px;
+
+        cursor: pointer;
+
+        opacity: 0; /* hide this */
+        z-index: 1002; /* and place it over the hamburger */
+
+        -webkit-touch-callout: none;
+      }
+      span.hb {
+        display: block;
+        width: 30px;
+        height: 3px;
+        margin-bottom: 5px;
+        position: relative;
+        top: $space-sm;
+
+        background: var(--purple);
+        border-radius: 3px;
+
+        z-index: 1001;
+
+        transform-origin: 4px 0;
+
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+        opacity 0.55s ease;
+      }
+
+      span.hb:first-child {
+        transform-origin: 0 0;
+      }
+
+      span.hb:nth-last-child(2) {
+        transform-origin: 0 100%;
+      }
+
+      .navbar {
+        flex-direction: column;
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        right: 0;
+        width: 0; // 0 size until toggle is clicked
+        bottom: 0;
+        overflow: hidden;
+        padding: calc(var(--margin-page-v) + #{$space-md}) 0; // fudge!
+        background-color: var(--grey-dark);
+        color: var(--beige);
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+
+        #main-menu-items {
+          overflow-y: scroll;
+          scrollbar-width: none;
+          ::-webkit-scrollbar {
+            display: none;
+          }
+        }
+
+        #main-menu-items a {
+          color: var(--beige);
+        }
+
+        .sub-menu .sub-menu {
+          display: none;
+        }
+
+        #search-toggle,
+        #search-icon
+        {
+          display: none;
+        }
+
+        .search-controls {
+          opacity: 86%;
+          margin-top: $space-md;
+          position: sticky;
+          bottom: 0;
+        }
+      }
+
+      // When the hamburger toggle is checked, move the lines to a cross...
+      input#hb-toggle:checked ~ span {
+        opacity: 1;
+        transform: rotate(45deg) translate(-2px, -1px);
+        background: var(--beige-light-bg);
+      }
+
+      input#hb-toggle:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+      }
+
+      input#hb-toggle:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) translate(0, -1px);
+      }
+
+      // ... and position the menu onscreen
+      input#hb-toggle:checked ~ span ~ span ~ span ~ .navbar {
+        width: Max(50%, 500px); // Note: Uppercase Sass/Css disambiguation here
+        padding-left: var(--margin-page-h);
+        padding-right: 1rem;
+        /* to stop flickering of text in safari */
+        -webkit-font-smoothing: antialiased;
+        transition: width 0.4s, padding-left 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+      }
+    }
+  }
+
+  // Phone width adjustments
+  @media (max-width: $breakpoint-phone) {
+    .logo,
+    .logo img {
+      width: 69px;
+    }
+    .logo {
+      margin-bottom: -1rem;
+    }
+    .title {
+      font-size: $font-size-md;
+      margin-left: $space-md;
+    }
+
+    .main-navbar {
+      input#hb-toggle {
+        width: 25px;
+      }
+
+      span.hb {
+        width: 23px;
+      }
+
+      input#hb-toggle:checked ~ span {
+        transform: rotate(45deg) translate(1px, 3px);
+      }
+
+      input#hb-toggle:checked ~ span ~ span ~ span ~ .navbar {
+        //right: 0;
+        //left: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+
