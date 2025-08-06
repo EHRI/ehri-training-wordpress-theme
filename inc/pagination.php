@@ -7,9 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! function_exists( 'ehri_pagination' ) ) {
+if ( ! function_exists( 'ehri_training_pagination' ) ) {
 
-	function ehri_pagination( $args = array(), $class = 'pagination' ) {
+	function ehri_training_pagination( $args = array(), $class = 'pagination' ) {
 
 		if ( $GLOBALS['wp_query']->max_num_pages <= 1 ) {
 			return;

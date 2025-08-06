@@ -34,7 +34,7 @@
                     </ul>
 
                     <!-- The pagination component -->
-                    <?php ehri_pagination(); ?>
+                    <?php ehri_training_pagination(); ?>
                 </div>
             </div>
             <?php get_sidebar(); ?>

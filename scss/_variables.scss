@@ -2,8 +2,11 @@
  * Globals
  */
 // region Global
-$headings-font-family: 'Barlow', sans-serif;
-$font-family-base: 'Noto Serif', serif;
+//$headings-font-family: 'Barlow', sans-serif;
+//$font-family-base: 'Noto Serif', serif;
+$headings-font-family: 'ff-tisa-web-pro', serif;
+$font-family-base: 'ff-tisa-web-pro', serif;
+$font-family-nav: 'ff-tisa-sans-web-pro', sans-serif;
 
 // Font sizing
 $font-size-base: 1.0625rem;
@@ -27,13 +30,17 @@ $space-xl: 2rem;
 
 // Common colours
 $wine-red: #771646;
-$purple: #3E274B;
+//$purple: #3E274B;
+$purple: #36104F;
+$grey-mid: #BEBEBE;
 $grey-dark: #46463D;
 $grey-darker: #3B3B3B;
 $beige: #D5D2B8;
 $beige-light: linear-gradient(0deg, rgba(213, 210, 184, 0.2), rgba(213, 210, 184, 0.2)), #FFFFFF;
 $white: #FFF;
 $black: #46463D;
+$blue: #00B6ED;
+
 
 // Breakpoints
 $breakpoint-laptop: 1440px;

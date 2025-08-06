@@ -3,41 +3,47 @@
  * The main template file.
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+get_header();
 ?>
 
-<?php get_header(); ?>
 
-<section class="hero">
-    <div class="hero-content">
-        <h1>Towards a permanent European Holocaust Research Infrastructure</h1>
-        <p>Since 2010 EHRI has worked to build a sustainable infrastructure to support scholarship into the Holocaust.
-            From 2025, it will become a permanent organisation in the form of a European Research Infrastructure Consortium (ERIC).
-        </p>
-        <p><a href="/towards-a-permanent-holocaust-research-infrastructure">Read more...</a></p>
-    </div>
-</section>
+    <main id="content">
+        <div class="page-content" role="main">
+            <a id="main-content"></a>
+			<?php
+			// Get all terms in the 'unit' taxonomy
+			$terms = get_terms( array(
+				'taxonomy'   => 'unit',
+				'hide_empty' => false,
+			) );
+			?>
 
-<main id="content">
+			<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) : ?>
+                <div class="unit-list">
+					<?php foreach ( $terms as $term ) : ?>
+                        <div class="unit-item">
+                            <div class="unit-title">
+                                <h2><a href="<?php echo get_term_link($term); ?>"><?php echo $term->name; ?></a></h2>
+                            </div>
 
-    <section class="home services">
+                            <div class="unit-teaser">
+                                <p><?php echo get_term_meta( $term->term_id, 'term_teaser', true ); ?></p>
+                            </div>
 
-	    <?php
-	    $args = ehriproject_homepage_teaser_args(6);
-	    $the_query = new WP_Query($args);
-
-	    ?>
-
-        <div class="resource-cards">
-            <?php if ($the_query->have_posts()) : ?>
-                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-                    <?php get_template_part('loop-templates/content-front', get_post_format()); ?>
-                <?php endwhile; ?>
-            <?php endif; ?>
+                            <div class="unit-featured-image">
+                                <a href="<?php echo get_term_link($term); ?>">
+                                    <img src="<?php echo wp_get_attachment_image_url(get_term_meta($term->term_id, "term_feature_image", true), "large") ?>" alt="">
+                                </a>
+                            </div>
+                        </div>
+					<?php endforeach; ?>
+                </div>
+			<?php endif; ?>
         </div>
-    </section>
-
-    <?php get_sidebar(); ?>
-</main>
-
+    </main>
 
 <?php get_footer(); ?>

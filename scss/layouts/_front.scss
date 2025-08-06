@@ -1,0 +1,23 @@
+
+.home .page-content {
+	background-color: var(--grey-mid);
+}
+
+.home .unit-list .unit-title a {
+	color: var(--wine-red);
+}
+
+.home .hero {
+	.hero-text {
+		font-size: 1.2em;
+		line-height: 1.8em;
+		padding-top: 4em;
+		padding-bottom: 2em;
+		color: var(--purple);
+
+		@media (min-width: var(--breakpoint-tablet)) {
+			margin-left: 100px;
+			margin-right: 190px;
+		}
+	}
+}

@@ -9,19 +9,15 @@ if (!defined('ABSPATH')) {
 
 get_header();
 ?>
-
 <main id="content">
 
     <?php if (have_posts()) : ?>
-        <section class="page-content" role="main">
+        <div class="page-content" role="main">
             <?php while (have_posts()) : the_post(); ?>
                 <?php get_template_part('loop-templates/content', 'page'); ?>
             <?php endwhile; ?>
-        </section>
+        </div>
     <?php endif; ?>
-
-    <?php get_sidebar(); ?>
-
 </main>
 
 <?php get_footer(); ?>

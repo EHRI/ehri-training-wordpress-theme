@@ -1,0 +1,119 @@
+
+.unit-list .unit-item {
+
+	background-color: var(--white);
+	border-left: 3rem solid var(--wine-red);
+	padding: 0 0 $space-lg $space-lg;
+
+	display: grid;
+	grid-template-areas: "title image" "teaser image";
+	grid-template-rows: min-content 1fr;
+	grid-column-gap: $space-md;
+
+	.unit-title {
+		grid-area: title;
+
+		h2 {
+			font-size: 1.1rem;
+			line-height: 1.3em;
+			margin-top: 0.5em;
+			text-indent: -50px;
+		}
+
+		h2:first-letter {
+			color: #fff;
+			padding-right: 35px;
+		}
+	}
+
+	.unit-teaser {
+		grid-area: teaser;
+
+		font-size: $font-size-sm;
+		font-family: var(--font-family-text);
+		line-height: 1.4em;
+		font-weight: 400;
+	}
+
+	.unit-featured-image {
+		grid-area: image;
+		width: 325px;
+		height: 235px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+.page-content.unit {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--white);
+
+	// Apply a padding to main sections
+	.unit-content,
+	.unit-title
+	{
+		padding: 0 $space-md 0 3rem; // we leave room here for the chapter numbers
+	}
+
+	.unit-header {
+		padding: unset;
+	}
+
+	.unit-title {
+		padding-top: $space-lg;
+		padding-bottom: $space-xl;
+		margin-bottom: $space-md;
+		margin-top: 0;
+		color: var(--white);
+
+
+		// Shift the title over to the left so that only the text
+		// after the number aligns with main text
+		@media(min-width: $breakpoint-tablet) {
+			padding-left: calc(10vw);
+		}
+	}
+
+	@media (min-width: $breakpoint-tablet) {
+		.unit-content,
+		.unit-title
+		{
+			padding: $space-md 10vw;
+		}
+	}
+
+	.unit-content {
+		padding-top: $space-md;
+		margin-bottom: auto;
+		font-size: 1.2em;
+	}
+
+	// Chapter number size set to page heading, so unset it here for listings
+	.unit-chapter-number {
+		font-size: unset;
+		line-height: unset;
+	}
+
+	.unit-chapter a {
+		color: var(--wine-red);
+		text-decoration: none;
+		font-size: 1.3rem;
+		line-height: 1.4rem;
+	}
+
+	.unit-featured-image {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			vertical-align: bottom;
+		}
+	}
+}

@@ -16,7 +16,6 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
@@ -42,13 +41,14 @@ body {
 :root {
   --purple: #{$purple};
   --wine-red: #{$wine-red};
-  --grey-mid: rgba(0,0,0,0.15);
+  --grey-mid: #{$grey-mid};
   --grey-dark: #{$grey-dark};
   --grey-darker: #{$grey-darker};
   --beige: #{$beige};
   --beige-light-bg: #{$beige-light};
   --white: #{$white};
   --black: #{$black};
+  --blue: #{$blue};
 
   --input-border-radius: 5px;
   --card-border-radius: 10px;
@@ -59,6 +59,7 @@ body {
   --font-size-lg: #{$font-size-lg};
   --font-size-xl: #{$font-size-xl};
   --font-family-headings: #{$headings-font-family};
+  --font-family-nav: #{$font-family-nav};
   --font-family-text: #{$font-family-base};
   --font-weight-reg: #{$font-weight-reg};
   --font-weight-bold: #{$font-weight-bold};
@@ -66,27 +67,42 @@ body {
 
   --max-width: #{$max-width};
 
-  --margin-page-v: max(1rem, min(3.1875rem, 5vw));
-  --margin-page-h: max(1rem, calc((100vw - var(--max-width)) / 2));
-  //--margin-page-h: clamp(max(1rem, 5vw), 5vw, min(1rem, 15vw));
-
-  // Adjust margins for larger screens
-  @media (min-width: $breakpoint-laptop) {
-    //--margin-page-h: max(1rem, 10vw);
+  // Standard page margins for all devices
+  --margin-page-v: 1rem;
+  --margin-page-h: 1rem;
+  @media (min-width: $breakpoint-tablet) {
+    --margin-page-v: max(1rem, min(3.1875rem, 5vw));
+    --margin-page-h: max(1rem, calc((100vw - var(--max-width)) / 2));
   }
 
-  --margin-section-v: max(2rem, min(5rem, 7vw));
-  --margin-section-h: var(--margin-page-h);
+  // Section margins for all devices
+  --margin-section-v: 1rem;
+  --margin-section-h: 1rem;
+  @media (min-width: $breakpoint-tablet) {
+    --margin-section-v: max(2rem, min(5rem, 7vw));
+    --margin-section-h: var(--margin-page-h);
+  }
 
-  --padding-page-content-v: max(2rem, min(8rem, 10vw));
-  --padding-page-content-h: 18vw;
+  // Page content padding for all devices
+  --padding-page-content-v: 1rem;
+  --padding-page-content-h: 1rem;
+  @media (min-width: $breakpoint-tablet) {
+    --padding-page-content-v: max(2rem, min(8rem, 10vw));
+    --padding-page-content-h: 18vw;
+  }
+  @media (min-width: $breakpoint-laptop) {
+    --padding-page-content-v: max(2rem, min(8rem, 20vw));
+    --padding-page-content-h: 25vw;
+  }
 }
 
 html {
   // Dynamic font-size test...
   //font-size: calc(15px + 0.190625vw);
+
+  --wp-admin--admin-bar--height: 0px;
   font-size: Min(Max(1rem, 4vw), 16px);
-  height: 100vh;
+  height: calc(100vh - var(--wp-admin--admin-bar--height));
   background-color: var(--white);
 }
 
@@ -99,18 +115,16 @@ body {
 body {
   font-family: var(--font-family-text);
   color: var(--black);
-  //font-size: $font-size-base;
+  font-size: $font-size-base;
   line-height: 1.8rem;
 
   display: flex;
   flex-direction: column;
-  background-color: $white;
+  background-color: var(--grey-mid);
   //max-width: 1742px;
   min-height: 100%;
   margin-left: auto;
   margin-right: auto;
-
-  border-top: $font-size-xs solid $wine-red;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -119,13 +133,13 @@ h1, h2, h3, h4, h5, h6
 }
 
 h1 {
-  font-size: 4rem;
-  line-height: 4.25rem;
+  font-size: 2rem;
+  line-height: 2.2rem;
 }
 
 h2 {
-  font-size: 2.25rem;
-  line-height: 2.375rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 h3 {
@@ -159,8 +173,8 @@ p  {
 
 @media (max-width: $breakpoint-tablet) {
   h1 {
-    font-size: 3.375rem;
-    line-height: 3.625rem;
+    //font-size: 3.375rem;
+    //line-height: 3.625rem;
   }
 
   body {
@@ -170,16 +184,16 @@ p  {
 }
 
 @media (max-width: $breakpoint-phone) {
-  h1 {
-    font-size: 2rem;
-    line-height: 2.125rem;
-  }
+  //h1 {
+  //  font-size: 2rem;
+  //  line-height: 2.125rem;
+  //}
 
-  h2 {
-    font-size: 1.625rem;
-    line-height: 1.75rem;
-    align-self: start;
-  }
+  //h2 {
+  //  font-size: 1.625rem;
+  //  line-height: 1.75rem;
+  //  align-self: start;
+  //}
 }
 
 input,
