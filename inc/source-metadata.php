@@ -3,116 +3,22 @@
  * Add custom metadata fields to taxonomy terms
  */
 
-if ( ! function_exists( "ehri_training_add_source_metadata_fields" ) ) {
+if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 	/**
-	 * Add the form fields for new source creation
-	 */
-	function ehri_training_add_source_metadata_fields() {
-		?>
-		<tr class="form-field">
-			<th scope="row"><label for="term_unit"><?php _e( 'Unit' ); ?></label></th>
-			<td>
-				<select name="term_unit" id="term_unit">
-					<option value=""><?php _e( 'Select Unit' ); ?></option>
-					<?php
-					$units = get_terms( array(
-						'taxonomy'   => 'unit',
-						'hide_empty' => false,
-					) );
-					foreach ( $units as $unit ) {
-						echo '<option value="' . esc_attr( $unit->term_id ) . '" ' . esc_html( $unit->name ) . '</option>';
-					}
-					?>
-				</select>
-				<p class="description"><?php _e( 'Select the unit this source belongs to.' ); ?></p>
-			</td>
-		</tr>
-
-		<div class="form-field">
-			<label for="term_teaser"><?php _e( 'Short Description' ); ?></label>
-			<textarea name="term_teaser" id="term_teaser" rows="5" cols="40"></textarea>
-			<p class="description"><?php _e( 'Enter a short description for this term.' ); ?></p>
-		</div>
-
-		<tr class="form-field">
-			<th scope="row"><label for="term_location"><?php _e( 'Location' ); ?></label></th>
-			<td>
-				<input type="text" name="term_location" id="term_location" value="" class="regular-text">
-				<p class="description"><?php _e( 'Enter the location of this source.' ); ?></p>
-			</td>
-		</tr>
-
-		<tr class="form-field">
-			<th scope="row"><label for="term_collection_name"><?php _e( 'Collection Name' ); ?></label></th>
-			<td>
-				<input type="text" name="term_collection_name" id="term_collection_name" value="" class="regular-text">
-				<p class="description"><?php _e( 'Enter the name of the source collection.' ); ?></p>
-			</td>
-		</tr>
-
-		<tr class="form-field">
-			<th scope="row"><label for="term_collection_url"><?php _e( 'Collection URL' ); ?></label></th>
-			<td>
-				<input type="url" name="term_collection_url" id="term_collection_url" value="" class="regular-text">
-				<p class="description"><?php _e( 'Enter the URL of the source collection.' ); ?></p>
-			</td>
-		</tr>
-
-		<div class="form-field">
-			<label for="term_feature_image"><?php _e( 'Scan Image' ); ?></label>
-			<input type="hidden" name="term_feature_image" id="term_feature_image" class="custom_media_url" value="">
-			<div id="term_feature_image_wrapper"></div>
-			<p>
-				<input type="button" class="button button-secondary" id="term_feature_image_button"
-					   value="<?php _e( 'Select Image' ); ?>"/>
-				<input type="button" class="button button-secondary" id="term_feature_image_remove"
-					   value="<?php _e( 'Remove Image' ); ?>"/>
-			</p>
-		</div>
-
-		<div class="form-field">
-			<label for="term_file_1"><?php _e( 'Source File' ); ?></label>
-			<input type="hidden" name="term_file_1" id="term_file_1" class="custom_media_url" value="">
-			<div id="term_file_1_wrapper"></div>
-			<p>
-				<input type="button" class="button button-secondary" id="term_file_1_button"
-					   value="<?php _e( 'Select File' ); ?>"/>
-				<input type="button" class="button button-secondary" id="term_file_1_remove"
-					   value="<?php _e( 'Remove File' ); ?>"/>
-			</p>
-		</div>
-
-		<div class="form-field">
-			<label for="term_file_2"><?php _e( 'Source Translation' ); ?></label>
-			<input type="hidden" name="term_file_2" id="term_file_2" class="custom_media_url" value="">
-			<div id="term_file_2_wrapper"></div>
-			<p>
-				<input type="button" class="button button-secondary" id="term_file_2_button"
-					   value="<?php _e( 'Select File' ); ?>"/>
-				<input type="button" class="button button-secondary" id="term_file_2_remove"
-					   value="<?php _e( 'Remove File' ); ?>"/>
-			</p>
-		</div>
-		<?php
-	}
-}
-
-if ( ! function_exists( "ehri_training_edit_source_metadata_fields" ) ) {
-	/**
-	 * Add the form fields for term editing
+	 * Render source metadata fields.
 	 *
-	 * @param WP_Term $term The term being edited.
+	 * @param WP_Term|null $term The term being edited (null for new terms)
 	 */
-	function ehri_training_edit_source_metadata_fields( $term ) {
-		$term_id               = $term->term_id;
-		$term_unit             = get_term_meta( $term_id, 'term_unit', true );
-		$term_teaser           = get_term_meta( $term_id, 'term_teaser', true );
-		$term_feature_image_id = get_term_meta( $term_id, 'term_feature_image', true );
-		$term_file_1_id        = get_term_meta( $term_id, 'term_file_1', true );
-		$term_file_2_id        = get_term_meta( $term_id, 'term_file_2', true );
-		$term_location         = get_term_meta( $term_id, 'term_location', true );
-		$term_collection_name  = get_term_meta( $term_id, 'term_collection_name', true );
-		$term_collection_url   = get_term_meta( $term_id, 'term_collection_url', true );
+	function ehri_training_render_source_metadata_fields( $term = null ) {
+		$term_id               = $term ? $term->term_id : 0;
+		$term_unit             = $term_id ? get_term_meta( $term_id, 'term_unit', true ) : '';
+		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
+		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
+		$term_file_1_id        = $term_id ? get_term_meta( $term_id, 'term_file_1', true ) : '';
+		$term_file_2_id        = $term_id ? get_term_meta( $term_id, 'term_file_2', true ) : '';
+		$term_location         = $term_id ? get_term_meta( $term_id, 'term_location', true ) : '';
+		$term_collection_name  = $term_id ? get_term_meta( $term_id, 'term_collection_name', true ) : '';
+		$term_collection_url   = $term_id ? get_term_meta( $term_id, 'term_collection_url', true ) : '';
 		?>
 		<tr class="form-field">
 			<th scope="row"><label for="term_unit"><?php _e( 'Unit' ); ?></label></th>
@@ -126,8 +32,8 @@ if ( ! function_exists( "ehri_training_edit_source_metadata_fields" ) ) {
 					) );
 					foreach ( $units as $unit ) {
 						echo '<option value="' . esc_attr( $unit->term_id ) . '" ' .
-							selected( $term_unit, $unit->term_id, false ) . '>' .
-							esc_html( $unit->name ) . '</option>';
+							 selected( $term_unit, $unit->term_id, false ) . '>' .
+							 esc_html( $unit->name ) . '</option>';
 					}
 					?>
 				</select>
@@ -138,8 +44,8 @@ if ( ! function_exists( "ehri_training_edit_source_metadata_fields" ) ) {
 		<tr class="form-field">
 			<th scope="row"><label for="term_teaser"><?php _e( 'Short Description' ); ?></label></th>
 			<td>
-            <textarea name="term_teaser" id="term_teaser" rows="5"
-					  cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
+				<textarea name="term_teaser" id="term_teaser" rows="5"
+						  cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
 				<p class="description"><?php _e( 'Enter a short description for this source.' ); ?></p>
 			</td>
 		</tr>
@@ -172,7 +78,7 @@ if ( ! function_exists( "ehri_training_edit_source_metadata_fields" ) ) {
 		</tr>
 
 		<tr class="form-field">
-			<th scope="row"><label for="term_feature_image"><?php _e( 'Feature Image' ); ?></label></th>
+			<th scope="row"><label for="term_feature_image"><?php _e( 'Scan Image' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_feature_image" id="term_feature_image"
 					   value="<?php echo esc_attr( $term_feature_image_id ); ?>">
@@ -232,6 +138,7 @@ if ( ! function_exists( "ehri_training_edit_source_metadata_fields" ) ) {
 		<?php
 	}
 }
+
 
 if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 	/**
@@ -326,8 +233,8 @@ if ( ! function_exists( "ehri_training_enqueue_source_metadata_scripts" ) ) {
 // Hook everything up
 if ( ! function_exists( "ehri_training_init_source_metadata" ) ) {
 	function ehri_training_init_source_metadata() {
-		add_action( "source_add_form_fields", 'ehri_training_add_source_metadata_fields' );
-		add_action( "source_edit_form_fields", 'ehri_training_edit_source_metadata_fields' );
+		add_action( "source_add_form_fields", 'ehri_training_render_source_metadata_fields' );
+		add_action( "source_edit_form_fields", 'ehri_training_render_source_metadata_fields' );
 		add_action( "created_source", 'ehri_training_save_source_metadata' );
 		add_action( "edited_source", 'ehri_training_save_source_metadata' );
 		add_action( 'admin_enqueue_scripts', 'ehri_training_enqueue_source_metadata_scripts' );

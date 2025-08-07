@@ -12,52 +12,110 @@ get_header();
 $source = get_queried_object();
 ?>
 <main id="content">
-    <div class="page-content source" role="main">
-		<header class="source-header">
-			<h1 class="source-title"><?php echo $source->name; ?></h1>
-		</header>
+	<div class="page-content source" role="main">
+
+		<?php $unit_id = get_term_meta( $source->term_id, 'term_unit', true ); ?>
+		<?php if ( $unit_id && ! is_wp_error( $unit_id ) ): ?>
+			<?php $unit = get_term( $unit_id, 'unit' ); ?>
+			<nav class="unit-header">
+				<div class="unit-title">
+					<a href="<?php echo esc_url( get_term_link( $unit ) ); ?>">
+						<?php echo esc_html( $unit->name ); ?>
+					</a>
+				</div>
+			</nav>
+		<?php endif; ?>
+
+		<!-- List all posts that belong to this source -->
+		<?php if ( have_posts() ) : ?>
+			<nav class="source-chapter-list">
+				<?php while ( have_posts() ) : the_post(); ?>
+					<div class="source-chapter">
+						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					</div>
+				<?php endwhile; ?>
+			</nav>
+		<?php endif; ?>
+
 		<section class="source-content">
+			<header class="source-header">
+				<h1 class="source-title"><?php echo $source->name; ?></h1>
+			</header>
+
+			<?php $teaser = get_term_meta( $source->term_id, 'term_teaser', true ); ?>
+			<?php if ( $teaser ): ?>
+				<div class="source-teaser">
+					<?php echo esc_html( $teaser ); ?>
+				</div>
+			<?php endif; ?>
+
 			<div class="source-description">
 				<?php echo $source->description; ?>
 			</div>
-			<?php if ( have_posts() ) : ?>
-				<div class="source-chapter-list">
-					<?php while ( have_posts() ) : the_post(); ?>
-						<h2 class="source-chapter">
-							<?php $chapter = get_post_meta( get_the_ID(), '_source_chapter', true ); ?>
-							<?php if ( $chapter ): ?>
-								<div class="source-chapter-number"><?php echo esc_html( $chapter ); ?></div>
-							<?php endif; ?>
-							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-						</h2>
-					<?php endwhile; ?>
+
+			<?php $location = get_term_meta( $source->term_id, 'term_location', true ); ?>
+			<?php if ( $location ): ?>
+				<div class="source-location">
+					<h3 class="field-label"><?php esc_html_e( 'Location' ); ?></h3>
+					<?php echo esc_html( $location ); ?>
+				</div>
+			<?php endif; ?>
+
+			<?php $image = get_term_meta( $source->term_id, "term_feature_image", true ); ?>
+			<?php if ( $image ): ?>
+				<div class="source-featured-image">
+					<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
+					<img src="<?php echo wp_get_attachment_image_url( $image ); ?>"
+						 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
+				</div>
+			<?php endif; ?>
+
+			<?php $file_1 = get_term_meta( $source->term_id, "term_file_1", true ); ?>
+			<?php if ( $file_1 ): ?>
+				<div class="source-file-1">
+					<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
+					<div class="file-ref">
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<a href="<?php echo esc_url( wp_get_attachment_url( $file_1 ) ); ?>" target="_blank">
+							<?php echo esc_html( get_the_title( $file_1 ) ); ?>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<?php $file_2 = get_term_meta( $source->term_id, "term_file_2", true ); ?>
+			<?php if ( $file_2 ): ?>
+				<div class="source-file-2">
+					<h3 class="field-label"><?php esc_html_e( 'English Translation' ); ?></h3>
+					<div class="file-ref">
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<a href="<?php echo esc_url( wp_get_attachment_url( $file_2 ) ); ?>" target="_blank">
+							<?php echo esc_html( get_the_title( $file_2 ) ); ?>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<?php $collection_name = get_term_meta( $source->term_id, 'term_collection_name', true ); ?>
+			<?php $collection_url = get_term_meta( $source->term_id, 'term_collection_url', true ); ?>
+			<?php if ( $collection_name || $collection_url ): ?>
+				<div class="source-collection">
+					<h3 class="field-label"><?php esc_html_e( 'Collection' ); ?></h3>
+					<?php if ( $collection_url ): ?>
+						<a href="<?php echo esc_url( $collection_url ); ?>" target="_blank">
+							<?php echo esc_html( $collection_name ?: $collection_url ); ?>
+						</a>
+					<?php else: ?>
+						<?php echo esc_html( $collection_name ); ?>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</section>
-		<?php $image = get_term_meta( $source->term_id, "term_feature_image", true ); ?>
-		<?php if ( $image ): ?>
-			<section class="source-featured-image">
-				<img src="<?php echo wp_get_attachment_image_url( $image ); ?>"
-					 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
-			</section>
-		<?php endif; ?>
-		<?php $file_1 = get_term_meta( $source->term_id, "term_file_1", true ); ?>
-		<?php if ( $file_1 ): ?>
-			<section class="source-file-1">
-				<a href="<?php echo esc_url( wp_get_attachment_url( $file_1 ) ); ?>" target="_blank">
-					<?php echo esc_html( get_the_title( $file_1 ) ); ?>
-				</a>
-			</section>
-		<?php endif; ?>
-		<?php $file_2 = get_term_meta( $source->term_id, "term_file_2", true ); ?>
-		<?php if ( $file_2 ): ?>
-			<section class="source-file-2">
-				<a href="<?php echo esc_url( wp_get_attachment_url( $file_2 ) ); ?>" target="_blank">
-					<?php echo esc_html( get_the_title( $file_2 ) ); ?>
-				</a>
-			</section>
-		<?php endif; ?>
-    </div>
+	</div>
 </main>
 
 <?php get_footer(); ?>

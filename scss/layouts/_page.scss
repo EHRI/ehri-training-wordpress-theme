@@ -20,7 +20,7 @@ body.home main#content {
 
 .unit-header {
 	background-color: var(--purple);
-	padding: 0 4.5rem;
+	padding: $space-sm 4.5rem $space-sm;
 }
 
 .unit-title a {
@@ -46,7 +46,7 @@ body.home main#content {
 .unit-content {
 	padding: 0 4rem;
 
-	@media (min-width: var(--breakpoint-tablet)) {
+	@media (min-width: $breakpoint-tablet) {
 		padding: 0 10vw;
 	}
 }
