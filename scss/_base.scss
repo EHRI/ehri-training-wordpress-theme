@@ -66,6 +66,8 @@ body {
   --font-weight-bolder: #{$font-weight-bolder};
 
   --max-width: #{$max-width};
+  --breakpoint-tablet: #{$breakpoint-tablet};
+  --breakpoint-laptop: #{$breakpoint-laptop};
 
   // Standard page margins for all devices
   --margin-page-v: 1rem;
@@ -88,11 +90,11 @@ body {
   --padding-page-content-h: 1rem;
   @media (min-width: $breakpoint-tablet) {
     --padding-page-content-v: max(2rem, min(8rem, 10vw));
-    --padding-page-content-h: 18vw;
+    --padding-page-content-h: 10vw;
   }
   @media (min-width: $breakpoint-laptop) {
     --padding-page-content-v: max(2rem, min(8rem, 20vw));
-    --padding-page-content-h: 25vw;
+    --padding-page-content-h: 20vw;
   }
 }
 
@@ -171,7 +173,7 @@ p  {
   margin-bottom: 1rem;
 }
 
-@media (max-width: $breakpoint-tablet) {
+@media (max-width: var(--breakpoint-tablet)) {
   h1 {
     //font-size: 3.375rem;
     //line-height: 3.625rem;
@@ -181,19 +183,6 @@ p  {
     //font-size: $font-size-sm;
     line-height: 1.25rem;
   }
-}
-
-@media (max-width: $breakpoint-phone) {
-  //h1 {
-  //  font-size: 2rem;
-  //  line-height: 2.125rem;
-  //}
-
-  //h2 {
-  //  font-size: 1.625rem;
-  //  line-height: 1.75rem;
-  //  align-self: start;
-  //}
 }
 
 input,
