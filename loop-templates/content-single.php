@@ -40,5 +40,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="post-body">
 		<?php the_content(); ?>
 	</div>
+
+	<?php $sources = get_the_terms( get_the_ID(), 'source' ); ?>
+	<?php if ( $sources && ! is_wp_error( $sources ) && ! empty( $sources ) ): ?>
+		<section class="post-sources">
+			<h2>Sources</h2>
+			<?php foreach ( $sources as $source ): ?>
+				<div class="post-source">
+					<a href="<?php echo esc_url( get_term_link( $source ) ); ?>">
+						<?php echo esc_html( $source->name ); ?>
+					</a>
+				</div>
+			<?php endforeach; ?>
+		</section>
+	<?php endif; ?>
+
+	<?php
+	// Display a link to the next chapter, if available.
+	$next_chapter = get_next_post(true, '', 'unit');
+	?>
+	<?php if ( $next_chapter ): ?>
+		<div class="next-chapter">
+			Next Chapter:
+			<a href="<?php echo esc_url( get_permalink( $next_chapter->ID ) ); ?>">
+				<?php echo esc_html( $next_chapter->post_title ); ?>
+			</a>
+		</div>
+	<?php endif; ?>
 </section>
 

@@ -85,3 +85,22 @@ body.home main#content {
 		line-height: 1.8rem;
 	}
 }
+
+.post-sources {
+	padding-bottom: $space-xl;
+
+	h2 {
+		margin: 0;
+	}
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin: 0;
+	}
+	li {
+		margin-bottom: 0.5rem;
+	}
+	a {
+		color: var(--blue-dark);
+	}
+}

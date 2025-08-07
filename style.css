@@ -72,6 +72,7 @@ body {
   --white: #FFF;
   --black: #46463D;
   --blue: #00B6ED;
+  --blue-dark: #1A0DAB;
   --input-border-radius: 5px;
   --card-border-radius: 10px;
   --font-size-base: 1.0625rem;
@@ -796,6 +797,24 @@ body.home main#content {
 .post-body p.intro {
   font-size: 1.2em;
   line-height: 1.8rem;
+}
+
+.post-sources {
+  padding-bottom: 2rem;
+}
+.post-sources h2 {
+  margin: 0;
+}
+.post-sources ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.post-sources li {
+  margin-bottom: 0.5rem;
+}
+.post-sources a {
+  color: var(--blue-dark);
 }
 
 .unit-list .unit-item {

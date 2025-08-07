@@ -4,14 +4,17 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-$ehri_training_includes = [
+$ehri_training_includes = array(
     'pagination',
     'widgets',
     'drupal',
     'theme-settings',
     'customizer',
+	'unit-taxonomy-type',
+	'source-taxonomy-type',
 	'unit-metadata',
-];
+	'source-metadata',
+);
 
 
 foreach ($ehri_training_includes as $file) {

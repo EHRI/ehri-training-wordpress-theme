@@ -5,8 +5,8 @@
  * @package ehri_training
  */
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
 if ( ! function_exists( 'ehri_training_add_unit_chapter_meta_box' ) ) {
@@ -42,9 +42,11 @@ if ( ! function_exists( 'ehri_training_unit_chapter_html' ) ) {
 		?>
 		<?php wp_nonce_field( 'ehri_training_unit_chapter_nonce', 'unit_chapter_nonce' ); ?>
 		<label for="unit_chapter">
-			<input type="text" pattern="[a-z]" maxlength="1" id="unit_chapter" name="unit_chapter" value="<?php echo esc_attr( $value ); ?>"/>
+			<input type="text" pattern="[a-z]" maxlength="1" id="unit_chapter" name="unit_chapter"
+				   value="<?php echo esc_attr( $value ); ?>"/>
 		</label>
-		<p class="components-form-token-field__help">Fill in the number of the chapter if applicable. This should be a letter (a,b,c,d,e,f...)</p>
+		<p class="components-form-token-field__help">Fill in the number of the chapter if applicable. This should be a
+			letter (a,b,c,d,e,f...)</p>
 		<?php
 	}
 }
@@ -120,9 +122,11 @@ if ( ! function_exists( 'ehri_training_sort_order_html' ) ) {
 		?>
 		<?php wp_nonce_field( 'ehri_training_sort_order_nonce', 'sort_order_nonce' ); ?>
 		<label for="sort_order">
-			<input type="number" id="sort_order" name="sort_order" min="1" max="20" value="<?php echo esc_attr( $value ); ?>"/>
+			<input type="number" id="sort_order" name="sort_order" min="1" max="20"
+				   value="<?php echo esc_attr( $value ); ?>"/>
 		</label>
-		<p class="components-form-token-field__help">Indicate the order of chapters in the table of contents and on the unit pages. You can use numbers between 1 and 20.</p>
+		<p class="components-form-token-field__help">Indicate the order of chapters in the table of contents and on the
+			unit pages. You can use numbers between 1 and 20.</p>
 		<?php
 	}
 }
@@ -164,3 +168,36 @@ if ( ! function_exists( 'ehri_training_save_sort_order_meta' ) ) {
 
 add_action( 'save_post', 'ehri_training_save_sort_order_meta' );
 
+//if ( ! function_exists( 'ehri_training_add_sources_meta_box' ) ) {
+//	/**
+//	 * Add a meta box to posts for selecting sources.
+//	 *
+//	 * @return void
+//	 */
+//	function ehri_training_add_sources_meta_box() {
+//		add_meta_box(
+//			'post-sources',
+//			'Sources',
+//			'ehri_training_sources_meta_box_callback',
+//			'post'
+//		);
+//	}
+//}
+//add_action( 'add_meta_boxes', 'ehri_training_add_sources_meta_box' );
+//
+//if ( ! function_exists( 'ehri_training_sources_meta_box_callback' ) ) {
+//	/**
+//	 * Callback function for the sources meta box.
+//	 *
+//	 * @param WP_Post $post The post object.
+//	 */
+//	function ehri_training_sources_meta_box_callback( WP_Post $post ) {
+//		$selected_sources = get_post_meta( $post->ID, '_post_sources', true );
+//		$sources          = get_posts( array( 'post_type' => 'source', 'numberposts' => - 1 ) );
+//
+//		foreach ( $sources as $source ) {
+//			$checked = is_array( $selected_sources ) && in_array( $source->ID, $selected_sources ) ? 'checked' : '';
+//			echo '<label><input type="checkbox" name="post_sources[]" value="' . $source->ID . '" ' . $checked . '> ' . $source->post_title . '</label><br>';
+//		}
+//	}
+//}

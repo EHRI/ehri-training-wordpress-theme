@@ -36,7 +36,7 @@ $unit = get_queried_object();
 		</section>
         <section class="unit-featured-image">
             <img src="<?php echo wp_get_attachment_image_url( get_term_meta( $unit->term_id, "term_feature_image", true ), "large" ) ?>"
-                 alt="">
+                 alt="Featured image for <?php echo esc_html( $unit->name ); ?>">
         </section>
     </div>
 </main>
