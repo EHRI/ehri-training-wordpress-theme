@@ -61,6 +61,36 @@ $source = get_queried_object();
 				</div>
 			<?php endif; ?>
 
+			<?php $source_file = get_term_meta( $source->term_id, "term_source_file", true ); ?>
+			<?php if ( $source_file ): ?>
+				<div class="source-file">
+					<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
+					<div class="file-ref">
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<a href="<?php echo esc_url( wp_get_attachment_url( $source_file ) ); ?>" target="_blank">
+							<?php echo esc_html( get_the_title( $source_file ) ); ?>
+						</a>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<?php $source_name = get_term_meta( $source->term_id, 'term_source_name', true ); ?>
+			<?php $source_url = get_term_meta( $source->term_id, 'term_source_url', true ); ?>
+			<?php if ( $source_name || $source_url ): ?>
+				<div class="source-text">
+					<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
+					<?php if ( $source_url ): ?>
+						<a href="<?php echo esc_url( $source_url ); ?>" target="_blank">
+							<?php echo esc_html( $source_name ?: $source_url ); ?>
+						</a>
+					<?php else: ?>
+						<?php echo esc_html( $source_name ); ?>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+
 			<?php $image = get_term_meta( $source->term_id, "term_feature_image", true ); ?>
 			<?php if ( $image ): ?>
 				<div class="source-featured-image">
@@ -70,31 +100,31 @@ $source = get_queried_object();
 				</div>
 			<?php endif; ?>
 
-			<?php $file_1 = get_term_meta( $source->term_id, "term_file_1", true ); ?>
-			<?php if ( $file_1 ): ?>
-				<div class="source-file-1">
-					<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
+			<?php $translation = get_term_meta( $source->term_id, "term_translation_file", true ); ?>
+			<?php if ( $translation ): ?>
+				<div class="source-file">
+					<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
 					<div class="file-ref">
 						<img alt="PDF File Icon"
 							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
 							 class="file-icon">
-						<a href="<?php echo esc_url( wp_get_attachment_url( $file_1 ) ); ?>" target="_blank">
-							<?php echo esc_html( get_the_title( $file_1 ) ); ?>
+						<a href="<?php echo esc_url( wp_get_attachment_url( $translation ) ); ?>" target="_blank">
+							<?php echo esc_html( get_the_title( $translation ) ); ?>
 						</a>
 					</div>
 				</div>
 			<?php endif; ?>
 
-			<?php $file_2 = get_term_meta( $source->term_id, "term_file_2", true ); ?>
-			<?php if ( $file_2 ): ?>
-				<div class="source-file-2">
-					<h3 class="field-label"><?php esc_html_e( 'English Translation' ); ?></h3>
+			<?php $transcript = get_term_meta( $source->term_id, "term_transcription_file", true ); ?>
+			<?php if ( $transcript ): ?>
+				<div class="source-file">
+					<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
 					<div class="file-ref">
 						<img alt="PDF File Icon"
 							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
 							 class="file-icon">
-						<a href="<?php echo esc_url( wp_get_attachment_url( $file_2 ) ); ?>" target="_blank">
-							<?php echo esc_html( get_the_title( $file_2 ) ); ?>
+						<a href="<?php echo esc_url( wp_get_attachment_url( $transcript ) ); ?>" target="_blank">
+							<?php echo esc_html( get_the_title( $transcript ) ); ?>
 						</a>
 					</div>
 				</div>

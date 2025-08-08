@@ -1,5 +1,7 @@
 jQuery(document).ready(function ($) {
 
+	let pdfIconHtml = '<img alt="PDF File" src="' + SourceMetadata.pdfIconUrl + '" class="file-icon">';
+
 	$('#term_feature_image_button').click(function (e) {
 		e.preventDefault();
 
@@ -29,11 +31,11 @@ jQuery(document).ready(function ($) {
 		$('#term_feature_image_wrapper').html('');
 	});
 
-	$('#term_file_1_button').click(function (e) {
+	$('#term_source_file_button').click(function (e) {
 		e.preventDefault();
 
 		let mediaUploader = wp.media({
-			title: 'Choose Source File',
+			title: 'Choose Source PDF File',
 			button: {
 				text: 'Use this file'
 			},
@@ -46,24 +48,24 @@ jQuery(document).ready(function ($) {
 		mediaUploader.once('select', function () {
 			var attachment = mediaUploader.state().get('selection').first().toJSON();
 			console.log(attachment);
-			$('#term_file_1').val(attachment.id);
-			$('#term_file_1_wrapper').html(attachment.filename);
+			$('#term_source_file').val(attachment.id);
+			$('#term_source_file_wrapper').html(pdfIconHtml + attachment.filename);
 		});
 
 		mediaUploader.open();
 	});
 
 	// Remove image button
-	$('#term_file_1_remove').click(function () {
-		$('#term_file_1').val('');
-		$('#term_file_1_wrapper').html('');
+	$('#term_source_file_remove').click(function () {
+		$('#term_source_file').val('');
+		$('#term_source_file_wrapper').html('');
 	});
 
-	$('#term_file_2_button').click(function (e) {
+	$('#term_translation_file_button').click(function (e) {
 		e.preventDefault();
 
 		let mediaUploader = wp.media({
-			title: 'Choose Source Translation File',
+			title: 'Choose Translation PDF File',
 			button: {
 				text: 'Use this file'
 			},
@@ -75,16 +77,46 @@ jQuery(document).ready(function ($) {
 
 		mediaUploader.once('select', function () {
 			var attachment = mediaUploader.state().get('selection').first().toJSON();
-			$('#term_file_2').val(attachment.id);
-			$('#term_file_2_wrapper').html(attachment.filename);
+			console.log(attachment);
+			$('#term_translation_file').val(attachment.id);
+			$('#term_translation_file_wrapper').html(pdfIconHtml + attachment.filename);
 		});
 
 		mediaUploader.open();
 	});
 
 	// Remove image button
-	$('#term_file_2_remove').click(function () {
-		$('#term_file_2').val('');
-		$('#term_file_2_wrapper').html('');
+	$('#term_translation_file_remove').click(function () {
+		$('#term_translation_file').val('');
+		$('#term_translation_file_wrapper').html('');
+	});
+
+	$('#term_transcription_file_button').click(function (e) {
+		e.preventDefault();
+
+		let mediaUploader = wp.media({
+			title: 'Choose Transcription PDF File',
+			button: {
+				text: 'Use this file'
+			},
+			library: {
+				type: 'application/pdf' // Restrict to PDF files
+			},
+			multiple: false
+		});
+
+		mediaUploader.once('select', function () {
+			var attachment = mediaUploader.state().get('selection').first().toJSON();
+			$('#term_transcription_file').val(attachment.id);
+			$('#term_transcription_file_wrapper').html(pdfIconHtml + attachment.filename);
+		});
+
+		mediaUploader.open();
+	});
+
+	// Remove image button
+	$('#term_transcription_file_remove').click(function () {
+		$('#term_transcription_file').val('');
+		$('#term_transcription_file_wrapper').html('');
 	});
 });

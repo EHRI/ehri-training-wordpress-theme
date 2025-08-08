@@ -10,16 +10,22 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 	 * @param WP_Term|null $term The term being edited (null for new terms)
 	 */
 	function ehri_training_render_source_metadata_fields( $term = null ) {
-		$term_id               = $term ? $term->term_id : 0;
-		$term_unit             = $term_id ? get_term_meta( $term_id, 'term_unit', true ) : '';
-		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
-		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
-		$term_file_1_id        = $term_id ? get_term_meta( $term_id, 'term_file_1', true ) : '';
-		$term_file_2_id        = $term_id ? get_term_meta( $term_id, 'term_file_2', true ) : '';
-		$term_location         = $term_id ? get_term_meta( $term_id, 'term_location', true ) : '';
-		$term_collection_name  = $term_id ? get_term_meta( $term_id, 'term_collection_name', true ) : '';
-		$term_collection_url   = $term_id ? get_term_meta( $term_id, 'term_collection_url', true ) : '';
+		$term_id                    = $term ? $term->term_id : 0;
+		$term_unit                  = $term_id ? get_term_meta( $term_id, 'term_unit', true ) : '';
+		$term_teaser                = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
+		$term_source_file_id        = $term_id ? get_term_meta( $term_id, 'term_source_file', true ) : '';
+		$term_source_name           = $term_id ? get_term_meta( $term_id, 'term_source_name', true ) : '';
+		$term_source_url            = $term_id ? get_term_meta( $term_id, 'term_source_url', true ) : '';
+		$term_feature_image_id      = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
+		$term_translation_file_id   = $term_id ? get_term_meta( $term_id, 'term_translation_file', true ) : '';
+		$term_transcription_file_id = $term_id ? get_term_meta( $term_id, 'term_transcription_file', true ) : '';
+		$term_location              = $term_id ? get_term_meta( $term_id, 'term_location', true ) : '';
+		$term_collection_name       = $term_id ? get_term_meta( $term_id, 'term_collection_name', true ) : '';
+		$term_collection_url        = $term_id ? get_term_meta( $term_id, 'term_collection_url', true ) : '';
 		?>
+
+		<?php echo wp_nonce_field( 'ehri_training_source_metadata_nonce', 'ehri_training_source_metadata_nonce', true, false ); ?>
+
 		<tr class="form-field">
 			<th scope="row"><label for="term_unit"><?php _e( 'Unit' ); ?></label></th>
 			<td>
@@ -60,11 +66,52 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 		</tr>
 
 		<tr class="form-field">
+			<th scope="row"><label for="term_source_file"><?php _e( 'Source (PDF)' ); ?></label></th>
+			<td>
+				<input type="hidden" name="term_source_file" id="term_source_file"
+					   value="<?php echo esc_attr( $term_source_file_id ); ?>">
+				<div id="term_source_file_wrapper">
+					<?php if ( $term_source_file_id ) : ?>
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<?php echo esc_html( get_the_title( $term_source_file_id ) ); ?>
+					<?php endif; ?>
+				</div>
+				<p>
+					<input type="button" class="button button-secondary" id="term_source_file_button"
+						   value="<?php _e( 'Select File' ); ?>"/>
+					<input type="button" class="button button-secondary" id="term_source_file_remove"
+						   value="<?php _e( 'Remove File' ); ?>"/>
+				</p>
+			</td>
+		</tr>
+
+		<tr class="form-field">
+			<th scope="row"><label for="term_source_name"><?php _e( 'Source Name' ); ?></label></th>
+			<td>
+				<input type="text" name="term_source_name" id="term_source_name"
+					   value="<?php echo esc_attr( $term_source_name ); ?>" class="regular-text">
+				<p class="description"><?php _e( 'Enter the name of the source.' ); ?></p>
+			</td>
+		</tr>
+
+		<tr class="form-field">
+			<th scope="row"><label for="term_source_url"><?php _e( 'Source URL' ); ?></label></th>
+			<td>
+				<input type="url" name="term_source_url" id="term_source_url"
+					   value="<?php echo esc_url( $term_source_url ); ?>" class="regular-text">
+				<p class="description"><?php _e( 'Enter the URL of the source.' ); ?></p>
+			</td>
+		</tr>
+
+
+		<tr class="form-field">
 			<th scope="row"><label for="term_collection_name"><?php _e( 'Collection Name' ); ?></label></th>
 			<td>
 				<input type="text" name="term_collection_name" id="term_collection_name"
 					   value="<?php echo esc_attr( $term_collection_name ); ?>" class="regular-text">
-				<p class="description"><?php _e( 'Enter the name of the source collection.' ); ?></p>
+				<p class="description"><?php _e( 'Enter the name of the collection.' ); ?></p>
 			</td>
 		</tr>
 
@@ -73,12 +120,12 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 			<td>
 				<input type="url" name="term_collection_url" id="term_collection_url"
 					   value="<?php echo esc_url( $term_collection_url ); ?>" class="regular-text">
-				<p class="description"><?php _e( 'Enter the URL of the source collection.' ); ?></p>
+				<p class="description"><?php _e( 'Enter the URL of the collection.' ); ?></p>
 			</td>
 		</tr>
 
 		<tr class="form-field">
-			<th scope="row"><label for="term_feature_image"><?php _e( 'Scan Image' ); ?></label></th>
+			<th scope="row"><label for="term_feature_image"><?php _e( 'Image' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_feature_image" id="term_feature_image"
 					   value="<?php echo esc_attr( $term_feature_image_id ); ?>">
@@ -99,38 +146,44 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 		</tr>
 
 		<tr class="form-field">
-			<th scope="row"><label for="term_file_1"><?php _e( 'Source File' ); ?></label></th>
+			<th scope="row"><label for="term_translation_file"><?php _e( 'English Translation (PDF)' ); ?></label></th>
 			<td>
-				<input type="hidden" name="term_file_1" id="term_file_1"
-					   value="<?php echo esc_attr( $term_file_1_id ); ?>">
-				<div id="term_file_1_wrapper">
-					<?php if ( $term_file_1_id ) : ?>
-						<?php echo esc_html( get_the_title( $term_file_1_id ) ); ?>
+				<input type="hidden" name="term_translation_file" id="term_translation_file"
+					   value="<?php echo esc_attr( $term_translation_file_id ); ?>">
+				<div id="term_translation_file_wrapper">
+					<?php if ( $term_translation_file_id ) : ?>
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<?php echo esc_html( get_the_title( $term_translation_file_id ) ); ?>
 					<?php endif; ?>
 				</div>
 				<p>
-					<input type="button" class="button button-secondary" id="term_file_1_button"
+					<input type="button" class="button button-secondary" id="term_translation_file_button"
 						   value="<?php _e( 'Select File' ); ?>"/>
-					<input type="button" class="button button-secondary" id="term_file_1_remove"
+					<input type="button" class="button button-secondary" id="term_translation_file_remove"
 						   value="<?php _e( 'Remove File' ); ?>"/>
 				</p>
 			</td>
 		</tr>
 
 		<tr class="form-field">
-			<th scope="row"><label for="term_file_2"><?php _e( 'Source Translation' ); ?></label></th>
+			<th scope="row"><label for="term_transcription_file"><?php _e( 'Transcription (PDF)' ); ?></label></th>
 			<td>
-				<input type="hidden" name="term_file_2" id="term_file_2"
-					   value="<?php echo esc_attr( $term_file_2_id ); ?>">
-				<div id="term_file_2_wrapper">
-					<?php if ( $term_file_2_id ) : ?>
-						<?php echo esc_html( get_the_title( $term_file_2_id ) ); ?>
+				<input type="hidden" name="term_transcription_file" id="term_transcription_file"
+					   value="<?php echo esc_attr( $term_transcription_file_id ); ?>">
+				<div id="term_transcription_file_wrapper">
+					<?php if ( $term_transcription_file_id ) : ?>
+						<img alt="PDF File Icon"
+							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							 class="file-icon">
+						<?php echo esc_html( get_the_title( $term_transcription_file_id ) ); ?>
 					<?php endif; ?>
 				</div>
 				<p>
-					<input type="button" class="button button-secondary" id="term_file_2_button"
+					<input type="button" class="button button-secondary" id="term_transcription_file_button"
 						   value="<?php _e( 'Select File' ); ?>"/>
-					<input type="button" class="button button-secondary" id="term_file_2_remove"
+					<input type="button" class="button button-secondary" id="term_transcription_file_remove"
 						   value="<?php _e( 'Remove File' ); ?>"/>
 				</p>
 			</td>
@@ -147,6 +200,18 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 	 * @param int $term_id The ID of the term being saved.
 	 */
 	function ehri_training_save_source_metadata( $term_id ) {
+
+		// Check nonce is set and valid
+		if ( ! isset( $_POST['ehri_training_source_metadata_nonce'] ) ||
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_source_metadata_nonce'] ) ), 'ehri_training_source_metadata_nonce' ) ) {
+			return $term_id;
+		}
+
+		// Check user capabilities
+		if ( ! current_user_can( 'edit_term', $term_id, 'source' ) ) {
+			return $term_id;
+		}
+
 		if ( isset( $_POST['term_unit'] ) ) {
 			update_term_meta(
 				$term_id,
@@ -160,6 +225,30 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				$term_id,
 				'term_location',
 				sanitize_text_field( $_POST['term_location'] )
+			);
+		}
+
+		if ( isset( $_POST['term_source_file'] ) ) {
+			update_term_meta(
+				$term_id,
+				'term_source_file',
+				$_POST['term_source_file']
+			);
+		}
+
+		if ( isset( $_POST['term_source_name'] ) ) {
+			update_term_meta(
+				$term_id,
+				'term_source_name',
+				sanitize_text_field( $_POST['term_source_name'] )
+			);
+		}
+
+		if ( isset( $_POST['term_source_url'] ) ) {
+			update_term_meta(
+				$term_id,
+				'term_source_url',
+				sanitize_url( $_POST['term_source_url'] )
 			);
 		}
 
@@ -195,19 +284,19 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 			);
 		}
 
-		if ( isset( $_POST['term_file_1'] ) ) {
+		if ( isset( $_POST['term_translation_file'] ) ) {
 			update_term_meta(
 				$term_id,
-				'term_file_1',
-				$_POST['term_file_1']
+				'term_translation_file',
+				$_POST['term_translation_file']
 			);
 		}
 
-		if ( isset( $_POST['term_file_2'] ) ) {
+		if ( isset( $_POST['term_transcription_file'] ) ) {
 			update_term_meta(
 				$term_id,
-				'term_file_2',
-				$_POST['term_file_2']
+				'term_transcription_file',
+				$_POST['term_transcription_file']
 			);
 		}
 	}
@@ -226,6 +315,14 @@ if ( ! function_exists( "ehri_training_enqueue_source_metadata_scripts" ) ) {
 			array( 'jquery' ),
 			'1.0.0',
 			true
+		);
+
+		wp_localize_script(
+			'term-metadata-js',
+			'SourceMetadata',
+			array(
+				'pdfIconUrl' => get_template_directory_uri() . '/images/application-pdf.png',
+			)
 		);
 	}
 }
