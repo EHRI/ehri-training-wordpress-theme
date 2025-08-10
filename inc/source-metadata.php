@@ -33,12 +33,11 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 					<option value=""><?php _e( 'Select Unit' ); ?></option>
 					<?php
 					$units = get_terms( array(
-						'taxonomy'   => 'unit',
-						'hide_empty' => false,
+						'taxonomy'   => 'unit'
 					) );
 					foreach ( $units as $unit ) {
-						echo '<option value="' . esc_attr( $unit->term_id ) . '" ' .
-							 selected( $term_unit, $unit->term_id, false ) . '>' .
+						echo '<option value="' . esc_attr( $unit->slug ) . '" ' .
+							 selected( $term_unit, $unit->slug, false ) . '>' .
 							 esc_html( $unit->name ) . '</option>';
 					}
 					?>

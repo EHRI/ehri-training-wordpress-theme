@@ -14,9 +14,9 @@ $source = get_queried_object();
 <main id="content">
 	<div class="page-content source" role="main">
 
-		<?php $unit_id = get_term_meta( $source->term_id, 'term_unit', true ); ?>
-		<?php if ( $unit_id && ! is_wp_error( $unit_id ) ): ?>
-			<?php $unit = get_term( $unit_id, 'unit' ); ?>
+		<?php $unit_slug = get_term_meta( $source->term_id, 'term_unit', true ); ?>
+		<?php if ( $unit_slug && ! is_wp_error( $unit_slug ) ): ?>
+			<?php $unit = get_term_by( 'slug', $unit_slug, 'unit' ); ?>
 			<nav class="unit-header">
 				<div class="unit-title">
 					<a href="<?php echo esc_url( get_term_link( $unit ) ); ?>">

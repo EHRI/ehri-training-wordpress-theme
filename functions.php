@@ -41,3 +41,4 @@ if (!function_exists( 'ehri_training_theme_setup' )) {
 add_action('after_setup_theme', 'ehri_training_theme_setup' );
 
 
+

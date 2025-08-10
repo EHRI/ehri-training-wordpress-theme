@@ -168,36 +168,101 @@ if ( ! function_exists( 'ehri_training_save_sort_order_meta' ) ) {
 
 add_action( 'save_post', 'ehri_training_save_sort_order_meta' );
 
-//if ( ! function_exists( 'ehri_training_add_sources_meta_box' ) ) {
-//	/**
-//	 * Add a meta box to posts for selecting sources.
-//	 *
-//	 * @return void
-//	 */
-//	function ehri_training_add_sources_meta_box() {
-//		add_meta_box(
-//			'post-sources',
-//			'Sources',
-//			'ehri_training_sources_meta_box_callback',
-//			'post'
-//		);
-//	}
-//}
-//add_action( 'add_meta_boxes', 'ehri_training_add_sources_meta_box' );
-//
-//if ( ! function_exists( 'ehri_training_sources_meta_box_callback' ) ) {
-//	/**
-//	 * Callback function for the sources meta box.
-//	 *
-//	 * @param WP_Post $post The post object.
-//	 */
-//	function ehri_training_sources_meta_box_callback( WP_Post $post ) {
-//		$selected_sources = get_post_meta( $post->ID, '_post_sources', true );
-//		$sources          = get_posts( array( 'post_type' => 'source', 'numberposts' => - 1 ) );
-//
-//		foreach ( $sources as $source ) {
-//			$checked = is_array( $selected_sources ) && in_array( $source->ID, $selected_sources ) ? 'checked' : '';
-//			echo '<label><input type="checkbox" name="post_sources[]" value="' . $source->ID . '" ' . $checked . '> ' . $source->post_title . '</label><br>';
-//		}
-//	}
-//}
+
+if ( ! function_exists( 'ehri_training_add_next_chapter_meta_box' ) ) {
+	/**
+	 * Add a meta box to posts and pages for setting next chapter.
+	 *
+	 * @return void
+	 */
+	function ehri_training_add_next_chapter_meta_box() {
+		$screens = array( 'post', 'page' );
+		foreach ( $screens as $screen ) {
+			add_meta_box(
+				'next_chapter',                        // Unique ID.
+				'Next Chapter',                       // Box title.
+				'ehri_training_next_chapter_html', // Content callback, must be of type callable.
+				$screen,                                 // Post type.
+				'side'                            // Position.
+			);
+		}
+	}
+}
+add_action( 'add_meta_boxes', 'ehri_training_add_next_chapter_meta_box' );
+
+
+if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
+	/**
+	 * Render the HTML for the next chapter meta box.
+	 *
+	 * @param WP_Post $post The post object.
+	 */
+	function ehri_training_next_chapter_html( $post ) {
+		$value = get_post_meta( $post->ID, '_next_chapter', true );
+		?>
+		<?php wp_nonce_field( 'ehri_training_next_chapter_nonce', 'next_chapter_nonce' ); ?>
+		<label for="next_chapter" class="sr-only"><?php echo __( 'Next Chapter' ); ?></label>
+		<select name="next_chapter" id="next_chapter">
+		<option value=""><?php echo esc_html__( 'Select next chapter', 'ehri-training' ); ?></option>
+		<?php
+		// Get all posts of type 'post' to select the next chapter.
+		$posts = get_posts(
+			array(
+				'post_type'      => 'post',
+				'posts_per_page' => - 1,
+				'post_status'    => 'publish',
+				'orderby'        => 'title',
+				'order'          => 'ASC',
+			)
+		);
+		foreach ( $posts as $p ) {
+			printf(
+				'<option value="%d" %s>%s</option>',
+				$p->ID,
+				selected( $value, $p->ID, false ),
+				esc_html( $p->post_title )
+			);
+		}
+		?>
+		<p class="components-form-token-field__help">Select the next chapter.</p>
+		<?php
+	}
+}
+
+if ( ! function_exists( 'ehri_training_save_next_chapter_meta' ) ) {
+	/**
+	 * Save the sort order meta box data.
+	 *
+	 * @param int $post_id The ID of the post being saved.
+	 */
+	function ehri_training_save_next_chapter_meta( $post_id ) {
+		// Check if nonce field exists before validating.
+		if ( ! isset( $_POST['next_chapter_nonce'] ) ) {
+			return $post_id; // Meta box not present, skip validation.
+		}
+
+		// Now validate the nonce.
+		$nonce = sanitize_text_field( wp_unslash( $_POST['next_chapter_nonce'] ) );
+		if ( ! wp_verify_nonce( $nonce, 'ehri_training_next_chapter_nonce' ) ) {
+			return $post_id; // Invalid nonce.
+		}
+
+		// Check user capabilities.
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return $post_id;
+		}
+
+		if ( array_key_exists( 'next_chapter', $_POST ) && '' !== $_POST['next_chapter'] ) {
+			update_post_meta(
+				$post_id,
+				'_next_chapter',
+				wp_unslash( intval( $_POST['next_chapter'] ) )
+			);
+		} else {
+			delete_post_meta( $post_id, '_next_chapter' );
+		}
+	}
+}
+
+add_action( 'save_post', 'ehri_training_save_next_chapter_meta' );
+

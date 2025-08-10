@@ -36,3 +36,23 @@ if ( ! function_exists( 'ehri_training_create_unit_taxonomy' ) ) {
 	}
 }
 add_action( 'init', 'ehri_training_create_unit_taxonomy' );
+
+if ( ! function_exists( 'unit_taxonomy_query_params' ) ) {
+	/**
+	 * Modify the main query to sort units by a custom meta key.
+	 *
+	 * @param WP_Query $query The WP_Query instance (passed by reference).
+	 */
+	function unit_taxonomy_query_params( $query ) {
+		if ( ! is_admin() && $query->is_main_query() ) {
+			// Replace 'your_taxonomy' with your actual taxonomy name
+			if ( is_tax( 'unit' ) || is_category() || is_tag() ) {
+				$query->set( 'meta_key', '_sort_order' );
+				$query->set( 'orderby', 'meta_value_num' );
+				$query->set( 'order', 'ASC' );
+				$query->set( 'posts_per_page', -1 ); // Show all posts in the taxonomy.
+			}
+		}
+	}
+}
+add_action( 'pre_get_posts', 'unit_taxonomy_query_params' );

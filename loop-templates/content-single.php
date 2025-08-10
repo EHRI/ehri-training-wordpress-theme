@@ -57,13 +57,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php
 	// Display a link to the next chapter, if available.
-	$next_chapter = get_next_post(true, '', 'unit');
+	$next_chapter_id = get_post_meta(get_the_ID(), '_next_chapter', true);
 	?>
-	<?php if ( $next_chapter ): ?>
+	<?php if ( $next_chapter_id ): ?>
 		<div class="next-chapter">
 			Next Chapter:
-			<a href="<?php echo esc_url( get_permalink( $next_chapter->ID ) ); ?>">
-				<?php echo esc_html( $next_chapter->post_title ); ?>
+			<a href="<?php echo esc_url( get_permalink( $next_chapter_id ) ); ?>">
+				<?php echo esc_html( get_the_title($next_chapter_id) ); ?>
 			</a>
 		</div>
 	<?php endif; ?>

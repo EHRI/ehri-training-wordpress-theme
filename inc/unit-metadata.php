@@ -3,38 +3,16 @@
  * Add custom metadata fields to taxonomy terms
  */
 
-// Add the form fields for new term creation
-if ( ! function_exists( "ehri_training_add_unit_metadata_fields" ) ) {
-	function ehri_training_add_unit_metadata_fields() {
-		?>
-		<div class="form-field">
-			<label for="term_teaser"><?php _e( 'Teaser' ); ?></label>
-			<textarea name="term_teaser" id="term_teaser" rows="5" cols="40"></textarea>
-			<p class="description"><?php _e( 'Enter a brief teaser for this term.' ); ?></p>
-		</div>
-
-		<div class="form-field">
-			<label for="term_feature_image"><?php _e( 'Feature Image' ); ?></label>
-			<input type="hidden" name="term_feature_image" id="term_feature_image" class="custom_media_url" value="">
-			<div id="term_feature_image_wrapper"></div>
-			<p>
-				<input type="button" class="button button-secondary" id="term_feature_image_button"
-					   value="<?php _e( 'Select Image' ); ?>"/>
-				<input type="button" class="button button-secondary" id="term_feature_image_remove"
-					   value="<?php _e( 'Remove Image' ); ?>"/>
-			</p>
-		</div>
-		<?php
-	}
-}
 
 // Add the form fields for term editing
-if ( ! function_exists( "ehri_training_edit_unit_metadata_fields" ) ) {
-	function ehri_training_edit_unit_metadata_fields( $term ) {
-		$term_id               = $term->term_id;
-		$term_teaser           = get_term_meta( $term_id, 'term_teaser', true );
-		$term_feature_image_id = get_term_meta( $term_id, 'term_feature_image', true );
+if ( ! function_exists( "ehri_training_render_unit_metadata_fields" ) ) {
+	function ehri_training_render_unit_metadata_fields( $term = null ) {
+		$term_id               = $term ? $term->term_id : 0;
+		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
+		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
 		?>
+		<?php echo wp_nonce_field( 'ehri_training_unit_metadata_nonce', 'ehri_training_unit_metadata_nonce', true, false ); ?>
+
 		<tr class="form-field">
 			<th scope="row"><label for="term_teaser"><?php _e( 'Teaser' ); ?></label></th>
 			<td>
@@ -71,6 +49,17 @@ if ( ! function_exists( "ehri_training_edit_unit_metadata_fields" ) ) {
 // Save the term metadata
 if ( ! function_exists( "ehri_training_save_unit_metadata" ) ) {
 	function ehri_training_save_unit_metadata( $term_id ) {
+		// Check nonce is set and valid
+		if ( ! isset( $_POST['ehri_training_unit_metadata_nonce'] ) ||
+			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_unit_metadata_nonce'] ) ), 'ehri_training_unit_metadata_nonce' ) ) {
+			return $term_id;
+		}
+
+		// Check user capabilities
+		if ( ! current_user_can( 'edit_term', $term_id, 'source' ) ) {
+			return $term_id;
+		}
+
 		if ( isset( $_POST['term_teaser'] ) ) {
 			update_term_meta(
 				$term_id,
@@ -109,8 +98,8 @@ if ( ! function_exists( "ehri_training_enqueue_unit_metadata_scripts" ) ) {
 // Hook everything up
 if ( ! function_exists( "ehri_training_init_unit_metadata" ) ) {
 	function ehri_training_init_unit_metadata() {
-		add_action( "unit_add_form_fields", 'ehri_training_add_unit_metadata_fields' );
-		add_action( "unit_edit_form_fields", 'ehri_training_edit_unit_metadata_fields' );
+		add_action( "unit_add_form_fields", 'ehri_training_render_unit_metadata_fields' );
+		add_action( "unit_edit_form_fields", 'ehri_training_render_unit_metadata_fields' );
 		add_action( "created_unit", 'ehri_training_save_unit_metadata' );
 		add_action( "edited_unit", 'ehri_training_save_unit_metadata' );
 		add_action( 'admin_enqueue_scripts', 'ehri_training_enqueue_unit_metadata_scripts' );
