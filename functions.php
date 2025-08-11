@@ -15,6 +15,7 @@ $ehri_training_includes = array(
 	'unit-metadata',
 	'source-metadata',
 	'index-pages',
+	'shortcodes',
 );
 
 

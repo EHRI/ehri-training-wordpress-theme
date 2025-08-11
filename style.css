@@ -846,6 +846,66 @@ body.home main#content {
   font-weight: 500;
 }
 
+.source-shortcode-wrapper {
+  display: flex;
+  position: relative;
+  background-color: #9c3267;
+  color: var(--white);
+  padding: 0 0 2rem 1rem;
+}
+.source-shortcode-wrapper .source-icon {
+  background-color: #10a7e6;
+  position: absolute;
+  right: 100%;
+  width: 4vw;
+}
+.source-shortcode-wrapper a {
+  color: #fff042;
+}
+.source-shortcode-wrapper h2.source-title {
+  color: var(--white);
+  padding: 0.5rem 0.5rem 0 0;
+}
+.source-shortcode-wrapper h3.field-label {
+  color: var(--white);
+  margin: 0;
+}
+.source-shortcode-wrapper .source-teaser,
+.source-shortcode-wrapper .source-description {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-reg);
+}
+.source-shortcode-wrapper summary {
+  list-style: none;
+  cursor: pointer;
+}
+.source-shortcode-wrapper summary::-webkit-details-marker {
+  display: none;
+}
+.source-shortcode-wrapper details[open] summary .source-featured-image {
+  max-height: unset;
+}
+.source-shortcode-wrapper .source-featured-image {
+  float: right;
+  max-height: 10rem;
+  overflow: hidden;
+  margin-right: -10vw;
+  margin-left: 0.5rem;
+}
+.source-shortcode-wrapper .source-featured-image img {
+  width: 350px;
+  height: auto;
+}
+.source-shortcode-wrapper .source-featured-image h3 {
+  display: none;
+}
+.source-shortcode-wrapper .source-shortcode-details {
+  font-size: var(--font-size-sm);
+}
+.source-shortcode-wrapper .source-shortcode-details .label-inline {
+  float: left;
+}
+
 .unit-list .unit-item {
   background-color: var(--white);
   border-left: 3rem solid var(--wine-red);
