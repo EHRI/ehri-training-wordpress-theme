@@ -29,18 +29,23 @@ body.home main#content {
 	text-decoration: none;
 }
 
-.unit-title:first-letter {
-	color: var(--blue);
-	padding-right: 0.5em;
-	display: inline-block;
-	//background-repeat: no-repeat;
-	//background-position: 1rem 1rem;
-	//background-image: url('images/right-paren.svg');
-	//background-size: .5rem;
+//.unit-title:first-letter {
+//	color: var(--blue);
+//	padding-right: 0.5em;
+//	display: inline-block;
+//	//background-repeat: no-repeat;
+//	//background-position: 1rem 1rem;
+//	//background-image: url('images/right-paren.svg');
+//	//background-size: .5rem;
+//	margin-left: -2.5rem;
+//}
+
+.unit-header .unit-title .unit-number {
 	margin-left: -2.5rem;
+	color: var(--blue);
 }
 
-.unit-title:first-letter::after {
+.unit-header .unit-title .unit-number::after {
 	content: ") ";
 }
 

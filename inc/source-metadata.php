@@ -217,6 +217,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_unit',
 				sanitize_text_field( $_POST['term_unit'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_unit' );
 		}
 
 		if ( isset( $_POST['term_location'] ) ) {
@@ -225,6 +227,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_location',
 				sanitize_text_field( $_POST['term_location'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_location' );
 		}
 
 		if ( isset( $_POST['term_source_file'] ) ) {
@@ -233,6 +237,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_source_file',
 				$_POST['term_source_file']
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_source_file' );
 		}
 
 		if ( isset( $_POST['term_source_name'] ) ) {
@@ -249,6 +255,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_source_url',
 				sanitize_url( $_POST['term_source_url'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_source_url' );
 		}
 
 		if ( isset( $_POST['term_collection_name'] ) ) {
@@ -257,6 +265,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_collection_name',
 				sanitize_text_field( $_POST['term_collection_name'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_collection_name' );
 		}
 
 		if ( isset( $_POST['term_collection_url'] ) ) {
@@ -265,6 +275,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_collection_url',
 				sanitize_url( $_POST['term_collection_url'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_collection_url' );
 		}
 
 		if ( isset( $_POST['term_teaser'] ) ) {
@@ -273,6 +285,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_teaser',
 				sanitize_textarea_field( $_POST['term_teaser'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_teaser' );
 		}
 
 		if ( isset( $_POST['term_feature_image'] ) ) {
@@ -281,6 +295,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_feature_image',
 				$_POST['term_feature_image']
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_feature_image' );
 		}
 
 		if ( isset( $_POST['term_translation_file'] ) ) {
@@ -289,6 +305,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_translation_file',
 				$_POST['term_translation_file']
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_translation_file' );
 		}
 
 		if ( isset( $_POST['term_transcription_file'] ) ) {
@@ -297,6 +315,8 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 				'term_transcription_file',
 				$_POST['term_transcription_file']
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_transcription_file' );
 		}
 	}
 }

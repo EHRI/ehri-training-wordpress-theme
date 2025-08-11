@@ -8,10 +8,19 @@
 if ( ! function_exists( "ehri_training_render_unit_metadata_fields" ) ) {
 	function ehri_training_render_unit_metadata_fields( $term = null ) {
 		$term_id               = $term ? $term->term_id : 0;
+		$term_num              = $term ? get_term_meta($term_id, 'term_num', true) : '';
 		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
 		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
 		?>
 		<?php echo wp_nonce_field( 'ehri_training_unit_metadata_nonce', 'ehri_training_unit_metadata_nonce', true, false ); ?>
+
+		<tr class="form-field">
+			<th scope="row"><label for="term_num"><?php _e( 'Number' ); ?></label></th>
+			<td>
+				<input type="number" id="term_num" name="term_num" min="1" max="999"
+					   value="<?php echo esc_attr( $term_num ); ?>"/>
+			</td>
+		</tr>
 
 		<tr class="form-field">
 			<th scope="row"><label for="term_teaser"><?php _e( 'Teaser' ); ?></label></th>
@@ -60,12 +69,24 @@ if ( ! function_exists( "ehri_training_save_unit_metadata" ) ) {
 			return $term_id;
 		}
 
+		if ( isset( $_POST['term_num'] ) ) {
+			update_term_meta(
+				$term_id,
+				'term_num',
+				sanitize_text_field( $_POST['term_num'] )
+			);
+		} else {
+			delete_term_meta( $term_id, 'term_num' );
+		}
+
 		if ( isset( $_POST['term_teaser'] ) ) {
 			update_term_meta(
 				$term_id,
 				'term_teaser',
 				sanitize_textarea_field( $_POST['term_teaser'] )
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_teaser' );
 		}
 
 		if ( isset( $_POST['term_feature_image'] ) ) {
@@ -74,6 +95,8 @@ if ( ! function_exists( "ehri_training_save_unit_metadata" ) ) {
 				'term_feature_image',
 				$_POST['term_feature_image']
 			);
+		} else {
+			delete_term_meta( $term_id, 'term_feature_image' );
 		}
 	}
 }

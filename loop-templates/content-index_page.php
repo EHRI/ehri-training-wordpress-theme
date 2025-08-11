@@ -16,6 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php foreach ( $unit as $u ): ?>
 			<div class="unit-title">
 				<a href="<?php echo esc_url( get_term_link( $u ) ); ?>">
+					<span class="unit-number">
+						<?php $unit_number = get_term_meta( $u->term_id, 'term_num', true ); ?>
+						<?php if ( $unit_number && ! is_wp_error( $unit_number ) ): ?>
+							<?php echo esc_html( $unit_number ); ?>
+						<?php endif; ?>
+					</span>
 					<?php echo esc_html( $u->name ); ?>
 				</a>
 			</div>

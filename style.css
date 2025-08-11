@@ -756,14 +756,12 @@ body.home main#content {
   text-decoration: none;
 }
 
-.unit-title:first-letter {
-  color: var(--blue);
-  padding-right: 0.5em;
-  display: inline-block;
+.unit-header .unit-title .unit-number {
   margin-left: -2.5rem;
+  color: var(--blue);
 }
 
-.unit-title:first-letter::after {
+.unit-header .unit-title .unit-number::after {
   content: ") ";
 }
 
