@@ -26,16 +26,17 @@ body.home main#content {
 .unit-title a {
 	font-family: var(--font-family-nav), sans-serif;
 	color: var(--white);
+	text-decoration: none;
 }
 
 .unit-title:first-letter {
 	color: var(--blue);
 	padding-right: 0.5em;
-	background-repeat: no-repeat;
-	background-position: 1rem 1rem;
 	display: inline-block;
-	background-image: url('images/right-paren.svg');
-	background-size: .5rem;
+	//background-repeat: no-repeat;
+	//background-position: 1rem 1rem;
+	//background-image: url('images/right-paren.svg');
+	//background-size: .5rem;
 	margin-left: -2.5rem;
 }
 
@@ -59,7 +60,7 @@ body.home main#content {
 	color: #009fe4;
 	display: block;
 	float: left;
-	margin-left: -2.2rem;
+	margin-left: -2.5rem;
 
 	&:after {
 		content: ") ";
@@ -128,6 +129,7 @@ body.home main#content {
 .source-shortcode-wrapper {
 	display: flex;
 	position: relative;
+	margin-bottom: $space-lg;
 
 	.source-icon {
 		background-color: #10a7e6;

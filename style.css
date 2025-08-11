@@ -181,8 +181,8 @@ h6 {
 }
 
 a {
-  color: var(--wine-red);
-  text-decoration: none;
+  color: var(--blue-dark);
+  text-decoration: underline;
 }
 
 p {
@@ -714,6 +714,7 @@ blockquote p {
 }
 .footer.main .ehrifooter .name a {
   text-wrap: nowrap;
+  text-decoration: none;
 }
 .footer.main .ehrifooter .name a .emph {
   font-weight: bold;
@@ -752,16 +753,13 @@ body.home main#content {
 .unit-title a {
   font-family: var(--font-family-nav), sans-serif;
   color: var(--white);
+  text-decoration: none;
 }
 
 .unit-title:first-letter {
   color: var(--blue);
   padding-right: 0.5em;
-  background-repeat: no-repeat;
-  background-position: 1rem 1rem;
   display: inline-block;
-  background-image: url("images/right-paren.svg");
-  background-size: 0.5rem;
   margin-left: -2.5rem;
 }
 
@@ -785,7 +783,7 @@ body.home main#content {
   color: #009fe4;
   display: block;
   float: left;
-  margin-left: -2.2rem;
+  margin-left: -2.5rem;
 }
 .unit-chapter-number:after {
   content: ") ";
@@ -849,6 +847,7 @@ body.home main#content {
 .source-shortcode-wrapper {
   display: flex;
   position: relative;
+  margin-bottom: 1.5rem;
   background-color: #9c3267;
   color: var(--white);
   padding: 0 0 2rem 1rem;
@@ -1069,6 +1068,10 @@ h3.field-label {
   line-height: 1.5em;
   margin: 0;
   padding-top: 0.5rem;
+}
+.page-content.index-page .unit-chapter-list h3 a {
+  color: var(--wine-red);
+  text-decoration: none;
 }
 .page-content.index-page .unit-chapter-list ul.source-list {
   list-style-type: none;

@@ -8,6 +8,11 @@
 			line-height: 1.5em;
 			margin: 0;
 			padding-top: $space-sm;
+
+			a {
+				color: var(--wine-red);
+				text-decoration: none;
+			}
 		}
 
 		ul.source-list {
