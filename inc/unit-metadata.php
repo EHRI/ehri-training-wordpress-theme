@@ -107,3 +107,32 @@ if ( ! function_exists( "ehri_training_init_unit_metadata" ) ) {
 }
 
 add_action( 'init', 'ehri_training_init_unit_metadata' );
+
+if (! function_exists( "ehri_training_get_unit_index_page" )) {
+	/**
+	 * Fetch the first index_page post associated with a unit.
+	 */
+	function ehri_training_get_unit_index_page( $unit_slug ) {
+		$args = array(
+			'post_type'      => 'index_page',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'unit',
+					'field'    => 'slug',
+					'terms'    => $unit_slug,
+				),
+			),
+			'posts_per_page' => 1,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
+		);
+
+		$query = new WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			return $query->posts[0];
+		}
+
+		return null;
+	}
+}

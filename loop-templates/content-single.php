@@ -55,17 +55,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</section>
 	<?php endif; ?>
 
-	<?php
-	// Display a link to the next chapter, if available.
-	$next_chapter_id = get_post_meta(get_the_ID(), '_next_chapter', true);
-	?>
-	<?php if ( $next_chapter_id ): ?>
-		<div class="next-chapter">
-			Next Chapter:
-			<a href="<?php echo esc_url( get_permalink( $next_chapter_id ) ); ?>">
-				<?php echo esc_html( get_the_title($next_chapter_id) ); ?>
-			</a>
-		</div>
-	<?php endif; ?>
 </section>
+
+<?php
+// Display a link to the next chapter, if available.
+$next_chapter_id = get_post_meta(get_the_ID(), '_next_chapter', true);
+?>
+<?php if ( $next_chapter_id ): ?>
+	<div class="next-chapter">
+		<span class="label-inline"><?php esc_html_e('Next Chapter:', 'ehri_training'); ?></span>
+		<a href="<?php echo esc_url( get_permalink( $next_chapter_id ) ); ?>">
+			<?php echo esc_html( get_the_title($next_chapter_id) ); ?>
+		</a>
+	</div>
+<?php endif; ?>
+
 

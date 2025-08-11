@@ -84,6 +84,12 @@ body.home main#content {
 		font-size: 1.2em;
 		line-height: 1.8rem;
 	}
+
+	img {
+		max-width: 100%;
+		width: auto;
+		height: auto;
+	}
 }
 
 .post-sources {
@@ -102,5 +108,19 @@ body.home main#content {
 	}
 	a {
 		color: var(--blue-dark);
+	}
+}
+
+.next-chapter {
+	margin: $space-md;
+	font-size: $font-size-sm;
+	float: right;
+	.label-inline {
+		font-weight: var(--font-weight-bolder);
+	}
+	a {
+		color: var(--blue-dark);
+		text-decoration: underline;
+		font-weight: 500;
 	}
 }

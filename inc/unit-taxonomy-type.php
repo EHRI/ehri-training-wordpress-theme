@@ -11,15 +11,15 @@ if ( ! function_exists( 'ehri_training_create_unit_taxonomy' ) ) {
 		$labels = array(
 			'name'              => _x( 'Units', 'taxonomy general name' ),
 			'singular_name'     => _x( 'Unit', 'taxonomy singular name' ),
-			'search_items'      => __( 'Search Units' ),
-			'all_items'         => __( 'All Units' ),
-			'parent_item'       => __( 'Parent Unit' ),
-			'parent_item_colon' => __( 'Parent Unit:' ),
-			'edit_item'         => __( 'Edit Unit' ),
-			'update_item'       => __( 'Update Unit' ),
-			'add_new_item'      => __( 'Add New Unit' ),
-			'new_item_name'     => __( 'New Unit Name' ),
-			'menu_name'         => __( 'Units' ),
+			'search_items'      => __( 'Search Units', 'ehri_training' ),
+			'all_items'         => __( 'All Units', 'ehri_training' ),
+			'parent_item'       => __( 'Parent Unit', 'ehri_training' ),
+			'parent_item_colon' => __( 'Parent Unit:', 'ehri_training' ),
+			'edit_item'         => __( 'Edit Unit', 'ehri_training' ),
+			'update_item'       => __( 'Update Unit', 'ehri_training' ),
+			'add_new_item'      => __( 'Add New Unit', 'ehri_training' ),
+			'new_item_name'     => __( 'New Unit Name', 'ehri_training' ),
+			'menu_name'         => __( 'Units', 'ehri_training' ),
 		);
 
 		$args = array(
@@ -32,7 +32,7 @@ if ( ! function_exists( 'ehri_training_create_unit_taxonomy' ) ) {
 			'show_in_rest'      => true,         // Enable for Gutenberg/REST API.
 		);
 
-		register_taxonomy( 'unit', array( 'post' ), $args );
+		register_taxonomy( 'unit', array( 'post', 'index_page' ), $args );
 	}
 }
 add_action( 'init', 'ehri_training_create_unit_taxonomy' );

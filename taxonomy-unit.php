@@ -12,7 +12,7 @@ get_header();
 $unit = get_queried_object();
 ?>
 <main id="content">
-    <div class="page-content unit" role="main">
+	<div class="page-content unit" role="main">
 		<header class="unit-header">
 			<h1 class="unit-title"><?php echo $unit->name; ?></h1>
 		</header>
@@ -31,14 +31,22 @@ $unit = get_queried_object();
 							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 						</h2>
 					<?php endwhile; ?>
+					<!-- Fetch any index_page posts for this unit -->
+					<?php $index_page = ehri_training_get_unit_index_page( $unit->slug ); ?>
+					<?php if ( $index_page ) : ?>
+						<h2 class="unit-chapter">
+							<a href="<?php echo esc_attr( get_the_permalink( $index_page ) ); ?>"><?php echo esc_html( get_the_title( $index_page->ID ) ); ?></a>
+						</h2>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 		</section>
-        <section class="unit-featured-image">
-            <img src="<?php echo wp_get_attachment_image_url( get_term_meta( $unit->term_id, "term_feature_image", true ), "large" ) ?>"
-                 alt="Featured image for <?php echo esc_html( $unit->name ); ?>">
-        </section>
-    </div>
+		<section class="unit-featured-image">
+			<img
+				src="<?php echo wp_get_attachment_image_url( get_term_meta( $unit->term_id, "term_feature_image", true ), "large" ) ?>"
+				alt="Featured image for <?php echo esc_html( $unit->name ); ?>">
+		</section>
+	</div>
 </main>
 
 <?php get_footer(); ?>

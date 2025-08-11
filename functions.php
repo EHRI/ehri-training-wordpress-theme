@@ -14,6 +14,7 @@ $ehri_training_includes = array(
 	'source-taxonomy-type',
 	'unit-metadata',
 	'source-metadata',
+	'index-pages',
 );
 
 
