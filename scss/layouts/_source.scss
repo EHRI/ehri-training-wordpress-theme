@@ -24,8 +24,9 @@ h3.field-label {
 
 .source-chapter a {
 	padding-left: $space-xl;
-	background-image: url(images/arrow.png);
+	background-image: url(images/arrow.svg);
 	background-repeat: no-repeat;
-	background-position: 0 7px;
+	background-position: 0 0.6rem;
+	background-size: $font-size-base;
 	text-decoration: underline;
 }
