@@ -5,13 +5,6 @@
 	padding: 0 2rem;
 }
 
-.source-content {
-	a {
-		color: var(--blue-dark);
-		text-decoration: underline;
-	}
-}
-
 h3.field-label {
 	color: var(--black);
 	padding-top: 0.5em;
@@ -30,9 +23,7 @@ h3.field-label {
 }
 
 .source-chapter a {
-	color: var(--blue-dark);
-	font-family: var(--font-family-headings), sans-serif;
-	padding-left: 30px;
+	padding-left: $space-xl;
 	background-image: url(images/arrow.png);
 	background-repeat: no-repeat;
 	background-position: 0 7px;

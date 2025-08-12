@@ -45,37 +45,34 @@
         </a>
     </div>
 
-    <h1 class="header__site-name" id="site-name">
-        <a href="/" title="Home" class="header__site-link" rel="home">
+    <h1 class="header-site-name" id="site-name">
+        <a href="/" title="Home" class="header-site-link" rel="home">
             <span><?php echo get_bloginfo( 'title' ); ?></span>
         </a>
     </h1>
 
-    <div id="main-menu" role="navigation">
-        <ul class="menu">
-            <li class="menu__item is-leaf first leaf"><a href="/overview" class="menu__link">overview</a></li>
-            <li class="menu__item is-leaf last leaf"><a href="/contact" class="menu__link">contact</a></li>
-        </ul>
-    </div>
+	<!-- Render the menus -->
+	<?php
+	wp_nav_menu(
+		array(
+			'menu'            => 'main-menu',
+			'theme_location'  => 'primary',
+			'container'       => 'nav',
+			'container_class' => 'main-menu-container',
+			'menu_class'      => 'menu',
+			'menu_id'         => 'main-menu',
+			'fallback_cb'     => false,
+		)
+	);
+	?>
 
 	<?php if ( is_front_page() ): ?>
-        <div class="header__tagline">
-            <h2><?php echo get_bloginfo( 'description' ); ?></h2>
-        </div>
-
         <section id="hero">
-            <div class="hero-text">
-                <p>Welcome to the EHRI Online Course in Holocaust Studies.
-                    With this growing resource, we want to provide teachers, lecturers and students with source material
-                    and background information in order to give them an overview on recent trends in historiography.
-                    Since it is not possible to cover all the manifold topics encompassed by modern historical Holocaust
-                    research,
-                    EHRI has decided to develop a course that teaches by using selected representative examples: five
-                    overarching topics have been developed
-                    for the online course. Each of these topics is used to focus on a critical analysis of sources
-                    within the context of the
-                    current state and methods of Holocaust research.</p>
-                <span class="readmore"><a href="/overview">read more</a></span>
+			<div class="hero-text">
+				<?php echo get_bloginfo( 'description' ); ?>
+                <span class="read-more">
+					<a href="/overview">read more</a>
+				</span>
             </div>
         </section>
 	<?php endif; ?>

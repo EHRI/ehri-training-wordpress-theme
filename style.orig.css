@@ -2078,7 +2078,7 @@ body.node-type-conference, body.page-public-history-holocaust-registration-form 
         text-decoration: underline !important
     }
 
-    a:link.header__site-link, a:visited.header__site-link {
+    a:link.header-site-link, a:visited.header-site-link {
         text-decoration: none !important
     }
 

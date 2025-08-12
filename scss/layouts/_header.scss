@@ -14,9 +14,14 @@
 }
 
 .header.main {
+	display: grid;
+	grid-template-areas: "logo" "name" "menu" "hero";
+	grid-column-gap: $space-lg;
+
 	padding: 2rem var(--padding-page-content-h);
 
 	h1#site-name {
+		grid-area: name;
 		font-size: 2rem;
 		line-height: 2.2rem;
 		margin: 0;
@@ -28,6 +33,7 @@
 		text-transform: lowercase;
 		font-variant: small-caps;
 		font-weight: var(--font-weight-bolder);
+		text-decoration: none;
 	}
 
 	#main-menu {
@@ -35,7 +41,7 @@
 	}
 
 	#logo {
-		float: right;
+		grid-area: logo;
 
 		img {
 			width: 6rem;
@@ -43,7 +49,11 @@
 		}
 	}
 
-	#main-menu .menu {
+	.main-menu-container {
+		grid-area: menu;
+	}
+
+	#main-menu {
 		padding: 0;
 		margin: 0;
 		display: flex;
@@ -58,8 +68,27 @@
 				color: var(--wine-red);
 				text-decoration: none;
 				font-weight: var(--font-weight-bolder);
-				font-family: var(--font-family-headings);
+				font-family: var(--font-family-headings), sans-serif;
 			}
+		}
+	}
+
+	#hero {
+		grid-area: hero;
+		color: #36104F;
+		margin: $space-xl 0;
+
+		.read-more a {
+			text-indent: -5000px;
+			display: inline-block;
+			background-image: url(images/read-more.svg);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position-y: 0.4rem;
+			width: var(--font-size-lg);
+			height: auto;
+			margin-top: 0.5rem;
+			margin-left: 0.5rem;
 		}
 	}
 }
@@ -67,11 +96,14 @@
 
 @media (min-width: $breakpoint-tablet) {
 	.header.main {
+		grid-template-areas: "name logo" "menu logo" "hero logo";
+		grid-template-columns: 1fr min-content;
+
 		#main-menu {
-			display: block;
+			display: flex;
 		}
 
-		#main-menu .menu {
+		#main-menu {
 			li {
 				padding-right: 3em;
 			}

@@ -48,8 +48,10 @@
 <?php if ( $image ): ?>
 	<div class="source-featured-image">
 		<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
+		<a href="<?php echo esc_url( wp_get_attachment_url( $image ) ); ?>" target="_blank">
 		<img src="<?php echo wp_get_attachment_image_url( $image ); ?>"
 			 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
+		</a>
 	</div>
 <?php endif; ?>
 

@@ -30,13 +30,8 @@ get_header();
                         <div class="unit-item">
                             <div class="unit-title">
                                 <h2>
+									<?php echo ehri_training_unit_number( $term ); ?>
 									<a href="<?php echo get_term_link($term); ?>">
-										<span class="unit-number">
-											<?php $unit_number = get_term_meta( $term->term_id, 'term_num', true ); ?>
-											<?php if ( $unit_number && ! is_wp_error( $unit_number ) ): ?>
-												<?php echo esc_html( $unit_number ); ?>
-											<?php endif; ?>
-										</span>
 										<?php echo $term->name; ?>
 									</a>
 								</h2>

@@ -15,12 +15,7 @@ $unit = get_queried_object();
 	<div class="page-content unit" role="main">
 		<header class="unit-header">
 			<h1 class="unit-title">
-				<span class="unit-number">
-					<?php $unit_number = get_term_meta( $unit->term_id, 'term_num', true ); ?>
-					<?php if ( $unit_number && ! is_wp_error( $unit_number ) ): ?>
-						<?php echo esc_html( $unit_number ); ?>
-					<?php endif; ?>
-				</span>
+				<?php echo ehri_training_unit_number( $unit ); ?>
 				<?php echo $unit->name; ?>
 			</h1>
 		</header>

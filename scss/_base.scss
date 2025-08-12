@@ -91,12 +91,15 @@ body {
   --padding-page-content-h: 1rem;
   @media (min-width: $breakpoint-tablet) {
     --padding-page-content-v: max(2rem, min(8rem, 10vw));
-    --padding-page-content-h: 10vw;
+	  --padding-page-content-h: max(1rem, calc((100vw - #{$breakpoint-tablet}) / 2));
   }
   @media (min-width: $breakpoint-laptop) {
-    --padding-page-content-v: max(2rem, min(8rem, 20vw));
-    --padding-page-content-h: 20vw;
+	  --padding-page-content-v: max(2rem, min(8rem, 20vw));
+	  --padding-page-content-h: max(1rem, calc((100vw - #{$breakpoint-laptop}) / 2));
   }
+
+  // Padding for content within the main content area
+  --padding-content-h: 5vw;
 }
 
 html {
@@ -116,7 +119,7 @@ body {
 }
 
 body {
-  font-family: var(--font-family-text);
+  font-family: var(--font-family-text), serif;
   color: var(--black);
   font-size: $font-size-base;
   line-height: 1.8rem;
@@ -132,7 +135,7 @@ body {
 
 h1, h2, h3, h4, h5, h6
 {
-  font-family: var(--font-family-headings);
+  font-family: var(--font-family-headings), sans-serif;
 }
 
 h1 {

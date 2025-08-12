@@ -29,19 +29,8 @@ body.home main#content {
 	text-decoration: none;
 }
 
-//.unit-title:first-letter {
-//	color: var(--blue);
-//	padding-right: 0.5em;
-//	display: inline-block;
-//	//background-repeat: no-repeat;
-//	//background-position: 1rem 1rem;
-//	//background-image: url('images/right-paren.svg');
-//	//background-size: .5rem;
-//	margin-left: -2.5rem;
-//}
-
 .unit-header .unit-title .unit-number {
-	margin-left: -2.5rem;
+	margin-left: calc(-1 * (var(--padding-content-h) / 2));
 	color: var(--blue);
 }
 
@@ -50,11 +39,7 @@ body.home main#content {
 }
 
 .unit-content {
-	padding: 0 4rem;
-
-	@media (min-width: $breakpoint-tablet) {
-		padding: 0 10vw;
-	}
+	padding: 0 var(--padding-content-h);
 }
 
 .unit-chapter-number {
@@ -65,7 +50,7 @@ body.home main#content {
 	color: #009fe4;
 	display: block;
 	float: left;
-	margin-left: -2.5rem;
+	margin-left: calc(-1 * (var(--padding-content-h) / 2));
 
 	&:after {
 		content: ") ";
@@ -134,13 +119,21 @@ body.home main#content {
 .source-shortcode-wrapper {
 	display: flex;
 	position: relative;
-	margin-bottom: $space-lg;
+	margin: $space-lg 0;
+	width: 100%;
+	min-height: max(3rem, 4vw);
+	//padding: 0 0 0 $space-md;
+
+	details {
+		width: 100%;
+	}
 
 	.source-icon {
 		background-color: #10a7e6;
 		position: absolute;
 		right: 100%;
-		width: 4vw;
+		width: max(3rem, 4vw);
+		height: max(3rem, 4vw);
 	}
 
 	background-color: #9c3267;
@@ -150,7 +143,8 @@ body.home main#content {
 	}
 	h2.source-title {
 		color: var(--white);
-		padding: $space-sm $space-sm 0 0;
+		padding: $space-sm;
+		padding-bottom: $space-sm;
 	}
 	h3.field-label {
 		color: var(--white);
@@ -162,9 +156,8 @@ body.home main#content {
 	{
 		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-reg);
+		padding: $space-sm;
 	}
-
-	padding: 0 0 $space-xl $space-md;
 
 
 	// Hide the details disclosure arrow:
@@ -184,11 +177,11 @@ body.home main#content {
 		float: right;
 		max-height: 10rem;
 		overflow: hidden;
-		margin-right: -10vw;
-		margin-left: $space-sm;
+		// This pulls the image over to align with the content container.
+		margin-right: calc(-1 * var(--padding-content-h));
 
 		img {
-			width: 350px;
+			width: 10rem;
 			height: auto;
 		}
 
@@ -199,9 +192,18 @@ body.home main#content {
 
 	.source-shortcode-details {
 		font-size: var(--font-size-sm);
+		padding: $space-sm;
 
 		.label-inline {
 			float: left;
+		}
+	}
+
+	@media(min-width: $breakpoint-tablet) {
+		.source-featured-image {
+			img {
+				width: 20rem;
+			}
 		}
 	}
 }

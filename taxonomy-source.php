@@ -20,12 +20,7 @@ $source = get_queried_object();
 			<nav class="unit-header">
 				<div class="unit-title">
 					<a href="<?php echo esc_url( get_term_link( $unit ) ); ?>">
-						<span class="unit-number">
-							<?php $unit_number = get_term_meta( $unit->term_id, 'term_num', true ); ?>
-							<?php if ( $unit_number && ! is_wp_error( $unit_number ) ): ?>
-								<?php echo esc_html( $unit_number ); ?>
-							<?php endif; ?>
-						</span>
+						<?php echo ehri_training_unit_number( $unit ); ?>
 						<?php echo esc_html( $unit->name ); ?>
 					</a>
 				</div>
