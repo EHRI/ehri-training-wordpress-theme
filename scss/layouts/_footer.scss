@@ -1,44 +1,58 @@
-
 /**
  * Responsive footer.
  */
+
 .footer.main {
-  .footer-content {
-    background-color: #009fe4;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    padding-right: 2.5rem;
+	// The footer is typically stuck to the bottom of the content
+	// with the same width. The exception is the home page, where it
+	// is full width and not stuck to the bottom.
+	padding: 0 var(--padding-page-content-h);
+	margin-bottom: 3rem;
 
-    .name {
-      text-transform: uppercase;
-      display: flex;
-      justify-content: center;
-      width: 100%;
+	.footer-content {
+		background-color: #009fe4;
+		//height: 2.5rem;
+		display: flex;
+		align-items: center;
+		padding-right: max(2.5rem, 2vw);
 
-      a {
-        text-wrap: nowrap;
-		  text-decoration: none;
+		.name {
+			// Shrink the font size of the footer name
+			// on smaller screens
+			font-size: min(var(--font-size-base), 2vw);
+			text-transform: uppercase;
+			display: flex;
+			justify-content: center;
+			width: 100%;
 
-        .emph {
-            font-weight: bold;
-        }
-      }
-    }
+			a {
+				//text-wrap: nowrap;
+				text-decoration: none;
 
-    .top {
-		background-color: var(--wine-red);
-    }
+				.emph {
+					font-weight: bold;
+				}
+			}
+		}
 
-    .top a {
-      display: block;
-      color: transparent;
-      width: 2.5rem;
-      height: 2.5rem;
-      background-image: url('images/back-top.svg');
-		background-repeat: no-repeat;
-		background-position: center center;
-	  background-size: 1.5rem 1.5rem;
-    }
-  }
+		.top {
+			background-color: var(--wine-red);
+		}
+
+		.top a {
+			display: block;
+			color: transparent;
+			//width: 2.5rem;
+			//height: 2.5rem;
+			width: max(2.5rem, 2vw);
+			height: max(2.5rem, 2vw);
+			//height: 100%;
+			//width: auto;
+
+			background-image: url('images/back-top.svg');
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: 1.5rem 1.5rem;
+		}
+	}
 }
