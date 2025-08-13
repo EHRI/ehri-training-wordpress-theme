@@ -200,19 +200,11 @@ if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
 		$value = get_post_meta( $post->ID, '_next_chapter', true );
 		?>
 		<?php wp_nonce_field( 'ehri_training_next_chapter_nonce', 'next_chapter_nonce' ); ?>
+		<label class="screen-reader-text" for="next_chapter">
+			<?php esc_html_e( 'Next Chapter', 'ehri-training' ); ?></label>
 		<select name="next_chapter" id="next_chapter">
 		<option value=""><?php echo esc_html__( 'Select next chapter', 'ehri-training' ); ?></option>
 		<?php
-		// Get all posts of type 'post' to select the next chapter.
-		$posts = get_posts(
-			array(
-				'post_type'      => 'post',
-				'posts_per_page' => - 1,
-				'post_status'    => 'publish',
-				'orderby'        => 'title',
-				'order'          => 'ASC',
-			)
-		);
 		$units = get_terms(
 			array(
 				'taxonomy'   => 'unit',
@@ -246,9 +238,9 @@ if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
 			);
 			foreach ( $unit_posts as $p ) {
 				printf(
-					'<option value="%d" %s>%s</option>',
-					$p->ID,
-					selected( $value, $p->ID, false ),
+					'<option value="%s" %s>%s</option>',
+					$p->post_name,
+					selected( $value, $p->post_name, false ),
 					esc_html( $p->post_title )
 				);
 			}
@@ -294,7 +286,7 @@ if ( ! function_exists( 'ehri_training_save_next_chapter_meta' ) ) {
 			update_post_meta(
 				$post_id,
 				'_next_chapter',
-				wp_unslash( intval( $_POST['next_chapter'] ) )
+				sanitize_text_field( wp_unslash( ( $_POST['next_chapter'] ) ) )
 			);
 		} else {
 			delete_post_meta( $post_id, '_next_chapter' );

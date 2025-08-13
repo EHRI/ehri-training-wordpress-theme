@@ -77,13 +77,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php
 // Display a link to the next chapter, if available.
-$next_chapter_id = get_post_meta( get_the_ID(), '_next_chapter', true );
+$next_chapter_name = get_post_meta( get_the_ID(), '_next_chapter', true );
 ?>
-<?php if ( $next_chapter_id ) : ?>
+<?php if ( $next_chapter_name ) : ?>
+	<?php $next_chapter = get_page_by_path( $next_chapter_name, OBJECT, 'post' ); ?>
 	<div class="next-chapter">
 		<span class="label-inline"><?php esc_html_e( 'Next Chapter:', 'ehri_training' ); ?></span>
-		<a href="<?php echo esc_url( get_permalink( $next_chapter_id ) ); ?>">
-			<?php echo esc_html( get_the_title( $next_chapter_id ) ); ?>
+		<a href="<?php echo esc_url( get_permalink( $next_chapter ) ); ?>">
+			<?php echo esc_html( get_the_title( $next_chapter ) ); ?>
 		</a>
 	</div>
 <?php endif; ?>
