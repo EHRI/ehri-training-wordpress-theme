@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<!-- List all the chapters for this unit and their respective sources -->
 	<?php
-	$chapter_posts = get_posts(
+	$chapter_query = new WP_Query(
 		array(
 			'post_type'      => 'post',
 			'posts_per_page' => -1, // Get all posts.
@@ -46,10 +46,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		)
 	);
 	?>
-	<?php if ( $chapter_posts ) : ?>
+	<?php if ( $chapter_query->have_posts() ) : ?>
 		<nav class="unit-chapter-list">
-			<?php foreach ( $chapter_posts as $chapter_post ) : ?>
-				<?php setup_postdata( $chapter_post ); ?>
+			<?php while ( $chapter_query->have_posts() ) : ?>
+				<?php $chapter_query->the_post(); ?>
 				<h3 class="unit-chapter">
 					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 				</h3>
@@ -65,7 +65,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
-			<?php endforeach; ?>
+			<?php endwhile; ?>
 			<?php wp_reset_postdata(); ?>
 		</nav>
 	<?php endif; ?>
