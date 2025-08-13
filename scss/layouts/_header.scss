@@ -7,6 +7,7 @@
 // Header is white only on the front page
 .home .header.main {
 	background-color: var(--white);
+	padding-bottom: 2rem;
 
 	#site-name a {
 		color: var(--purple);
@@ -18,7 +19,7 @@
 	grid-template-areas: "logo" "name" "menu" "hero";
 	grid-column-gap: $space-lg;
 
-	padding: 2rem var(--padding-page-content-h);
+	padding: 2rem var(--padding-page-content-h) 0;
 
 	h1#site-name {
 		grid-area: name;

@@ -633,6 +633,7 @@ blockquote p {
  */
 .home .header.main {
   background-color: var(--white);
+  padding-bottom: 2rem;
 }
 .home .header.main #site-name a {
   color: var(--purple);
@@ -642,7 +643,7 @@ blockquote p {
   display: grid;
   grid-template-areas: "logo" "name" "menu" "hero";
   grid-column-gap: 1.5rem;
-  padding: 2rem var(--padding-page-content-h);
+  padding: 2rem var(--padding-page-content-h) 0;
 }
 .header.main h1#site-name {
   grid-area: name;
