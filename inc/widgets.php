@@ -213,13 +213,46 @@ if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
 				'order'          => 'ASC',
 			)
 		);
-		foreach ( $posts as $p ) {
+		$units = get_terms(
+			array(
+				'taxonomy'   => 'unit',
+				'hide_empty' => false,
+				'orderby'    => 'meta_value_num',
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required for unit ordering
+				'meta_key'   => 'term_num',
+			)
+		);
+		foreach ( $units as $unit ) {
+			// Add a heading for each unit.
 			printf(
-				'<option value="%d" %s>%s</option>',
-				$p->ID,
-				selected( $value, $p->ID, false ),
-				esc_html( $p->post_title )
+				'<optgroup label="%s">',
+				esc_html( $unit->name )
 			);
+			// Get posts in this unit.
+			$unit_posts = get_posts(
+				array(
+					'post_type'      => 'post',
+					'posts_per_page' => -1,
+					'post_status'    => 'publish',
+					// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required to filter by unit
+					'tax_query'      => array(
+						array(
+							'taxonomy' => 'unit',
+							'field'    => 'term_id',
+							'terms'    => $unit->term_id,
+						),
+					),
+				)
+			);
+			foreach ( $unit_posts as $p ) {
+				printf(
+					'<option value="%d" %s>%s</option>',
+					$p->ID,
+					selected( $value, $p->ID, false ),
+					esc_html( $p->post_title )
+				);
+			}
+			echo '</optgroup>';
 		}
 		?>
 		</select>
