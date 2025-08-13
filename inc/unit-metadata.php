@@ -76,7 +76,7 @@ if ( ! function_exists( 'ehri_training_save_unit_metadata' ) ) {
 		}
 
 		// Check user capabilities.
-		if ( ! current_user_can( 'edit_term', $term_id, 'source' ) ) {
+		if ( ! current_user_can( 'edit_term', $term_id, 'unit' ) ) {
 			return $term_id;
 		}
 
