@@ -13,10 +13,13 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 	 * @param WP_Term|null $term The term object or null for new terms.
 	 */
 	function ehri_training_render_unit_metadata_fields( $term = null ) {
-		$term_id               = $term ? $term->term_id : 0;
-		$term_num              = $term ? get_term_meta( $term_id, 'term_num', true ) : '';
-		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
-		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
+		$term_id = $term ? $term->term_id : 0;
+
+		// Performance optimization: Get all metadata in a single query instead of 3 separate queries.
+		$term_meta             = $term_id ? get_term_meta( $term_id ) : array();
+		$term_num              = $term_meta['term_num'][0] ?? '';
+		$term_teaser           = $term_meta['term_teaser'][0] ?? '';
+		$term_feature_image_id = $term_meta['term_feature_image'][0] ?? '';
 		?>
 		<?php echo wp_nonce_field( 'ehri_training_unit_metadata_nonce', 'ehri_training_unit_metadata_nonce', true, false ); ?>
 

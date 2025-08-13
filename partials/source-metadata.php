@@ -5,13 +5,25 @@
  * @package ehri_training
  */
 
-$source = $args['source']; ?>
+$source = $args['source'];
+
+// Performance optimization: Get all metadata in a single query instead of 9 separate queries.
+$source_meta = get_term_meta( $source->term_id );
+
+$location        = $source_meta['term_location'][0] ?? '';
+$source_file     = $source_meta['term_source_file'][0] ?? '';
+$source_name     = $source_meta['term_source_name'][0] ?? '';
+$source_url      = $source_meta['term_source_url'][0] ?? '';
+$image           = $source_meta['term_feature_image'][0] ?? '';
+$translation     = $source_meta['term_translation_file'][0] ?? '';
+$transcript      = $source_meta['term_transcription_file'][0] ?? '';
+$collection_name = $source_meta['term_collection_name'][0] ?? '';
+$collection_url  = $source_meta['term_collection_url'][0] ?? '';
+?>
 
 <div class="source-description">
 	<?php echo wp_kses_post( $source->description ); ?>
 </div>
-
-<?php $location = get_term_meta( $source->term_id, 'term_location', true ); ?>
 <?php if ( $location ) : ?>
 	<div class="source-location">
 		<h3 class="field-label"><?php esc_html_e( 'Location' ); ?></h3>
@@ -19,7 +31,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $source_file = get_term_meta( $source->term_id, 'term_source_file', true ); ?>
 <?php if ( $source_file ) : ?>
 	<div class="source-file">
 		<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
@@ -34,8 +45,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $source_name = get_term_meta( $source->term_id, 'term_source_name', true ); ?>
-<?php $source_url = get_term_meta( $source->term_id, 'term_source_url', true ); ?>
 <?php if ( $source_name || $source_url ) : ?>
 	<div class="source-text">
 		<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
@@ -49,7 +58,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $image = get_term_meta( $source->term_id, 'term_feature_image', true ); ?>
 <?php if ( $image ) : ?>
 	<div class="source-featured-image">
 		<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
@@ -60,7 +68,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $translation = get_term_meta( $source->term_id, 'term_translation_file', true ); ?>
 <?php if ( $translation ) : ?>
 	<div class="source-file">
 		<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
@@ -75,7 +82,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $transcript = get_term_meta( $source->term_id, 'term_transcription_file', true ); ?>
 <?php if ( $transcript ) : ?>
 	<div class="source-file">
 		<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
@@ -90,8 +96,6 @@ $source = $args['source']; ?>
 	</div>
 <?php endif; ?>
 
-<?php $collection_name = get_term_meta( $source->term_id, 'term_collection_name', true ); ?>
-<?php $collection_url = get_term_meta( $source->term_id, 'term_collection_url', true ); ?>
 <?php if ( $collection_name || $collection_url ) : ?>
 	<div class="source-collection">
 		<h3 class="field-label"><?php esc_html_e( 'Collection' ); ?></h3>

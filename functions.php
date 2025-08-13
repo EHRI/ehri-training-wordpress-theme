@@ -67,5 +67,30 @@ function ehri_training_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'ehri_training_scripts' );
 
+/**
+ * Clear cached source metadata when term is updated.
+ *
+ * @param int $term_id The term ID.
+ */
+function ehri_training_clear_source_metadata_cache( $term_id ) {
+	delete_transient( 'source_metadata_' . $term_id );
+}
+add_action( 'saved_source', 'ehri_training_clear_source_metadata_cache' );
+add_action( 'edited_source', 'ehri_training_clear_source_metadata_cache' );
+add_action( 'saved_unit', 'ehri_training_clear_source_metadata_cache' );
+add_action( 'edited_unit', 'ehri_training_clear_source_metadata_cache' );
+
+/**
+ * Clear front-page units cache when units are modified.
+ *
+ * @param int $term_id The term ID.
+ */
+function ehri_training_clear_front_page_units_cache( $term_id ) {
+	delete_transient( 'ehri_training_front_page_units' );
+}
+add_action( 'saved_unit', 'ehri_training_clear_front_page_units_cache' );
+add_action( 'edited_unit', 'ehri_training_clear_front_page_units_cache' );
+add_action( 'deleted_unit', 'ehri_training_clear_front_page_units_cache' );
+
 
 

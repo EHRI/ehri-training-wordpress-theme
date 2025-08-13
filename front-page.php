@@ -17,15 +17,21 @@ get_header();
 	<div class="page-content" role="main">
 		<a id="main-content"></a>
 		<?php
-		// Get all terms in the 'unit' taxonomy.
-		$terms = get_terms(
-			array(
-				'taxonomy'   => 'unit',
-				'hide_empty' => false,
-				'orderby'    => 'meta_value_num',
-				'meta_key'   => 'term_num', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required for custom unit ordering on front page
-			)
-		);
+		// Get all terms in the 'unit' taxonomy with caching for better performance.
+		$terms = get_transient( 'ehri_training_front_page_units' );
+		if ( false === $terms ) {
+			$terms = get_terms(
+				array(
+					'taxonomy'   => 'unit',
+					'hide_empty' => false,
+					'orderby'    => 'meta_value_num',
+					'meta_key'   => 'term_num', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required for custom unit ordering on front page
+				)
+			);
+
+			// Cache for 1 hour.
+			set_transient( 'ehri_training_front_page_units', $terms, HOUR_IN_SECONDS );
+		}
 		?>
 
 		<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) : ?>

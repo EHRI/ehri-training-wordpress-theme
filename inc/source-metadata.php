@@ -12,18 +12,21 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 	 * @param WP_Term|null $term The term being edited (null for new terms).
 	 */
 	function ehri_training_render_source_metadata_fields( $term = null ) {
-		$term_id                    = $term ? $term->term_id : 0;
-		$term_unit                  = $term_id ? get_term_meta( $term_id, 'term_unit', true ) : '';
-		$term_teaser                = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
-		$term_source_file_id        = $term_id ? get_term_meta( $term_id, 'term_source_file', true ) : '';
-		$term_source_name           = $term_id ? get_term_meta( $term_id, 'term_source_name', true ) : '';
-		$term_source_url            = $term_id ? get_term_meta( $term_id, 'term_source_url', true ) : '';
-		$term_feature_image_id      = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
-		$term_translation_file_id   = $term_id ? get_term_meta( $term_id, 'term_translation_file', true ) : '';
-		$term_transcription_file_id = $term_id ? get_term_meta( $term_id, 'term_transcription_file', true ) : '';
-		$term_location              = $term_id ? get_term_meta( $term_id, 'term_location', true ) : '';
-		$term_collection_name       = $term_id ? get_term_meta( $term_id, 'term_collection_name', true ) : '';
-		$term_collection_url        = $term_id ? get_term_meta( $term_id, 'term_collection_url', true ) : '';
+		$term_id = $term ? $term->term_id : 0;
+
+		// Performance optimization: Get all metadata in a single query instead of 11 separate queries.
+		$term_meta                  = $term_id ? get_term_meta( $term_id ) : array();
+		$term_unit                  = $term_meta['term_unit'][0] ?? '';
+		$term_teaser                = $term_meta['term_teaser'][0] ?? '';
+		$term_source_file_id        = $term_meta['term_source_file'][0] ?? '';
+		$term_source_name           = $term_meta['term_source_name'][0] ?? '';
+		$term_source_url            = $term_meta['term_source_url'][0] ?? '';
+		$term_feature_image_id      = $term_meta['term_feature_image'][0] ?? '';
+		$term_translation_file_id   = $term_meta['term_translation_file'][0] ?? '';
+		$term_transcription_file_id = $term_meta['term_transcription_file'][0] ?? '';
+		$term_location              = $term_meta['term_location'][0] ?? '';
+		$term_collection_name       = $term_meta['term_collection_name'][0] ?? '';
+		$term_collection_url        = $term_meta['term_collection_url'][0] ?? '';
 		?>
 
 		<?php echo wp_nonce_field( 'ehri_training_source_metadata_nonce', 'ehri_training_source_metadata_nonce', true, false ); ?>
