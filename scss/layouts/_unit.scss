@@ -62,22 +62,20 @@
 }
 
 .page-content.unit {
+	--padding-content-h: max(3rem, 15vw);
+
 	display: flex;
 	flex-direction: column;
 	background-color: var(--white);
 
 	// Apply a padding to main sections
 	.unit-content,
-	.unit-title
+	.unit-header
 	{
-		padding: 0 $space-md 0 var(--padding-content-h); // we leave room here for the chapter numbers
+		padding: 0 var(--padding-content-h); // we leave room here for the chapter numbers
 	}
 
 	.unit-header {
-		padding: unset;
-	}
-
-	.unit-title {
 		padding-top: $space-lg;
 		padding-bottom: $space-xl;
 		margin-bottom: $space-md;
@@ -94,9 +92,9 @@
 
 	@media (min-width: $breakpoint-tablet) {
 		.unit-content,
-		.unit-title
+		.unit-header
 		{
-			padding: $space-md 10vw;
+			//padding: $space-md 10vw;
 		}
 	}
 
@@ -106,17 +104,40 @@
 		font-size: 1.2em;
 	}
 
-	// Chapter number size set to page heading, so unset it here for listings
-	.unit-chapter-number {
-		font-size: unset;
-		line-height: unset;
+	.unit-title,
+	.unit-chapter-title {
+		position: relative;
 	}
 
-	.unit-chapter a {
+	.unit-number,
+	.unit-chapter-number {
+		// The unit number sits in the left margin, so it's
+		// absolutely positioned next to the title, with a
+		// width slightly smaller than the content padding
+		// aligned to the right.
+		position: absolute;
+		width: calc(var(--padding-content-h) - #{$space-md});
+		right: 100%;
+		text-align: right;
+		margin-right: $space-md;
+		text-wrap: nowrap;
+	}
+
+	// Chapter number size set to page heading, so unset it here for listings
+	.unit-chapter-number {
+		//font-size: unset;
+		//line-height: unset;
+	}
+
+	.unit-chapter-title a {
 		color: var(--wine-red);
 		text-decoration: none;
 		font-size: 1.3rem;
 		line-height: 1.4rem;
+	}
+
+	.unit-chapter-number {
+		color: var(--blue);
 	}
 
 	.unit-featured-image {

@@ -19,8 +19,15 @@ body.home main#content {
 
 
 .unit-header {
+	display: flex;
+	justify-content: space-between;
 	background-color: var(--purple);
-	padding: $space-sm 4.5rem $space-sm;
+	padding: $space-sm calc(var(--padding-content-h) / 4) $space-sm;
+
+	.unit-index-page a {
+		color: var(--white);
+		text-decoration: none;
+	}
 }
 
 .unit-title a {
@@ -29,31 +36,45 @@ body.home main#content {
 	text-decoration: none;
 }
 
-.unit-header .unit-title .unit-number {
-	margin-left: calc(-1 * (var(--padding-content-h) / 2));
-	color: var(--blue);
+.unit-title {
+	position: relative;
 }
 
-.unit-header .unit-title .unit-number::after {
-	content: ") ";
+.unit-header .unit-title .unit-number {
+	font-weight: bold;
+	color: var(--blue);
+
+	&::after {
+		content: ")";
+	}
 }
 
 .unit-content {
 	padding: 0 var(--padding-content-h);
 }
 
-.unit-chapter-number {
-	//text-align: right;
+.post-header {
+	position: relative;
+}
+
+.post-header .unit-chapter-number {
 	font-size: 2rem; // same as h1
 	line-height: 2.2rem; // same as h1
+}
+
+// Chapter number next to the chapter title.
+.unit-chapter-number {
+	text-align: right;
 	font-weight: bold;
-	color: #009fe4;
-	display: block;
-	float: left;
-	margin-left: calc(-1 * (var(--padding-content-h) / 2));
+	color: var(--blue);
+	position: absolute;
+	width: calc(var(--padding-content-h) - #{$space-md});
+	right: 100%;
+	padding-left: $space-md;
+	margin-right: $space-md;
 
 	&:after {
-		content: ") ";
+		content: ")";
 	}
 }
 
@@ -61,6 +82,7 @@ body.home main#content {
 	color: var(--purple);
 }
 
+// Styling for HTML inside posts body.
 .post-body {
 	font-size: 0.9rem;
 
@@ -83,32 +105,39 @@ body.home main#content {
 	}
 }
 
+// List of sources at the bottom of a post.
 .post-sources {
 	padding-bottom: $space-xl;
 
 	h2 {
 		margin: 0;
 	}
+
 	ul {
 		list-style: none;
 		padding-left: 0;
 		margin: 0;
 	}
+
 	li {
 		margin-bottom: 0.5rem;
 	}
+
 	a {
 		color: var(--blue-dark);
 	}
 }
 
+// Next chapter link
 .next-chapter {
 	margin: $space-md;
 	font-size: $font-size-sm;
 	float: right;
+
 	.label-inline {
 		font-weight: var(--font-weight-bolder);
 	}
+
 	a {
 		color: var(--blue-dark);
 		text-decoration: underline;
@@ -116,12 +145,15 @@ body.home main#content {
 	}
 }
 
+// Source shortcode styles
 .source-shortcode-wrapper {
 	display: flex;
 	position: relative;
 	margin: $space-lg 0;
 	width: 100%;
 	min-height: max(3rem, 4vw);
+	background-color: #9c3267;
+	color: var(--white);
 
 	details {
 		width: 100%;
@@ -131,27 +163,26 @@ body.home main#content {
 		background-color: #10a7e6;
 		position: absolute;
 		right: 100%;
-		width: var(--padding-content-h);
+		width: min(5rem, var(--padding-content-h));
 		height: auto;
 	}
 
-	background-color: #9c3267;
-	color: var(--white);
 	a {
 		color: #fff042;
 	}
+
 	h2.source-title {
 		color: var(--white);
 		padding: $space-sm;
 	}
+
 	h3.field-label {
 		color: var(--white);
 		margin: 0;
 	}
 
 	.source-teaser,
-	.source-description
-	{
+	.source-description {
 		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-reg);
 		padding: $space-sm;
@@ -163,6 +194,7 @@ body.home main#content {
 		list-style: none;
 		cursor: pointer;
 	}
+
 	summary::-webkit-details-marker {
 		display: none;
 	}

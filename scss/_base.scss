@@ -99,7 +99,7 @@ body {
   }
 
   // Padding for content within the main content area
-  --padding-content-h: 5vw;
+  --padding-content-h: max(3rem, 10vw);
 }
 
 html {

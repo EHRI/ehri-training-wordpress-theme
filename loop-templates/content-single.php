@@ -20,17 +20,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php echo esc_html( $u->name ); ?>
 				</a>
 			</div>
+			<?php $index_page = ehri_training_get_unit_index_page( $u->slug ); ?>
+			<?php if ( $index_page ): ?>
+				<div class="unit-index-page">
+					<a href="<?php echo esc_url( get_permalink( $index_page ) ); ?>">
+						<?php echo esc_html( get_the_title( $index_page ) ); ?>
+					</a>
+				</div>
+			<?php endif; ?>
 		<?php endforeach; ?>
 	</nav>
 <?php endif; ?>
 
 <section class="unit-content">
-	<?php $chapter = get_post_meta( get_the_ID(), '_unit_chapter', true ); ?>
-	<?php if ( $chapter ): ?>
-		<div class="unit-chapter-number"><?php echo esc_html( $chapter ); ?></div>
-	<?php endif; ?>
-
-	<h1 class="post-title" id="page-title"><?php the_title(); ?></h1>
+	<header class="post-header">
+		<h1 class="post-title" id="page-title">
+			<?php $chapter = get_post_meta( get_the_ID(), '_unit_chapter', true ); ?>
+			<?php if ( $chapter ): ?>
+				<span class="unit-chapter-number"><?php echo esc_html( $chapter ); ?></span>
+			<?php endif; ?>
+			<?php the_title(); ?>
+		</h1>
+	</header>
 
 	<?php if ( has_post_thumbnail() ): ?>
 		<picture class="featured-image">
@@ -60,13 +71,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php
 // Display a link to the next chapter, if available.
-$next_chapter_id = get_post_meta(get_the_ID(), '_next_chapter', true);
+$next_chapter_id = get_post_meta( get_the_ID(), '_next_chapter', true );
 ?>
 <?php if ( $next_chapter_id ): ?>
 	<div class="next-chapter">
-		<span class="label-inline"><?php esc_html_e('Next Chapter:', 'ehri_training'); ?></span>
+		<span class="label-inline"><?php esc_html_e( 'Next Chapter:', 'ehri_training' ); ?></span>
 		<a href="<?php echo esc_url( get_permalink( $next_chapter_id ) ); ?>">
-			<?php echo esc_html( get_the_title($next_chapter_id) ); ?>
+			<?php echo esc_html( get_the_title( $next_chapter_id ) ); ?>
 		</a>
 	</div>
 <?php endif; ?>
