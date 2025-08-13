@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- render the title as a link -->
 		<h3>
 			<a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php echo get_the_title(); ?>"
-			   alt="<?php echo get_the_title(); ?>">
+			alt="<?php echo get_the_title(); ?>">
 				<?php the_title(); ?>
 			</a>
 		</h3>

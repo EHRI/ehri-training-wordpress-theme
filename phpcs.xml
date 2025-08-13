@@ -22,4 +22,10 @@
             <property name="customAllowedVars" type="array" value="before_widget,after_widget,before_title,after_title" />
         </exclude>
     </rule>
+
+    <!-- Exclude filename checks for WordPress template hierarchy files -->
+    <rule ref="WordPress.Files.FileName.NotHyphenatedLowercase">
+        <exclude-pattern>*/single-index_page.php</exclude-pattern>
+        <exclude-pattern>*/content-index_page.php</exclude-pattern>
+    </rule>
 </ruleset>

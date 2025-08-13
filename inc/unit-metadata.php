@@ -24,7 +24,7 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 			<th scope="row"><label for="term_num"><?php esc_html_e( 'Number' ); ?></label></th>
 			<td>
 				<input type="number" id="term_num" name="term_num" min="1" max="999"
-					   value="<?php echo esc_attr( $term_num ); ?>"/>
+					value="<?php echo esc_attr( $term_num ); ?>"/>
 			</td>
 		</tr>
 
@@ -32,7 +32,7 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 			<th scope="row"><label for="term_teaser"><?php esc_html_e( 'Teaser' ); ?></label></th>
 			<td>
 				<textarea name="term_teaser" id="term_teaser" rows="5"
-						  cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
+						cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
 				<p class="description"><?php esc_html_e( 'Enter a brief teaser for this term.' ); ?></p>
 			</td>
 		</tr>
@@ -41,19 +41,19 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 			<th scope="row"><label for="term_feature_image"><?php esc_html_e( 'Feature Image' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_feature_image" id="term_feature_image"
-					   value="<?php echo esc_attr( $term_feature_image_id ); ?>">
+					value="<?php echo esc_attr( $term_feature_image_id ); ?>">
 				<div id="term_feature_image_wrapper">
 					<?php if ( $term_feature_image_id ) : ?>
 						<img alt="Featured Image"
-							 src="<?php echo wp_get_attachment_image_url( $term_feature_image_id, 'medium' ); ?>"
-							 style="max-width:300px;height:auto;">
+							src="<?php echo wp_get_attachment_image_url( $term_feature_image_id, 'medium' ); ?>"
+							style="max-width:300px;height:auto;">
 					<?php endif; ?>
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_feature_image_button"
-						   value="<?php esc_attr_e( 'Select Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Select Image' ); ?>"/>
 					<input type="button" class="button button-secondary" id="term_feature_image_remove"
-						   value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
 				</p>
 			</td>
 		</tr>
@@ -71,7 +71,7 @@ if ( ! function_exists( 'ehri_training_save_unit_metadata' ) ) {
 	function ehri_training_save_unit_metadata( $term_id ) {
 		// Check nonce is set and valid.
 		if ( ! isset( $_POST['ehri_training_unit_metadata_nonce'] ) ||
-			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_unit_metadata_nonce'] ) ), 'ehri_training_unit_metadata_nonce' ) ) {
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_unit_metadata_nonce'] ) ), 'ehri_training_unit_metadata_nonce' ) ) {
 			return $term_id;
 		}
 
@@ -158,7 +158,7 @@ if ( ! function_exists( 'ehri_training_get_unit_index_page' ) ) {
 	function ehri_training_get_unit_index_page( $unit_slug ) {
 		$args = array(
 			'post_type'      => 'index_page',
-			'tax_query'      => array(
+			'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required to find index page for specific unit
 				array(
 					'taxonomy' => 'unit',
 					'field'    => 'slug',

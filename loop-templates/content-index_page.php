@@ -34,9 +34,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			'post_type'      => 'post',
 			'posts_per_page' => -1, // Get all posts.
 			'orderby'        => 'meta_value_num',
-			'meta_key'       => '_sort_order',
+			'meta_key'       => '_sort_order', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required for custom sort order of chapters
 			'order'          => 'ASC',
-			'tax_query'      => array(
+			'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Necessary to filter posts by unit taxonomy
 				array(
 					'taxonomy' => 'unit',
 					'field'    => 'slug',

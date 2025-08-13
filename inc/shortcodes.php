@@ -45,14 +45,14 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 				<summary>
 					<div class="source-icon">
 						<img src="<?php echo esc_url( get_template_directory_uri() . '/images/doc.svg' ); ?>"
-							 alt="<?php echo esc_attr( $source->name ); ?> Icon">
+							alt="<?php echo esc_attr( $source->name ); ?> Icon">
 					</div>
 					<?php $image = get_term_meta( $source->term_id, 'term_feature_image', true ); ?>
 					<?php if ( $image ) : ?>
 						<div class="source-featured-image">
 							<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
 							<img src="<?php echo esc_url( wp_get_attachment_image_url( $image, 'large' ) ); ?>"
-								 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
+								alt="Featured image for <?php echo esc_html( $source->name ); ?>">
 						</div>
 					<?php endif; ?>
 					<h2 class="source-title">
@@ -85,10 +85,10 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 							<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
 							<div class="file-ref">
 								<img alt="PDF File Icon"
-									 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-									 class="file-icon">
+									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+									class="file-icon">
 								<a href="<?php echo esc_url( wp_get_attachment_url( $source_file ) ); ?>"
-								   target="_blank">
+								target="_blank">
 									<?php echo esc_html( get_the_title( $source_file ) ); ?>
 								</a>
 							</div>
@@ -116,10 +116,10 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 							<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
 							<div class="file-ref">
 								<img alt="PDF File Icon"
-									 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-									 class="file-icon">
+									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+									class="file-icon">
 								<a href="<?php echo esc_url( wp_get_attachment_url( $translation ) ); ?>"
-								   target="_blank">
+								target="_blank">
 									<?php echo esc_html( get_the_title( $translation ) ); ?>
 								</a>
 							</div>
@@ -132,10 +132,10 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 							<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
 							<div class="file-ref">
 								<img alt="PDF File Icon"
-									 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-									 class="file-icon">
+									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+									class="file-icon">
 								<a href="<?php echo esc_url( wp_get_attachment_url( $transcript ) ); ?>"
-								   target="_blank">
+								target="_blank">
 									<?php echo esc_html( get_the_title( $transcript ) ); ?>
 								</a>
 							</div>

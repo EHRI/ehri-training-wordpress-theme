@@ -41,8 +41,8 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 					);
 					foreach ( $units as $unit ) {
 						echo '<option value="' . esc_attr( $unit->slug ) . '" ' .
-							 selected( $term_unit, $unit->slug, false ) . '>' .
-							 esc_html( $unit->name ) . '</option>';
+							selected( $term_unit, $unit->slug, false ) . '>' .
+							esc_html( $unit->name ) . '</option>';
 					}
 					?>
 				</select>
@@ -54,7 +54,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_teaser"><?php esc_html_e( 'Short Description' ); ?></label></th>
 			<td>
 				<textarea name="term_teaser" id="term_teaser" rows="5"
-						  cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
+						cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
 				<p class="description"><?php esc_html_e( 'Enter a short description for this source.' ); ?></p>
 			</td>
 		</tr>
@@ -63,7 +63,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_location"><?php esc_html_e( 'Location' ); ?></label></th>
 			<td>
 				<input type="text" name="term_location" id="term_location"
-					   value="<?php echo esc_attr( $term_location ); ?>" class="regular-text">
+					value="<?php echo esc_attr( $term_location ); ?>" class="regular-text">
 				<p class="description"><?php esc_html_e( 'Enter the location of this source.' ); ?></p>
 			</td>
 		</tr>
@@ -72,20 +72,20 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_source_file"><?php esc_html_e( 'Source (PDF)' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_source_file" id="term_source_file"
-					   value="<?php echo esc_attr( $term_source_file_id ); ?>">
+					value="<?php echo esc_attr( $term_source_file_id ); ?>">
 				<div id="term_source_file_wrapper">
 					<?php if ( $term_source_file_id ) : ?>
 						<img alt="PDF File Icon"
-							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-							 class="file-icon">
+							src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							class="file-icon">
 						<?php echo esc_html( get_the_title( $term_source_file_id ) ); ?>
 					<?php endif; ?>
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_source_file_button"
-						   value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>"/>
 					<input type="button" class="button button-secondary" id="term_source_file_remove"
-						   value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
 				</p>
 			</td>
 		</tr>
@@ -94,7 +94,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_source_name"><?php esc_html_e( 'Source Name' ); ?></label></th>
 			<td>
 				<input type="text" name="term_source_name" id="term_source_name"
-					   value="<?php echo esc_attr( $term_source_name ); ?>" class="regular-text">
+					value="<?php echo esc_attr( $term_source_name ); ?>" class="regular-text">
 				<p class="description"><?php esc_html_e( 'Enter the name of the source.' ); ?></p>
 			</td>
 		</tr>
@@ -103,7 +103,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_source_url"><?php esc_html_e( 'Source URL' ); ?></label></th>
 			<td>
 				<input type="url" name="term_source_url" id="term_source_url"
-					   value="<?php echo esc_url( $term_source_url ); ?>" class="regular-text">
+					value="<?php echo esc_url( $term_source_url ); ?>" class="regular-text">
 				<p class="description"><?php esc_html_e( 'Enter the URL of the source.' ); ?></p>
 			</td>
 		</tr>
@@ -113,7 +113,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_collection_name"><?php esc_html_e( 'Collection Name' ); ?></label></th>
 			<td>
 				<input type="text" name="term_collection_name" id="term_collection_name"
-					   value="<?php echo esc_attr( $term_collection_name ); ?>" class="regular-text">
+					value="<?php echo esc_attr( $term_collection_name ); ?>" class="regular-text">
 				<p class="description"><?php esc_html_e( 'Enter the name of the collection.' ); ?></p>
 			</td>
 		</tr>
@@ -122,7 +122,7 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_collection_url"><?php esc_html_e( 'Collection URL' ); ?></label></th>
 			<td>
 				<input type="url" name="term_collection_url" id="term_collection_url"
-					   value="<?php echo esc_url( $term_collection_url ); ?>" class="regular-text">
+					value="<?php echo esc_url( $term_collection_url ); ?>" class="regular-text">
 				<p class="description"><?php esc_html_e( 'Enter the URL of the collection.' ); ?></p>
 			</td>
 		</tr>
@@ -131,19 +131,19 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_feature_image"><?php esc_html_e( 'Image' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_feature_image" id="term_feature_image"
-					   value="<?php echo esc_attr( $term_feature_image_id ); ?>">
+					value="<?php echo esc_attr( $term_feature_image_id ); ?>">
 				<div id="term_feature_image_wrapper">
 					<?php if ( $term_feature_image_id ) : ?>
 						<img alt="Featured Image"
-							 src="<?php echo wp_get_attachment_image_url( $term_feature_image_id, 'medium' ); ?>"
-							 style="max-width:300px;height:auto;">
+							src="<?php echo wp_get_attachment_image_url( $term_feature_image_id, 'medium' ); ?>"
+							style="max-width:300px;height:auto;">
 					<?php endif; ?>
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_feature_image_button"
-						   value="<?php esc_attr_e( 'Select Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Select Image' ); ?>"/>
 					<input type="button" class="button button-secondary" id="term_feature_image_remove"
-						   value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
 				</p>
 			</td>
 		</tr>
@@ -152,20 +152,20 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_translation_file"><?php esc_html_e( 'English Translation (PDF)' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_translation_file" id="term_translation_file"
-					   value="<?php echo esc_attr( $term_translation_file_id ); ?>">
+					value="<?php echo esc_attr( $term_translation_file_id ); ?>">
 				<div id="term_translation_file_wrapper">
 					<?php if ( $term_translation_file_id ) : ?>
 						<img alt="PDF File Icon"
-							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-							 class="file-icon">
+							src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							class="file-icon">
 						<?php echo esc_html( get_the_title( $term_translation_file_id ) ); ?>
 					<?php endif; ?>
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_translation_file_button"
-						   value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>"/>
 					<input type="button" class="button button-secondary" id="term_translation_file_remove"
-						   value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
 				</p>
 			</td>
 		</tr>
@@ -174,20 +174,20 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 			<th scope="row"><label for="term_transcription_file"><?php esc_html_e( 'Transcription (PDF)' ); ?></label></th>
 			<td>
 				<input type="hidden" name="term_transcription_file" id="term_transcription_file"
-					   value="<?php echo esc_attr( $term_transcription_file_id ); ?>">
+					value="<?php echo esc_attr( $term_transcription_file_id ); ?>">
 				<div id="term_transcription_file_wrapper">
 					<?php if ( $term_transcription_file_id ) : ?>
 						<img alt="PDF File Icon"
-							 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-							 class="file-icon">
+							src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+							class="file-icon">
 						<?php echo esc_html( get_the_title( $term_transcription_file_id ) ); ?>
 					<?php endif; ?>
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_transcription_file_button"
-						   value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>"/>
 					<input type="button" class="button button-secondary" id="term_transcription_file_remove"
-						   value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
 				</p>
 			</td>
 		</tr>
@@ -206,7 +206,7 @@ if ( ! function_exists( 'ehri_training_save_source_metadata' ) ) {
 
 		// Check nonce is set and valid.
 		if ( ! isset( $_POST['ehri_training_source_metadata_nonce'] ) ||
-			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_source_metadata_nonce'] ) ), 'ehri_training_source_metadata_nonce' ) ) {
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_source_metadata_nonce'] ) ), 'ehri_training_source_metadata_nonce' ) ) {
 			return $term_id;
 		}
 

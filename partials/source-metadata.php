@@ -25,8 +25,8 @@ $source = $args['source']; ?>
 		<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
 		<div class="file-ref">
 			<img alt="PDF File Icon"
-				 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-				 class="file-icon">
+				src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+				class="file-icon">
 			<a href="<?php echo esc_url( wp_get_attachment_url( $source_file ) ); ?>" target="_blank">
 				<?php echo esc_html( get_the_title( $source_file ) ); ?>
 			</a>
@@ -55,7 +55,7 @@ $source = $args['source']; ?>
 		<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
 		<a href="<?php echo esc_url( wp_get_attachment_url( $image ) ); ?>" target="_blank">
 				<img src="<?php echo esc_url( wp_get_attachment_image_url( $image ) ); ?>"
-				 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
+				alt="Featured image for <?php echo esc_html( $source->name ); ?>">
 		</a>
 	</div>
 <?php endif; ?>
@@ -66,8 +66,8 @@ $source = $args['source']; ?>
 		<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
 		<div class="file-ref">
 			<img alt="PDF File Icon"
-				 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-				 class="file-icon">
+				src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+				class="file-icon">
 			<a href="<?php echo esc_url( wp_get_attachment_url( $translation ) ); ?>" target="_blank">
 				<?php echo esc_html( get_the_title( $translation ) ); ?>
 			</a>
@@ -81,8 +81,8 @@ $source = $args['source']; ?>
 		<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
 		<div class="file-ref">
 			<img alt="PDF File Icon"
-				 src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
-				 class="file-icon">
+				src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
+				class="file-icon">
 			<a href="<?php echo esc_url( wp_get_attachment_url( $transcript ) ); ?>" target="_blank">
 				<?php echo esc_html( get_the_title( $transcript ) ); ?>
 			</a>

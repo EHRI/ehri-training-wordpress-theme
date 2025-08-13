@@ -23,7 +23,7 @@ get_header();
 				'taxonomy'   => 'unit',
 				'hide_empty' => false,
 				'orderby'    => 'meta_value_num',
-				'meta_key'   => 'term_num',
+				'meta_key'   => 'term_num', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Required for custom unit ordering on front page
 			)
 		);
 		?>

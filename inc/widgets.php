@@ -43,7 +43,7 @@ if ( ! function_exists( 'ehri_training_unit_chapter_html' ) ) {
 		<?php wp_nonce_field( 'ehri_training_unit_chapter_nonce', 'unit_chapter_nonce' ); ?>
 		<label for="unit_chapter">
 			<input type="text" pattern="[a-z]" maxlength="1" id="unit_chapter" name="unit_chapter"
-				   value="<?php echo esc_attr( $value ); ?>"/>
+				value="<?php echo esc_attr( $value ); ?>"/>
 		</label>
 		<p class="components-form-token-field__help">Fill in the number of the chapter if applicable. This should be a
 			letter (a,b,c,d,e,f...)</p>
@@ -123,7 +123,7 @@ if ( ! function_exists( 'ehri_training_sort_order_html' ) ) {
 		<?php wp_nonce_field( 'ehri_training_sort_order_nonce', 'sort_order_nonce' ); ?>
 		<label for="sort_order">
 			<input type="number" id="sort_order" name="sort_order" min="1" max="20"
-				   value="<?php echo esc_attr( $value ); ?>"/>
+				value="<?php echo esc_attr( $value ); ?>"/>
 		</label>
 		<p class="components-form-token-field__help">Indicate the order of chapters in the table of contents and on the
 			unit pages. You can use numbers between 1 and 20.</p>
