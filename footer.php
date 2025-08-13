@@ -1,7 +1,10 @@
 <?php
 /**
  * The template for displaying the footer.
+ *
+ * @package ehri_training
  */
+
 ?>
 
 <footer id="footer" class="footer main">

@@ -78,7 +78,7 @@ if ( ! function_exists( 'ehri_training_save_unit_chapter_meta' ) ) {
 			update_post_meta(
 				$post_id,
 				'_unit_chapter',
-				wp_unslash( $_POST['unit_chapter'] )
+				sanitize_text_field( wp_unslash( $_POST['unit_chapter'] ) )
 			);
 		} else {
 			delete_post_meta( $post_id, '_unit_chapter' );
@@ -266,7 +266,7 @@ if ( ! function_exists( 'ehri_training_save_next_chapter_meta' ) ) {
 
 add_action( 'save_post', 'ehri_training_save_next_chapter_meta' );
 
-if (!function_exists('ehri_training_unit_number')) {
+if ( ! function_exists( 'ehri_training_unit_number' ) ) {
 	/**
 	 * Get the unit number for a given term.
 	 *
@@ -274,9 +274,9 @@ if (!function_exists('ehri_training_unit_number')) {
 	 *
 	 * @return string The unit number or an empty string if not set.
 	 */
-	function ehri_training_unit_number(WP_Term $term): string {
-		$unit_number = get_term_meta($term->term_id, 'term_num', true);
-		if ($unit_number && !is_wp_error($unit_number)) {
+	function ehri_training_unit_number( WP_Term $term ): string {
+		$unit_number = get_term_meta( $term->term_id, 'term_num', true );
+		if ( $unit_number && ! is_wp_error( $unit_number ) ) {
 			ob_start();
 			?>
 			<span class="unit-number">

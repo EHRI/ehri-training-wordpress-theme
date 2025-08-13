@@ -1,5 +1,10 @@
 <?php
-// With this snippet from header.php:
+/**
+ * Header template for EHRI Training WordPress theme.
+ *
+ * @package ehri_training
+ */
+
 ?>
 
 <!DOCTYPE html>
@@ -18,16 +23,6 @@
 	<link rel="shortcut icon" href="<?php echo get_theme_file_uri( 'favicon.png' ); ?>" type="image/png"/>
 	<meta name="robots" content="index, follow">
 
-	<script src="//use.typekit.com/pvi1xwv.js"></script>
-	<script>
-		try {
-			Typekit.load();
-		} catch (e) {
-		}
-	</script>
-
-	<!-- include style.css -->
-	<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css"/>
 	<?php wp_head(); ?>
 
 </head>
@@ -37,9 +32,9 @@
 	<a id="top"></a>
 	<div id="logo">
 		<a href="<?php echo $home; ?>">
-			<?php if ( is_front_page() ): ?>
+			<?php if ( is_front_page() ) : ?>
 				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo.svg' ); ?>" alt="EHRI Logo"/>
-			<?php else: ?>
+			<?php else : ?>
 				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo-s.svg' ); ?>" alt="EHRI Logo"/>
 			<?php endif; ?>
 		</a>
@@ -66,7 +61,7 @@
 	);
 	?>
 
-	<?php if ( is_front_page() ): ?>
+	<?php if ( is_front_page() ) : ?>
 		<section id="hero">
 			<div class="hero-text">
 				<?php echo get_bloginfo( 'description' ); ?>

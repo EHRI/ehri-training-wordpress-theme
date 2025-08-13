@@ -42,7 +42,9 @@ $unit = get_queried_object();
 					<?php if ( $index_page ) : ?>
 						<div class="unit-chapter-header">
 							<h2 class="unit-chapter-title">
-								<a href="<?php echo esc_attr( get_the_permalink( $index_page ) ); ?>"><?php echo esc_html( get_the_title( $index_page->ID ) ); ?></a>
+								<a href="<?php echo esc_attr( get_the_permalink( $index_page ) ); ?>">
+									<?php echo esc_html( get_the_title( $index_page->ID ) ); ?>
+								</a>
 							</h2>
 						</div>
 					<?php endif; ?>

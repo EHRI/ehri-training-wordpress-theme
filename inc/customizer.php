@@ -29,6 +29,11 @@ if ( ! function_exists( 'ehri_training_customize_register' ) ) {
 add_action( 'customize_register', 'ehri_training_customize_register' );
 
 if ( ! function_exists( 'ehri_training_theme_customize_register' ) ) {
+	/**
+	 * Register theme customizer settings.
+	 *
+	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 */
 	function ehri_training_theme_customize_register( $wp_customize ) {
 		$wp_customize->add_section(
 			'ehri_training_theme_header_options',

@@ -1,6 +1,8 @@
 <?php
 /**
  * Pagination layout.
+ *
+ * @package ehri_training
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,7 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! function_exists( 'ehri_training_pagination' ) ) {
-
+	/**
+	 * Display pagination for posts.
+	 *
+	 * @param array  $args  Arguments for paginate_links().
+	 * @param string $class CSS class for pagination container.
+	 */
 	function ehri_training_pagination( $args = array(), $class = 'pagination' ) {
 
 		if ( $GLOBALS['wp_query']->max_num_pages <= 1 ) {

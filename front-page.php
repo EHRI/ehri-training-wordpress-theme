@@ -1,6 +1,8 @@
 <?php
 /**
  * The main template file.
+ *
+ * @package ehri_training
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,36 +17,38 @@ get_header();
 	<div class="page-content" role="main">
 		<a id="main-content"></a>
 		<?php
-		// Get all terms in the 'unit' taxonomy
-		$terms = get_terms( array(
-			'taxonomy'   => 'unit',
-			'hide_empty' => false,
-			'orderby'    => 'meta_value_num',
-			'meta_key'   => 'term_num',
-		) );
+		// Get all terms in the 'unit' taxonomy.
+		$terms = get_terms(
+			array(
+				'taxonomy'   => 'unit',
+				'hide_empty' => false,
+				'orderby'    => 'meta_value_num',
+				'meta_key'   => 'term_num',
+			)
+		);
 		?>
 
 		<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) : ?>
 			<div class="unit-list">
-				<?php foreach ( $terms as $term ) : ?>
+				<?php foreach ( $terms as $unit_term ) : ?>
 					<div class="unit-item">
 						<div class="unit-title">
 							<h2>
-								<?php echo ehri_training_unit_number( $term ); ?>
-								<a href="<?php echo get_term_link( $term ); ?>">
-									<?php echo $term->name; ?>
+								<?php echo ehri_training_unit_number( $unit_term ); ?>
+								<a href="<?php echo esc_url( get_term_link( $unit_term ) ); ?>">
+									<?php echo esc_html( $unit_term->name ); ?>
 								</a>
 							</h2>
 						</div>
 
 						<div class="unit-teaser">
-							<p><?php echo get_term_meta( $term->term_id, 'term_teaser', true ); ?></p>
+							<?php echo wp_kses_post( get_term_meta( $unit_term->term_id, 'term_teaser', true ) ); ?>
 						</div>
 
 						<div class="unit-featured-image">
-							<a href="<?php echo get_term_link( $term ); ?>">
+							<a href="<?php echo esc_url( get_term_link( $unit_term ) ); ?>">
 								<img
-									src="<?php echo wp_get_attachment_image_url( get_term_meta( $term->term_id, "term_feature_image", true ), "large" ) ?>"
+									src="<?php echo esc_url( wp_get_attachment_image_url( get_term_meta( $unit_term->term_id, 'term_feature_image', true ), 'large' ) ); ?>"
 									alt="">
 							</a>
 						</div>

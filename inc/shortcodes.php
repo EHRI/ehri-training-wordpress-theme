@@ -60,7 +60,9 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 					</h2>
 					<?php $teaser = get_term_meta( $source->term_id, 'term_teaser', true ); ?>
 					<?php if ( $teaser ): ?>
-						<p class="source-teaser"><?php echo esc_html( $teaser ); ?></p>
+						<p class="source-teaser">
+							<?php echo esc_html( $teaser ); ?>
+						</p>
 					<?php endif; ?>
 				</summary>
 

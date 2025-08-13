@@ -1,6 +1,8 @@
 <?php
 /**
  * The template for displaying all single posts.
+ *
+ * @package ehri_training
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +15,8 @@ get_header();
 <main id="content">
 
 	<?php if ( have_posts() ) : ?>
-		<?php while ( have_posts() ) : the_post(); ?>
+		<?php while ( have_posts() ) : ?>
+			<?php the_post(); ?>
 			<div class="page-content" role="main">
 				<?php get_template_part( 'loop-templates/content', 'single' ); ?>
 			</div>

@@ -5,7 +5,6 @@
  * @package ehri_training
  */
 
-
 /**
  * Register Index Page Custom Post Type
  */
@@ -55,8 +54,8 @@ if ( ! function_exists( 'ehri_training_register_index_page_post_type' ) ) {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'menu_icon'          => 'dashicons-list-view', // You can change this to any dashicon
-			'show_in_rest'       => true, // Enables Gutenberg editor
+			'menu_icon'          => 'dashicons-list-view', // You can change this to any dashicon.
+			'show_in_rest'       => true, // Enables Gutenberg editor.
 			'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'custom-fields' ),
 		);
 
@@ -64,7 +63,7 @@ if ( ! function_exists( 'ehri_training_register_index_page_post_type' ) ) {
 	}
 }
 
-// Hook into the 'init' action
+// Hook into the 'init' action.
 add_action( 'init', 'ehri_training_register_index_page_post_type' );
 
 /**
@@ -72,6 +71,9 @@ add_action( 'init', 'ehri_training_register_index_page_post_type' );
  * Add this if you want to automatically flush permalinks when the theme is activated
  */
 if ( ! function_exists( 'ehri_training_index_page_rewrite_flush' ) ) {
+	/**
+	 * Flush rewrite rules for index page post type.
+	 */
 	function ehri_training_index_page_rewrite_flush() {
 		ehri_training_register_index_page_post_type();
 		flush_rewrite_rules();

@@ -10,6 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! function_exists( 'ehri_training_setup_theme_default_settings' ) ) {
+	/**
+	 * Setup theme default settings.
+	 */
 	function ehri_training_setup_theme_default_settings() {
 
 		// check if settings are set, if not set defaults.

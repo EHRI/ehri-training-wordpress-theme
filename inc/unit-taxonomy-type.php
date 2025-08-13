@@ -1,6 +1,8 @@
 <?php
 /**
  * Add a custom taxonomy for units.
+ *
+ * @package ehri_training
  */
 
 if ( ! function_exists( 'ehri_training_create_unit_taxonomy' ) ) {
@@ -45,7 +47,7 @@ if ( ! function_exists( 'unit_taxonomy_query_params' ) ) {
 	 */
 	function unit_taxonomy_query_params( $query ) {
 		if ( ! is_admin() && $query->is_main_query() ) {
-			// Replace 'your_taxonomy' with your actual taxonomy name
+			// Replace 'your_taxonomy' with your actual taxonomy name.
 			if ( is_tax( 'unit' ) || is_category() || is_tag() ) {
 				$query->set( 'meta_key', '_sort_order' );
 				$query->set( 'orderby', 'meta_value_num' );

@@ -40,5 +40,20 @@ if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
 
 add_action( 'after_setup_theme', 'ehri_training_theme_setup' );
 
+/**
+ * Enqueue scripts and styles.
+ */
+function ehri_training_scripts() {
+	// Enqueue Typekit script.
+	wp_enqueue_script( 'typekit', '//use.typekit.com/pvi1xwv.js', array(), null, false );
+	
+	// Add inline script for Typekit loading.
+	wp_add_inline_script( 'typekit', 'try{Typekit.load();}catch(e){}' );
+	
+	// Enqueue theme stylesheet.
+	wp_enqueue_style( 'ehri-training-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
+}
+add_action( 'wp_enqueue_scripts', 'ehri_training_scripts' );
+
 
 

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Register the Source taxonomy.
+ *
+ * @package ehri_training
+ */
 
 if ( ! function_exists( 'ehri_training_create_source_taxonomy_type' ) ) {
 	/**
@@ -7,7 +12,8 @@ if ( ! function_exists( 'ehri_training_create_source_taxonomy_type' ) ) {
 	 * @return void
 	 */
 	function ehri_training_create_source_taxonomy_type() {
-		register_taxonomy( 'source',
+		register_taxonomy(
+			'source',
 			'post',
 			array(
 				'labels'       => array(
@@ -25,7 +31,7 @@ if ( ! function_exists( 'ehri_training_create_source_taxonomy_type' ) ) {
 					'menu_name'          => 'Sources',
 				),
 				'public'       => true,
-				'show_in_rest' => true, // Enable Gutenberg/REST API
+				'show_in_rest' => true, // Enable Gutenberg/REST API.
 				'show_ui'      => true,
 				'show_in_menu' => true,
 				'supports'     => array( 'title', 'editor', 'thumbnail' ),
