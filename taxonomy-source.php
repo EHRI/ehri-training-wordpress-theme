@@ -1,6 +1,8 @@
 <?php
 /**
- * The template for displaying all pages.
+ * The template for displaying source taxonomy pages.
+ *
+ * @package ehri_training
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,7 +17,7 @@ $source = get_queried_object();
 	<div class="page-content source" role="main">
 
 		<?php $unit_slug = get_term_meta( $source->term_id, 'term_unit', true ); ?>
-		<?php if ( $unit_slug && ! is_wp_error( $unit_slug ) ): ?>
+		<?php if ( $unit_slug && ! is_wp_error( $unit_slug ) ) : ?>
 			<?php $unit = get_term_by( 'slug', $unit_slug, 'unit' ); ?>
 			<nav class="unit-header">
 				<div class="unit-title">
@@ -30,7 +32,8 @@ $source = get_queried_object();
 		<!-- List all posts that belong to this source -->
 		<?php if ( have_posts() ) : ?>
 			<nav class="source-chapter-list">
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php while ( have_posts() ) : ?>
+					<?php the_post(); ?>
 					<div class="source-chapter">
 						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 					</div>
@@ -44,7 +47,7 @@ $source = get_queried_object();
 			</header>
 
 			<?php $teaser = get_term_meta( $source->term_id, 'term_teaser', true ); ?>
-			<?php if ( $teaser ): ?>
+			<?php if ( $teaser ) : ?>
 				<div class="source-teaser">
 					<?php echo esc_html( $teaser ); ?>
 				</div>

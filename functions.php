@@ -1,4 +1,9 @@
 <?php
+/**
+ * Theme functions and definitions.
+ *
+ * @package ehri_training
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -19,7 +24,9 @@ $ehri_training_includes = array(
 
 
 foreach ( $ehri_training_includes as $file ) {
-	if ( ! $filepath = locate_template( "inc/$file.php" ) ) {
+	$filepath = locate_template( "inc/$file.php" );
+	if ( ! $filepath ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error
 		trigger_error( "Error locating /inc/$file.php", E_USER_ERROR );
 	}
 
@@ -31,6 +38,9 @@ foreach ( $ehri_training_includes as $file ) {
 add_filter( 'http_request_host_is_external', '__return_true' );
 
 if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
+	/**
+	 * Set up theme defaults and register support for various WordPress features.
+	 */
 	function ehri_training_theme_setup() {
 		add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
 
@@ -45,11 +55,10 @@ add_action( 'after_setup_theme', 'ehri_training_theme_setup' );
  */
 function ehri_training_scripts() {
 	// Enqueue Typekit script.
-	wp_enqueue_script( 'typekit', '//use.typekit.com/pvi1xwv.js', array(), null, false );
-	
+	wp_enqueue_script( 'typekit', '//use.typekit.com/pvi1xwv.js', array(), '1.0.0', false );
+
 	// Add inline script for Typekit loading.
 	wp_add_inline_script( 'typekit', 'try{Typekit.load();}catch(e){}' );
-	
 	// Enqueue theme stylesheet.
 	wp_enqueue_style( 'ehri-training-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 }

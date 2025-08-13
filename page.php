@@ -1,6 +1,8 @@
 <?php
 /**
  * The template for displaying all pages.
+ *
+ * @package ehri_training
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,7 +15,8 @@ get_header();
 
 	<?php if ( have_posts() ) : ?>
 		<div class="page-content" role="main">
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php while ( have_posts() ) : ?>
+				<?php the_post(); ?>
 				<?php get_template_part( 'loop-templates/content', 'page' ); ?>
 			<?php endwhile; ?>
 		</div>

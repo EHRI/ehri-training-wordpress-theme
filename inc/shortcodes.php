@@ -38,7 +38,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 		}
 
 		ob_start();
-		// Render all the relevant source info: title, description, location, links etc:
+		// Render all the relevant source info: title, description, location, links etc.
 		?>
 		<div class="source-shortcode-wrapper">
 			<details class="source-shortcode-info">
@@ -47,11 +47,11 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						<img src="<?php echo esc_url( get_template_directory_uri() . '/images/doc.svg' ); ?>"
 							 alt="<?php echo esc_attr( $source->name ); ?> Icon">
 					</div>
-					<?php $image = get_term_meta( $source->term_id, "term_feature_image", true ); ?>
-					<?php if ( $image ): ?>
+					<?php $image = get_term_meta( $source->term_id, 'term_feature_image', true ); ?>
+					<?php if ( $image ) : ?>
 						<div class="source-featured-image">
 							<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
-							<img src="<?php echo wp_get_attachment_image_url( $image, 'large' ); ?>"
+							<img src="<?php echo esc_url( wp_get_attachment_image_url( $image, 'large' ) ); ?>"
 								 alt="Featured image for <?php echo esc_html( $source->name ); ?>">
 						</div>
 					<?php endif; ?>
@@ -59,7 +59,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						<?php echo esc_html( $source->name ); ?>
 					</h2>
 					<?php $teaser = get_term_meta( $source->term_id, 'term_teaser', true ); ?>
-					<?php if ( $teaser ): ?>
+					<?php if ( $teaser ) : ?>
 						<p class="source-teaser">
 							<?php echo esc_html( $teaser ); ?>
 						</p>
@@ -68,19 +68,19 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 
 				<div class="source-shortcode-details">
 					<div class="source-description">
-						<?php echo $source->description; ?>
+						<?php echo wp_kses_post( $source->description ); ?>
 					</div>
 
 					<?php $location = get_term_meta( $source->term_id, 'term_location', true ); ?>
-					<?php if ( $location ): ?>
+					<?php if ( $location ) : ?>
 						<div class="source-location">
 							<h3 class="field-label"><?php esc_html_e( 'Location' ); ?></h3>
 							<?php echo esc_html( $location ); ?>
 						</div>
 					<?php endif; ?>
 
-					<?php $source_file = get_term_meta( $source->term_id, "term_source_file", true ); ?>
-					<?php if ( $source_file ): ?>
+					<?php $source_file = get_term_meta( $source->term_id, 'term_source_file', true ); ?>
+					<?php if ( $source_file ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
 							<div class="file-ref">
@@ -97,21 +97,21 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 
 					<?php $source_name = get_term_meta( $source->term_id, 'term_source_name', true ); ?>
 					<?php $source_url = get_term_meta( $source->term_id, 'term_source_url', true ); ?>
-					<?php if ( $source_name || $source_url ): ?>
+					<?php if ( $source_name || $source_url ) : ?>
 						<div class="source-text">
 							<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
-							<?php if ( $source_url ): ?>
+							<?php if ( $source_url ) : ?>
 								<a href="<?php echo esc_url( $source_url ); ?>" target="_blank">
-									<?php echo esc_html( $source_name ?: $source_url ); ?>
+									<?php echo esc_html( $source_name ? $source_name : $source_url ); ?>
 								</a>
-							<?php else: ?>
+							<?php else : ?>
 								<?php echo esc_html( $source_name ); ?>
 							<?php endif; ?>
 						</div>
 					<?php endif; ?>
 
-					<?php $translation = get_term_meta( $source->term_id, "term_translation_file", true ); ?>
-					<?php if ( $translation ): ?>
+					<?php $translation = get_term_meta( $source->term_id, 'term_translation_file', true ); ?>
+					<?php if ( $translation ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
 							<div class="file-ref">
@@ -126,8 +126,8 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						</div>
 					<?php endif; ?>
 
-					<?php $transcript = get_term_meta( $source->term_id, "term_transcription_file", true ); ?>
-					<?php if ( $transcript ): ?>
+					<?php $transcript = get_term_meta( $source->term_id, 'term_transcription_file', true ); ?>
+					<?php if ( $transcript ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
 							<div class="file-ref">
@@ -144,14 +144,14 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 
 					<?php $collection_name = get_term_meta( $source->term_id, 'term_collection_name', true ); ?>
 					<?php $collection_url = get_term_meta( $source->term_id, 'term_collection_url', true ); ?>
-					<?php if ( $collection_name || $collection_url ): ?>
+					<?php if ( $collection_name || $collection_url ) : ?>
 						<div class="source-collection">
 							<h3 class="field-label"><?php esc_html_e( 'Collection' ); ?></h3>
-							<?php if ( $collection_url ): ?>
+							<?php if ( $collection_url ) : ?>
 								<a href="<?php echo esc_url( $collection_url ); ?>" target="_blank">
-									<?php echo esc_html( $collection_name ?: $collection_url ); ?>
+									<?php echo esc_html( $collection_name ? $collection_name : $collection_url ); ?>
 								</a>
-							<?php else: ?>
+							<?php else : ?>
 								<?php echo esc_html( $collection_name ); ?>
 							<?php endif; ?>
 						</div>
