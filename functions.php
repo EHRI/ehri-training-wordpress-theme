@@ -38,7 +38,7 @@ foreach ( $ehri_training_includes as $file ) {
 add_filter( 'http_request_host_is_external', '__return_true' );
 
 // Run shortcodes on the excerpt.
-add_filter('the_excerpt', 'do_shortcode');
+add_filter( 'the_excerpt', 'do_shortcode' );
 
 if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
 	/**

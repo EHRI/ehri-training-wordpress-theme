@@ -15,7 +15,7 @@ get_header();
 <main id="content">
 
 	<section class="page-content not-found" role="main">
-		<h1><?php esc_html_e('404: Page not found'); ?></h1>
+		<h1><?php esc_html_e( '404: Page not found' ); ?></h1>
 	</section>
 
 </main>

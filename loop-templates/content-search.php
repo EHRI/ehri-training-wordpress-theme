@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			// Show unit taxonomy if it exists.
 			$units = get_the_terms( get_the_ID(), 'unit' );
 			if ( $units && ! is_wp_error( $units ) && ! empty( $units ) ) :
-			?>
+				?>
 				<span class="post-unit">
 					<span class="label-inline"><?php esc_html_e( 'Unit:', 'ehri_training' ); ?></span>
 					<?php foreach ( $units as $unit ) : ?>
