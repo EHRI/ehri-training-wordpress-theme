@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// For now the page content is the same as the single post content
+// For now the page content is the same as the single post content.
 get_template_part( 'loop-templates/content', 'single' );
 
 

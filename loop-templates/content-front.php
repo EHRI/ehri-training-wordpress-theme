@@ -13,7 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div <?php post_class( 'resource-card' ); ?> id="post-<?php the_ID(); ?>">
 	<div class="resource-img">
 		<a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php echo get_the_title(); ?>">
-			<?php echo ehri_training_teaser_element( $alt_text = get_the_title() ); ?>
+			<?php
+			$alt_text = get_the_title();
+			echo ehri_training_teaser_element( $alt_text );
+			?>
 		</a>
 	</div>
 	<div class="resource-info">
