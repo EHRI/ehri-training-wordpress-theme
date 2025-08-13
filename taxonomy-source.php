@@ -50,7 +50,7 @@ $source = get_queried_object();
 				</div>
 			<?php endif; ?>
 
-			<?php get_template_part('partials/source', 'metadata', array('source' => $source)); ?>
+			<?php get_template_part( 'partials/source', 'metadata', array( 'source' => $source ) ); ?>
 
 		</section>
 	</div>

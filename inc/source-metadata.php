@@ -33,7 +33,7 @@ if ( ! function_exists( "ehri_training_render_source_metadata_fields" ) ) {
 					<option value=""><?php _e( 'Select Unit' ); ?></option>
 					<?php
 					$units = get_terms( array(
-						'taxonomy'   => 'unit'
+						'taxonomy' => 'unit'
 					) );
 					foreach ( $units as $unit ) {
 						echo '<option value="' . esc_attr( $unit->slug ) . '" ' .
@@ -202,7 +202,7 @@ if ( ! function_exists( "ehri_training_save_source_metadata" ) ) {
 
 		// Check nonce is set and valid
 		if ( ! isset( $_POST['ehri_training_source_metadata_nonce'] ) ||
-			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_source_metadata_nonce'] ) ), 'ehri_training_source_metadata_nonce' ) ) {
+			 ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ehri_training_source_metadata_nonce'] ) ), 'ehri_training_source_metadata_nonce' ) ) {
 			return $term_id;
 		}
 

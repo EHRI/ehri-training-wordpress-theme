@@ -9,10 +9,10 @@ $font-family-base: 'ff-tisa-web-pro', serif;
 $font-family-nav: 'ff-tisa-sans-web-pro', sans-serif;
 
 // Font sizing
-$font-size-base: 1.0625rem;
+$font-size-base: 1.0rem;
 $font-size-xs: 0.625rem;
-$font-size-sm: 0.875rem;
-$font-size-md: 1.125rem;
+$font-size-sm: 0.9rem;
+$font-size-md: 1.2rem;
 $font-size-lg: 1.5rem;
 $font-size-xl: 1.75rem;
 $font-size-title: 2rem;
@@ -23,6 +23,7 @@ $font-weight-bold: 500;
 $font-weight-bolder: 600;
 
 // General spacing
+$space-xs: 0.25rem;
 $space-sm: 0.5rem;
 $space-md: 1rem;
 $space-lg: 1.5rem;

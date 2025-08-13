@@ -62,7 +62,7 @@
 }
 
 .page-content.unit {
-	--padding-content-h: max(3rem, 15vw);
+	--padding-content-h: max(3rem, 10vw);
 
 	display: flex;
 	flex-direction: column;
@@ -81,13 +81,6 @@
 		margin-bottom: $space-md;
 		margin-top: 0;
 		color: var(--white);
-
-
-		// Shift the title over to the left so that only the text
-		// after the number aligns with main text
-		@media(min-width: $breakpoint-tablet) {
-			//padding-left: calc(10vw);
-		}
 	}
 
 	@media (min-width: $breakpoint-tablet) {

@@ -8,7 +8,7 @@
 if ( ! function_exists( "ehri_training_render_unit_metadata_fields" ) ) {
 	function ehri_training_render_unit_metadata_fields( $term = null ) {
 		$term_id               = $term ? $term->term_id : 0;
-		$term_num              = $term ? get_term_meta($term_id, 'term_num', true) : '';
+		$term_num              = $term ? get_term_meta( $term_id, 'term_num', true ) : '';
 		$term_teaser           = $term_id ? get_term_meta( $term_id, 'term_teaser', true ) : '';
 		$term_feature_image_id = $term_id ? get_term_meta( $term_id, 'term_feature_image', true ) : '';
 		?>
@@ -131,7 +131,7 @@ if ( ! function_exists( "ehri_training_init_unit_metadata" ) ) {
 
 add_action( 'init', 'ehri_training_init_unit_metadata' );
 
-if (! function_exists( "ehri_training_get_unit_index_page" )) {
+if ( ! function_exists( "ehri_training_get_unit_index_page" ) ) {
 	/**
 	 * Fetch the first index_page post associated with a unit.
 	 */

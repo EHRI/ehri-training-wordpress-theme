@@ -49,6 +49,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</picture>
 	<?php endif; ?>
 
+	<?php if ( has_excerpt() ): ?>
+		<div class="post-excerpt">
+			<?php the_excerpt(); ?>
+		</div>
+	<?php endif; ?>
+
 	<div class="post-body">
 		<?php the_content(); ?>
 	</div>

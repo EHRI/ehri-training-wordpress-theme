@@ -271,6 +271,7 @@ if (!function_exists('ehri_training_unit_number')) {
 	 * Get the unit number for a given term.
 	 *
 	 * @param WP_Term $term The term object.
+	 *
 	 * @return string The unit number or an empty string if not set.
 	 */
 	function ehri_training_unit_number(WP_Term $term): string {

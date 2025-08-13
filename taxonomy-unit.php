@@ -31,7 +31,7 @@ $unit = get_queried_object();
 								<?php $chapter = get_post_meta( get_the_ID(), '_unit_chapter', true ); ?>
 								<?php if ( $chapter ): ?>
 									<span href="<?php the_permalink(); ?>"
-									   class="unit-chapter-number"><?php echo esc_html( $chapter ); ?></span>
+										  class="unit-chapter-number"><?php echo esc_html( $chapter ); ?></span>
 								<?php endif; ?>
 								<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 							</h2>

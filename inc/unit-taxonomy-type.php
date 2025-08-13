@@ -50,7 +50,7 @@ if ( ! function_exists( 'unit_taxonomy_query_params' ) ) {
 				$query->set( 'meta_key', '_sort_order' );
 				$query->set( 'orderby', 'meta_value_num' );
 				$query->set( 'order', 'ASC' );
-				$query->set( 'posts_per_page', -1 ); // Show all posts in the taxonomy.
+				$query->set( 'posts_per_page', - 1 ); // Show all posts in the taxonomy.
 			}
 		}
 	}

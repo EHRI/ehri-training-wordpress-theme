@@ -51,6 +51,12 @@ body.home main#content {
 
 .unit-content {
 	padding: 0 var(--padding-content-h);
+
+	.post-excerpt {
+		font-size: 1.2em;
+		line-height: 1.8rem;
+		margin-bottom: $space-lg;
+	}
 }
 
 .post-header {
@@ -84,7 +90,9 @@ body.home main#content {
 
 // Styling for HTML inside posts body.
 .post-body {
-	font-size: 0.9rem;
+	//font-size: 1.0rem;
+	//line-height: 1.5rem;
+	//font-width: 400;
 
 	h2 {
 		color: var(--wine-red);

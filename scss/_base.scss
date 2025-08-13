@@ -16,7 +16,7 @@ html:focus-within {
 
 /* Set core body defaults */
 body {
-  text-rendering: optimizeSpeed;
+  //text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
 
@@ -121,13 +121,12 @@ body {
 body {
   font-family: var(--font-family-text), serif;
   color: var(--black);
-  font-size: $font-size-base;
+  font-size: var(--font-size-base);
   line-height: 1.8rem;
 
   display: flex;
   flex-direction: column;
   background-color: var(--grey-mid);
-  //max-width: 1742px;
   min-height: 100%;
   margin-left: auto;
   margin-right: auto;

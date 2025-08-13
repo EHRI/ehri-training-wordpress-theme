@@ -29,12 +29,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<!-- List all the chapters for this unit and their respective sources -->
 	<?php $posts = get_posts( array(
-		'post_type' => 'post',
-		'posts_per_page' => -1, // Get all posts
-		'orderby'  => 'meta_value_num',
-		'meta_key' => '_sort_order',
-		'order'    => 'ASC',
-		'tax_query' => array(
+		'post_type'      => 'post',
+		'posts_per_page' => - 1, // Get all posts
+		'orderby'        => 'meta_value_num',
+		'meta_key'       => '_sort_order',
+		'order'          => 'ASC',
+		'tax_query'      => array(
 			array(
 				'taxonomy' => 'unit',
 				'field'    => 'slug',
@@ -61,7 +61,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
-			<?php endforeach; wp_reset_postdata(); ?>
+			<?php endforeach;
+			wp_reset_postdata(); ?>
 		</nav>
 	<?php endif; ?>
 
