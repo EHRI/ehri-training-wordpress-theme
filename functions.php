@@ -37,6 +37,9 @@ foreach ( $ehri_training_includes as $file ) {
 // Temporarily required to import media from the same host.
 add_filter( 'http_request_host_is_external', '__return_true' );
 
+// Run shortcodes on the excerpt.
+add_filter('the_excerpt', 'do_shortcode');
+
 if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
 	/**
 	 * Set up theme defaults and register support for various WordPress features.

@@ -27,9 +27,9 @@ if ( ! function_exists( 'ehri_training_pagination' ) ) {
 			array(
 				'mid_size'           => 2,
 				'prev_next'          => true,
-				'prev_text'          => __( 'Previous', 'ehri' ),
-				'next_text'          => __( 'Next', 'ehri' ),
-				'screen_reader_text' => __( 'Posts navigation', 'ehri' ),
+				'prev_text'          => __( 'Previous', 'ehri_training' ),
+				'next_text'          => __( 'Next', 'ehri_training' ),
+				'screen_reader_text' => __( 'Posts navigation', 'ehri_training' ),
 				'type'               => 'array',
 				'current'            => max( 1, get_query_var( 'paged' ) ),
 			)

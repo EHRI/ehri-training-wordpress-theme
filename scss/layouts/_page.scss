@@ -89,10 +89,9 @@ body.home main#content {
 }
 
 // Styling for HTML inside posts body.
-.post-body {
-	//font-size: 1.0rem;
-	//line-height: 1.5rem;
-	//font-width: 400;
+.post-body,
+.post-excerpt
+{
 
 	h2 {
 		color: var(--wine-red);
@@ -244,4 +243,13 @@ body.home main#content {
 			}
 		}
 	}
+}
+
+.pager {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	margin: $space-lg 0;
+	gap: $space-md;
+
 }

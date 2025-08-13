@@ -14,11 +14,9 @@ get_header();
 
 <main id="content">
 
-	<section class="page-content" role="main">
-		<h1>404: Page not found</h1>
+	<section class="page-content not-found" role="main">
+		<h1><?php esc_html_e('404: Page not found'); ?></h1>
 	</section>
-
-	<?php get_sidebar(); ?>
 
 </main>
 
