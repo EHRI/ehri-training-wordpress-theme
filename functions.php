@@ -20,6 +20,7 @@ $ehri_training_includes = array(
 	'source-metadata',
 	'index-page-post-type',
 	'shortcodes',
+	'admin',
 );
 
 

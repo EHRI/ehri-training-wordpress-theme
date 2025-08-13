@@ -16,19 +16,16 @@ if ( ! function_exists( 'ehri_training_add_unit_chapter_meta_box' ) ) {
 	 * @return void
 	 */
 	function ehri_training_add_unit_chapter_meta_box() {
-		$screens = array( 'post', 'page' );
-		foreach ( $screens as $screen ) {
-			add_meta_box(
-				'unit_chapter',                        // Unique ID.
-				'Unit Chapter',                       // Box title.
-				'ehri_training_unit_chapter_html', // Content callback, must be of type callable.
-				$screen,                                   // Post type.
-				'side'                              // Position.
-			);
-		}
+		add_meta_box(
+			'unit_chapter',                        // Unique ID.
+			'Unit Chapter',                       // Box title.
+			'ehri_training_unit_chapter_html', // Content callback, must be of type callable.
+			'post',                             // Post type.
+			'side'                              // Position.
+		);
 	}
 }
-add_action( 'add_meta_boxes', 'ehri_training_add_unit_chapter_meta_box' );
+add_action( 'add_meta_boxes_post', 'ehri_training_add_unit_chapter_meta_box' );
 
 // Meta box HTML.
 if ( ! function_exists( 'ehri_training_unit_chapter_html' ) ) {
@@ -58,6 +55,10 @@ if ( ! function_exists( 'ehri_training_save_unit_chapter_meta' ) ) {
 	 * @param int $post_id The ID of the post being saved.
 	 */
 	function ehri_training_save_unit_chapter_meta( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id; // Skip autosave.
+		}
+
 		// Check if nonce field exists before validating.
 		if ( ! isset( $_POST['unit_chapter_nonce'] ) ) {
 			return $post_id; // Meta box not present, skip validation.
@@ -96,19 +97,16 @@ if ( ! function_exists( 'ehri_training_add_sort_order_meta_box' ) ) {
 	 * @return void
 	 */
 	function ehri_training_add_sort_order_meta_box() {
-		$screens = array( 'post', 'page' );
-		foreach ( $screens as $screen ) {
-			add_meta_box(
-				'sort_order',                        // Unique ID.
-				'Sort Order',                       // Box title.
-				'ehri_training_sort_order_html', // Content callback, must be of type callable.
-				$screen,                                 // Post type.
-				'side'                            // Position.
-			);
-		}
+		add_meta_box(
+			'sort_order',                        // Unique ID.
+			'Sort Order',                       // Box title.
+			'ehri_training_sort_order_html', // Content callback, must be of type callable.
+			'post',                           // Post type.
+			'side'                            // Position.
+		);
 	}
 }
-add_action( 'add_meta_boxes', 'ehri_training_add_sort_order_meta_box' );
+add_action( 'add_meta_boxes_post', 'ehri_training_add_sort_order_meta_box' );
 
 // Meta box HTML.
 if ( ! function_exists( 'ehri_training_sort_order_html' ) ) {
@@ -138,6 +136,10 @@ if ( ! function_exists( 'ehri_training_save_sort_order_meta' ) ) {
 	 * @param int $post_id The ID of the post being saved.
 	 */
 	function ehri_training_save_sort_order_meta( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id; // Skip autosave.
+		}
+
 		// Check if nonce field exists before validating.
 		if ( ! isset( $_POST['sort_order_nonce'] ) ) {
 			return $post_id; // Meta box not present, skip validation.
@@ -176,19 +178,16 @@ if ( ! function_exists( 'ehri_training_add_next_chapter_meta_box' ) ) {
 	 * @return void
 	 */
 	function ehri_training_add_next_chapter_meta_box() {
-		$screens = array( 'post', 'page' );
-		foreach ( $screens as $screen ) {
-			add_meta_box(
-				'next_chapter',                        // Unique ID.
-				'Next Chapter',                       // Box title.
-				'ehri_training_next_chapter_html', // Content callback, must be of type callable.
-				$screen,                                 // Post type.
-				'side'                            // Position.
-			);
-		}
+		add_meta_box(
+			'next_chapter',                        // Unique ID.
+			'Next Chapter',                       // Box title.
+			'ehri_training_next_chapter_html', // Content callback, must be of type callable.
+			'post',                              // Post type.
+			'side'                              // Position.
+		);
 	}
 }
-add_action( 'add_meta_boxes', 'ehri_training_add_next_chapter_meta_box' );
+add_action( 'add_meta_boxes_post', 'ehri_training_add_next_chapter_meta_box' );
 
 
 if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
@@ -201,7 +200,6 @@ if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
 		$value = get_post_meta( $post->ID, '_next_chapter', true );
 		?>
 		<?php wp_nonce_field( 'ehri_training_next_chapter_nonce', 'next_chapter_nonce' ); ?>
-		<label for="next_chapter" class="sr-only"><?php echo __( 'Next Chapter' ); ?></label>
 		<select name="next_chapter" id="next_chapter">
 		<option value=""><?php echo esc_html__( 'Select next chapter', 'ehri-training' ); ?></option>
 		<?php
@@ -224,7 +222,10 @@ if ( ! function_exists( 'ehri_training_next_chapter_html' ) ) {
 			);
 		}
 		?>
-		<p class="components-form-token-field__help">Select the next chapter.</p>
+		</select>
+		<p class="components-form-token-field__help">
+			Select the chapter that should follow this one.
+		</p>
 		<?php
 	}
 }
@@ -236,6 +237,10 @@ if ( ! function_exists( 'ehri_training_save_next_chapter_meta' ) ) {
 	 * @param int $post_id The ID of the post being saved.
 	 */
 	function ehri_training_save_next_chapter_meta( $post_id ) {
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return $post_id; // Skip autosave.
+		}
+
 		// Check if nonce field exists before validating.
 		if ( ! isset( $_POST['next_chapter_nonce'] ) ) {
 			return $post_id; // Meta box not present, skip validation.
