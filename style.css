@@ -1083,6 +1083,8 @@ body.home main#content {
 .page-content.unit .unit-featured-image img {
   width: 100%;
   vertical-align: bottom;
+  aspect-ratio: 120/75;
+  object-fit: cover;
 }
 
 .home .page-content {

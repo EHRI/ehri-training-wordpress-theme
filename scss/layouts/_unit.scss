@@ -142,6 +142,8 @@
 		img {
 			width: 100%;
 			vertical-align: bottom;
+			aspect-ratio: 120/75;
+			object-fit: cover;
 		}
 	}
 }
