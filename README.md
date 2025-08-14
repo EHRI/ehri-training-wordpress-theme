@@ -1,10 +1,7 @@
-Wordpress implementation of EHRI Drupal project site
-====================================================
+Wordpress implementation of the EHRI Training Site
+==================================================
 
-Not indended to be the finished version, since an extensive redesign
-will follow.
+TODO:
 
-Plugins required for form functionality:
-
- - Contact Form 7
- - Flamingo
+ - improve microdata and site meta tags
+ - make search accessible
