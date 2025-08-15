@@ -40,7 +40,7 @@
 </head>
 <body <?php body_class(); ?>>
 
-<header class="main header" role="banner">
+<header class="main header">
 	<a id="top"></a>
 	<div id="logo">
 		<a href="<?php echo $home; ?>">
