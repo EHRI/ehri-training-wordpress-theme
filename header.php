@@ -13,15 +13,27 @@
 <head>
 	<?php $home = get_home_url(); ?>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,minimum-scale=1">
-	<meta name="dcterms.title" content="European Holocaust Research Infrastructure"/>
-	<meta name="dcterms.type" content="Text"/>
-	<meta name="dcterms.format" content="text/html"/>
-	<meta name="dcterms.identifier" content="<?php echo $home; ?>/"/>
+	<meta name="dcterms.title" content="European Holocaust Research Infrastructure">
+	<meta name="dcterms.type" content="Text">
+	<meta name="dcterms.format" content="text/html">
+	<meta name="dcterms.identifier" content="<?php echo $home; ?>/">
+	<meta name="dcterms.rightsHolder" content="EHRI-ERIC">
+	<meta name="dcterms.dateCopyrighted" content="<?php echo gmdate( 'Y' ); ?>">
 
-	<link rel="shortcut icon" href="<?php echo get_theme_file_uri( 'favicon.png' ); ?>" type="image/png"/>
+	<link rel="shortcut icon" href="<?php echo get_theme_file_uri( 'favicon.png' ); ?>" type="image/png">
 	<meta name="robots" content="index, follow">
+
+	<script type=application/ld+json>{
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"about": {
+				"@type": "Organization",
+				"email": "info@ehri-project.eu",
+				"name": "EHRI-ERIC"
+			},
+			"url": "https://training.ehri-project.eu/"
+		}</script>
 
 	<?php wp_head(); ?>
 
@@ -33,9 +45,9 @@
 	<div id="logo">
 		<a href="<?php echo $home; ?>">
 			<?php if ( is_front_page() ) : ?>
-				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo.svg' ); ?>" alt="EHRI Logo"/>
+				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo.svg' ); ?>" alt="EHRI Logo">
 			<?php else : ?>
-				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo-s.svg' ); ?>" alt="EHRI Logo"/>
+				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo-s.svg' ); ?>" alt="EHRI Logo">
 			<?php endif; ?>
 		</a>
 	</div>
@@ -62,13 +74,13 @@
 	?>
 
 	<?php if ( is_front_page() ) : ?>
-		<section id="hero">
+		<div id="hero">
 			<div class="hero-text">
 				<?php echo get_bloginfo( 'description' ); ?>
 				<span class="read-more">
 					<a href="/overview">read more</a>
 				</span>
 			</div>
-		</section>
+		</div>
 	<?php endif; ?>
 </header>

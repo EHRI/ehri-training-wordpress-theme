@@ -27,7 +27,7 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 			<th scope="row"><label for="term_num"><?php esc_html_e( 'Number' ); ?></label></th>
 			<td>
 				<input type="number" id="term_num" name="term_num" min="1" max="999"
-					value="<?php echo esc_attr( $term_num ); ?>"/>
+					value="<?php echo esc_attr( $term_num ); ?>">
 			</td>
 		</tr>
 
@@ -54,9 +54,9 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_feature_image_button"
-						value="<?php esc_attr_e( 'Select Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Select Image' ); ?>">
 					<input type="button" class="button button-secondary" id="term_feature_image_remove"
-						value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove Image' ); ?>">
 				</p>
 			</td>
 		</tr>

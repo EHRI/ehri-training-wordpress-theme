@@ -86,9 +86,9 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_source_file_button"
-						value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>">
 					<input type="button" class="button button-secondary" id="term_source_file_remove"
-						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>">
 				</p>
 			</td>
 		</tr>
@@ -144,9 +144,9 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_feature_image_button"
-						value="<?php esc_attr_e( 'Select Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Select Image' ); ?>">
 					<input type="button" class="button button-secondary" id="term_feature_image_remove"
-						value="<?php esc_attr_e( 'Remove Image' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove Image' ); ?>">
 				</p>
 			</td>
 		</tr>
@@ -166,9 +166,9 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_translation_file_button"
-						value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>">
 					<input type="button" class="button button-secondary" id="term_translation_file_remove"
-						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>">
 				</p>
 			</td>
 		</tr>
@@ -188,9 +188,9 @@ if ( ! function_exists( 'ehri_training_render_source_metadata_fields' ) ) {
 				</div>
 				<p>
 					<input type="button" class="button button-secondary" id="term_transcription_file_button"
-						value="<?php esc_attr_e( 'Select File' ); ?>"/>
+						value="<?php esc_attr_e( 'Select File' ); ?>">
 					<input type="button" class="button button-secondary" id="term_transcription_file_remove"
-						value="<?php esc_attr_e( 'Remove File' ); ?>"/>
+						value="<?php esc_attr_e( 'Remove File' ); ?>">
 				</p>
 			</td>
 		</tr>
