@@ -46,13 +46,40 @@ if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
 	 * Set up theme defaults and register support for various WordPress features.
 	 */
 	function ehri_training_theme_setup() {
+		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
 
 		add_filter( 'screen_options_show_screen', '__return_true' );
 	}
 }
-
 add_action( 'after_setup_theme', 'ehri_training_theme_setup' );
+
+if ( ! function_exists( 'ehri_training_document_title_parts' ) ) {
+	/**
+	 * Customise the format of the page title.
+	 *
+	 * @param array $parts title components.
+	 *
+	 * @return array the components to use.
+	 */
+	function ehri_training_document_title_parts( $parts ) {
+		// Default parts array contains: title, page, tagline, site.
+
+		// For a simple "Page Title | Site Name" format.
+		$custom_parts = array();
+
+		if ( isset( $parts['title'] ) ) {
+			$custom_parts['title'] = $parts['title'];
+		}
+
+		if ( isset( $parts['site'] ) ) {
+			$custom_parts['site'] = $parts['site'];
+		}
+
+		return $custom_parts;
+	}
+}
+add_filter( 'document_title_parts', 'ehri_training_document_title_parts' );
 
 /**
  * Enqueue scripts and styles.
