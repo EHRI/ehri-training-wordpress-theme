@@ -253,3 +253,23 @@ body.home main#content {
 	gap: $space-md;
 
 }
+
+.page-content.not-found {
+	padding: 0 var(--padding-content-h);
+}
+
+@media (min-width: $breakpoint-tablet) {
+	.page-content.not-found {
+		.search-form {
+			display: flex;
+
+			label {
+				flex: 1;
+			}
+
+			.search-submit {
+				width: 8rem;
+			}
+		}
+	}
+}

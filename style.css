@@ -980,6 +980,21 @@ body.home main#content {
   gap: 1rem;
 }
 
+.page-content.not-found {
+  padding: 0 var(--padding-content-h);
+}
+
+@media (min-width: 1024px) {
+  .page-content.not-found .search-form {
+    display: flex;
+  }
+  .page-content.not-found .search-form label {
+    flex: 1;
+  }
+  .page-content.not-found .search-form .search-submit {
+    width: 8rem;
+  }
+}
 .unit-list .unit-item {
   background-color: var(--white);
   border-left: 3rem solid var(--wine-red);
@@ -1064,6 +1079,7 @@ body.home main#content {
   right: 100%;
   text-align: right;
   margin-right: 1rem;
+  padding-left: 0.25rem;
   text-wrap: nowrap;
 }
 .page-content.unit .unit-chapter-title a {

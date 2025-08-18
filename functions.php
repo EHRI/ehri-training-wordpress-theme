@@ -46,6 +46,15 @@ if ( ! function_exists( 'ehri_training_theme_setup' ) ) {
 	 * Set up theme defaults and register support for various WordPress features.
 	 */
 	function ehri_training_theme_setup() {
+		add_theme_support(
+			'html5',
+			array(
+				'caption',
+				'script',
+				'search-form',
+				'style',
+			)
+		);
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails', array( 'post', 'page' ) );
 
@@ -93,6 +102,7 @@ function ehri_training_scripts() {
 	// Enqueue theme stylesheet.
 	wp_enqueue_style( 'ehri-training-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 }
+
 add_action( 'wp_enqueue_scripts', 'ehri_training_scripts' );
 
 /**
@@ -103,6 +113,7 @@ add_action( 'wp_enqueue_scripts', 'ehri_training_scripts' );
 function ehri_training_clear_source_metadata_cache( $term_id ) {
 	delete_transient( 'source_metadata_' . $term_id );
 }
+
 add_action( 'saved_source', 'ehri_training_clear_source_metadata_cache' );
 add_action( 'edited_source', 'ehri_training_clear_source_metadata_cache' );
 add_action( 'saved_unit', 'ehri_training_clear_source_metadata_cache' );
@@ -116,6 +127,7 @@ add_action( 'edited_unit', 'ehri_training_clear_source_metadata_cache' );
 function ehri_training_clear_front_page_units_cache( $term_id ) {
 	delete_transient( 'ehri_training_front_page_units' );
 }
+
 add_action( 'saved_unit', 'ehri_training_clear_front_page_units_cache' );
 add_action( 'edited_unit', 'ehri_training_clear_front_page_units_cache' );
 add_action( 'deleted_unit', 'ehri_training_clear_front_page_units_cache' );
