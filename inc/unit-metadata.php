@@ -34,8 +34,9 @@ if ( ! function_exists( 'ehri_training_render_unit_metadata_fields' ) ) {
 		<tr class="form-field">
 			<th scope="row"><label for="term_teaser"><?php esc_html_e( 'Teaser' ); ?></label></th>
 			<td>
-				<textarea name="term_teaser" id="term_teaser" rows="5"
-						cols="50"><?php echo esc_textarea( $term_teaser ); ?></textarea>
+				<textarea name="term_teaser" id="term_teaser" rows="5" cols="50">
+					<?php echo esc_textarea( $term_teaser ); ?>
+				</textarea>
 				<p class="description"><?php esc_html_e( 'Enter a brief teaser for this term.' ); ?></p>
 			</td>
 		</tr>
@@ -156,9 +157,10 @@ if ( ! function_exists( 'ehri_training_get_unit_index_page' ) ) {
 	 * Fetch the first index_page post associated with a unit.
 	 *
 	 * @param string $unit_slug The unit slug.
+	 *
 	 * @return WP_Post|null The index page post or null if not found.
 	 */
-	function ehri_training_get_unit_index_page( $unit_slug ) {
+	function ehri_training_get_unit_index_page( string $unit_slug ): ?WP_Post {
 		$args = array(
 			'post_type'      => 'index_page',
 			'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required to find index page for specific unit
@@ -177,6 +179,24 @@ if ( ! function_exists( 'ehri_training_get_unit_index_page' ) ) {
 
 		if ( $query->have_posts() ) {
 			return $query->posts[0];
+		}
+
+		return null;
+	}
+}
+
+if ( ! function_exists( 'ehri_training_post_unit_image_url' ) ) {
+	/**
+	 * Fetch the URL of the featured image associated with the post's unit.
+	 *
+	 * @param WP_Post $post The current post.
+	 *
+	 * @return ?string the URL, or null
+	 */
+	function ehri_training_post_unit_image_url( WP_Post $post ): ?string {
+		$units = get_the_terms( $post, 'unit' );
+		foreach ( $units as $unit ) {
+			return wp_get_attachment_image_url( get_term_meta( $unit->term_id, 'term_feature_image', true ), 'large' );
 		}
 
 		return null;

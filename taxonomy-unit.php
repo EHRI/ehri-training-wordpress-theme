@@ -53,11 +53,14 @@ $unit = get_queried_object();
 				</div>
 			<?php endif; ?>
 		</section>
-		<section class="unit-featured-image">
-			<img
-				src="<?php echo esc_url( wp_get_attachment_image_url( get_term_meta( $unit->term_id, 'term_feature_image', true ), 'large' ) ); ?>"
-				alt="Featured image for <?php echo esc_html( $unit->name ); ?>">
-		</section>
+		<?php $feature_image = get_term_meta( $unit->term_id, 'term_feature_image', true ); ?>
+		<?php if ( $feature_image ) : ?>
+			<div class="unit-featured-image">
+				<img
+					src="<?php echo esc_url( wp_get_attachment_image_url( $feature_image, 'large' ) ); ?>"
+					alt="Featured image for <?php echo esc_html( $unit->name ); ?>">
+			</div>
+		<?php endif; ?>
 	</div>
 </main>
 

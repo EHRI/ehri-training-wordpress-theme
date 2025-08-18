@@ -42,12 +42,13 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 		?>
 		<div class="source-shortcode-wrapper">
 			<details class="source-shortcode-info">
+				<?php $meta = get_term_meta( $source->term_id ); ?>
 				<summary>
 					<div class="source-icon">
 						<img src="<?php echo esc_url( get_template_directory_uri() . '/images/doc.svg' ); ?>"
 							alt="<?php echo esc_attr( $source->name ); ?> Icon">
 					</div>
-					<?php $image = get_term_meta( $source->term_id, 'term_feature_image', true ); ?>
+					<?php $image = $meta['term_feature_image'][0]; ?>
 					<?php if ( $image ) : ?>
 						<div class="source-featured-image">
 							<h3 class="field-label"><?php esc_html_e( 'Image' ); ?></h3>
@@ -58,7 +59,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 					<h2 class="source-title">
 						<?php echo esc_html( $source->name ); ?>
 					</h2>
-					<?php $teaser = get_term_meta( $source->term_id, 'term_teaser', true ); ?>
+					<?php $teaser = $meta['term_teaser'][0]; ?>
 					<?php if ( $teaser ) : ?>
 						<p class="source-teaser">
 							<?php echo esc_html( $teaser ); ?>
@@ -71,7 +72,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						<?php echo wp_kses_post( $source->description ); ?>
 					</div>
 
-					<?php $location = get_term_meta( $source->term_id, 'term_location', true ); ?>
+					<?php $location = $meta['term_location'][0]; ?>
 					<?php if ( $location ) : ?>
 						<div class="source-location">
 							<h3 class="field-label"><?php esc_html_e( 'Location' ); ?></h3>
@@ -79,7 +80,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						</div>
 					<?php endif; ?>
 
-					<?php $source_file = get_term_meta( $source->term_id, 'term_source_file', true ); ?>
+					<?php $source_file = $meta['term_source_file'][0]; ?>
 					<?php if ( $source_file ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
@@ -87,16 +88,15 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 								<img alt="PDF File Icon"
 									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
 									class="file-icon">
-								<a href="<?php echo esc_url( wp_get_attachment_url( $source_file ) ); ?>"
-								target="_blank">
+								<a href="<?php echo esc_url( wp_get_attachment_url( $source_file ) ); ?>" target="_blank">
 									<?php echo esc_html( get_the_title( $source_file ) ); ?>
 								</a>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<?php $source_name = get_term_meta( $source->term_id, 'term_source_name', true ); ?>
-					<?php $source_url = get_term_meta( $source->term_id, 'term_source_url', true ); ?>
+					<?php $source_name = $meta['term_source_name'][0]; ?>
+					<?php $source_url = $meta['term_source_url'][0]; ?>
 					<?php if ( $source_name || $source_url ) : ?>
 						<div class="source-text">
 							<h3 class="field-label"><?php esc_html_e( 'Source' ); ?></h3>
@@ -110,7 +110,7 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 						</div>
 					<?php endif; ?>
 
-					<?php $translation = get_term_meta( $source->term_id, 'term_translation_file', true ); ?>
+					<?php $translation = $meta['term_translation_file'][0]; ?>
 					<?php if ( $translation ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Translation' ); ?></h3>
@@ -118,15 +118,14 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 								<img alt="PDF File Icon"
 									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
 									class="file-icon">
-								<a href="<?php echo esc_url( wp_get_attachment_url( $translation ) ); ?>"
-								target="_blank">
+								<a href="<?php echo esc_url( wp_get_attachment_url( $translation ) ); ?>" target="_blank">
 									<?php echo esc_html( get_the_title( $translation ) ); ?>
 								</a>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<?php $transcript = get_term_meta( $source->term_id, 'term_transcription_file', true ); ?>
+					<?php $transcript = $meta['term_transcription_file'][0]; ?>
 					<?php if ( $transcript ) : ?>
 						<div class="source-file">
 							<h3 class="field-label"><?php esc_html_e( 'Transcript' ); ?></h3>
@@ -134,16 +133,15 @@ if ( ! function_exists( 'ehri_training_source_shortcode' ) ) {
 								<img alt="PDF File Icon"
 									src="<?php echo esc_url( get_template_directory_uri() . '/images/application-pdf.png' ); ?>"
 									class="file-icon">
-								<a href="<?php echo esc_url( wp_get_attachment_url( $transcript ) ); ?>"
-								target="_blank">
+								<a href="<?php echo esc_url( wp_get_attachment_url( $transcript ) ); ?>" target="_blank">
 									<?php echo esc_html( get_the_title( $transcript ) ); ?>
 								</a>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<?php $collection_name = get_term_meta( $source->term_id, 'term_collection_name', true ); ?>
-					<?php $collection_url = get_term_meta( $source->term_id, 'term_collection_url', true ); ?>
+					<?php $collection_name = $meta['term_collection_name'][0]; ?>
+					<?php $collection_url = $meta['term_collection_url'][0]; ?>
 					<?php if ( $collection_name || $collection_url ) : ?>
 						<div class="source-collection">
 							<h3 class="field-label"><?php esc_html_e( 'Collection' ); ?></h3>
