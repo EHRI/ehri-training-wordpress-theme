@@ -132,5 +132,50 @@ add_action( 'saved_unit', 'ehri_training_clear_front_page_units_cache' );
 add_action( 'edited_unit', 'ehri_training_clear_front_page_units_cache' );
 add_action( 'deleted_unit', 'ehri_training_clear_front_page_units_cache' );
 
+if ( ! function_exists( 'ehri_training_render_open_graph_meta' ) ) {
+	/**
+	 * Generate Open Graph meta tags.
+	 */
+	function ehri_training_render_open_graph_meta() {
+		$og_data = array(
+			'locale'    => 'en-GB',
+			'site_name' => get_bloginfo( 'name' ),
+			'title'     => get_the_title(),
+		);
+
+		if ( is_tax( 'unit' ) ) {
+			$unit                   = get_queried_object();
+			$og_data['description'] = wp_filter_nohtml_kses( $unit->description );
+			$og_data['image']       = wp_get_attachment_image_url( get_term_meta( $unit->term_id, 'term_feature_image', true ), 'large' );
+			$og_data['url']         = get_the_permalink();
+			$og_data['type']        = 'article';
+			$og_data['title']       = $unit->name;
+		} elseif ( is_single() ) {
+			$og_data['description']            = wp_filter_nohtml_kses( get_the_excerpt() );
+			$og_data['image']                  = ehri_training_post_unit_image_url( get_queried_object() );
+			$og_data['url']                    = get_the_permalink();
+			$og_data['type']                   = 'article';
+			$og_data['article:published_time'] = get_the_date( 'c' );
+			$og_data['article:modified_time']  = get_the_modified_date( 'c' );
+		} else {
+			$og_data['description'] = get_bloginfo( 'description' );
+			$og_data['image']       = get_theme_file_uri( 'images/ehri-logo-large.png' );
+			$og_data['url']         = get_home_url();
+			$og_data['type']        = 'website';
+			$og_data['title']       = get_the_title();
+		}
+
+		foreach ( $og_data as $property => $content ) {
+			if ( ! empty( $content ) ) {
+				printf(
+					'<meta property="og:%s" content="%s">' . "\n\t",
+					esc_attr( $property ),
+					esc_attr( $content )
+				);
+			}
+		}
+	}
+}
+
 
 
