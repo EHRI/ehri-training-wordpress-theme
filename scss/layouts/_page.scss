@@ -17,6 +17,9 @@ body.home main#content {
 	background-color: var(--white);
 }
 
+.page-content .post-list {
+	padding: $space-lg var(--padding-content-h);
+}
 
 .unit-header {
 	display: flex;
@@ -57,6 +60,38 @@ body.home main#content {
 		line-height: 1.8rem;
 		margin-bottom: $space-lg;
 	}
+}
+
+// List items
+.post {
+	padding-bottom: $space-md;
+	border-bottom: 1px dashed var(--grey-mid);
+	margin-bottom: $space-lg;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	h2 {
+		a {
+			color: var(--wine-red);
+			text-decoration: none;
+			font-family: var(--font-family-headings), sans-serif;
+		}
+
+		font-size: 1.2rem;
+		line-height: 1.3em;
+		margin: 0;
+	}
+
+	// Don't display shortcodes except in single page views
+	.source-shortcode-wrapper {
+		display: none;
+	}
+}
+
+.post-unit .label-inline {
+	font-weight: var(--font-weight-bolder);
 }
 
 .post-header {
