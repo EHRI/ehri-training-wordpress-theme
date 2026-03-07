@@ -25,6 +25,7 @@ if ( ! function_exists( 'ehri_training_create_unit_taxonomy' ) ) {
 		);
 
 		$args = array(
+			'public'            => true,
 			'hierarchical'      => false,
 			'labels'            => $labels,
 			'show_ui'           => true,

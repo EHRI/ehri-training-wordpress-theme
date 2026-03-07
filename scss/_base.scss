@@ -51,7 +51,8 @@ body {
   --blue: #{$blue};
   --blue-dark: #{$blue-dark};
 
-  --input-border-radius: 5px;
+  --input-border-radius: 2px;
+  --input-border-radius-lg: 5px;
   --card-border-radius: 10px;
   --font-size-base: #{$font-size-base};
   --font-size-xs: #{$font-size-xs};

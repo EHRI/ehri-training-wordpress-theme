@@ -1,80 +1,61 @@
 <?php
 /**
- * The template for displaying search results.
+ * The search results template file.
  *
  * @package ehri_training
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+// Get the search query for pagination.
+global $wp_query;
 
-get_header();
 ?>
 
+<?php get_header(); ?>
+
 <main id="content">
-	<div class="page-content search-results" role="main">
-		<a id="main-content"></a>
-
+	<section class="page-content">
+		<?php $query = get_search_query(); ?>
+		<?php $q = trim( $query ); ?>
 		<header class="search-header">
-			<h1 class="search-title">
-				<?php if ( have_posts() ) : ?>
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: "%s"', 'ehri_training' ), '<span class="search-query">' . esc_html( get_search_query() ) . '</span>' );
-					?>
-				<?php else : ?>
-					<?php esc_html_e( 'Nothing Found', 'ehri_training' ); ?>
-				<?php endif; ?>
-			</h1>
-		</header>
+			<h1 class="search-title"><?php esc_html_e( 'Search the website', 'ehri_training' ); ?></h1>
 
-		<section class="search-content">
-			<?php if ( have_posts() ) : ?>
-				<div class="search-results-count">
-					<?php
-					global $wp_query;
-					/* translators: %s: number of search results. */
-					printf( esc_html__( 'Found %s results', 'ehri_training' ), '<strong>' . esc_html( $wp_query->found_posts ) . '</strong>' );
-					?>
+			<form method="get">
+				<div class="search-box">
+					<label class="sr-only" for="search-box">Search</label>
+					<i class="fa fa-2x fa-search" aria-hidden="true"></i>
+					<input name="s" id="search-box" class="search-box-input" type="text"
+						placeholder="<?php esc_attr_e( 'What are you looking for?', 'ehri_training' ); ?>"
+						value="<?php echo esc_attr( $q ); ?>">
+					<button type="submit" class="search-box-button button-primary">
+						<?php esc_html_e( 'Search', 'ehri_training' ); ?>
+					</button>
 				</div>
+			</form>
+		</header>
+		<?php if ( $q ) : ?>
+			<?php if ( have_posts() ) : ?>
+					<div class="breadcrumbs">
+						<div class="text-muted">
+							<?php echo '"' . esc_html( $q ) . '"'; ?>
+						</div>
+					</div>
 
-				<div class="search-results-list">
+				<div class="post-list">
 					<?php while ( have_posts() ) : ?>
 						<?php the_post(); ?>
-						<?php get_template_part( 'loop-templates/content', 'search' ); ?>
+						<?php get_template_part( 'loop-templates/content' ); ?>
 					<?php endwhile; ?>
 				</div>
 
-				<?php
-				// Pagination.
-				if ( function_exists( 'ehri_training_pagination' ) ) {
-					ehri_training_pagination();
-				} else {
-					the_posts_navigation();
-				}
-				?>
-
+				<!-- The pagination component -->
+				<?php ehri_training_pagination( $wp_query ); ?>
 			<?php else : ?>
-				<div class="search-no-results">
-					<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with different keywords.', 'ehri_training' ); ?></p>
-
-					<div class="search-form-container">
-						<?php get_search_form(); ?>
-					</div>
-
-					<div class="search-suggestions">
-						<h3><?php esc_html_e( 'Suggestions:', 'ehri_training' ); ?></h3>
-						<ul>
-							<li><?php esc_html_e( 'Try different keywords', 'ehri_training' ); ?></li>
-							<li><?php esc_html_e( 'Try more general keywords', 'ehri_training' ); ?></li>
-							<li><?php esc_html_e( 'Check your spelling', 'ehri_training' ); ?></li>
-						</ul>
-					</div>
+				<div class="post-list">
+					<h4><?php echo esc_html( sprintf( 'No results found for "%s"', $query ) ); ?> </h4>
 				</div>
 			<?php endif; ?>
-		</section>
-	</div>
+		<?php endif; ?>
+	</section>
 </main>
 
 <?php get_footer(); ?>

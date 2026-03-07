@@ -177,5 +177,3 @@ if ( ! function_exists( 'ehri_training_render_open_graph_meta' ) ) {
 	}
 }
 
-
-
