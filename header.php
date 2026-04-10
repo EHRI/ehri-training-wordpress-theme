@@ -46,11 +46,7 @@
 	<a id="top"></a>
 	<div id="logo">
 		<a href="<?php echo $home; ?>">
-			<?php if ( is_front_page() ) : ?>
-				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo.svg' ); ?>" alt="EHRI Logo">
-			<?php else : ?>
-				<img src="<?php echo get_theme_file_uri( 'images/ehri-logo-s.svg' ); ?>" alt="EHRI Logo">
-			<?php endif; ?>
+			<img src="<?php echo get_theme_file_uri( 'images/ehri-logo.svg' ); ?>" alt="EHRI Logo">
 		</a>
 	</div>
 
